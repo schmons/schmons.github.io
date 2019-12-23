@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.2.3/math.js"></script>
+
+<!-- <script src ="mathjax/MathJax.js?config=TeX-AMS_HTML-full"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<style>
+
+@import url(http://fonts.googleapis.com/css?family=PT+Serif|PT+Serif:b|PT+Serif:i);
+
+h2 {
+  color: #8386D7
+}
+
+section {
+  background: #fff;
+  color: #000;
+  padding: 2em;
+  /*font-family: "PT Serif", Baskerville, Georgia;*/
+  font-family: PT Serif, Cambria;
+}
+
+#follow {
+  background: none;
+}
+
+.grey {
+  color: #777;
+}
+
+a:link,
+a:visited {
+  color: orange;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+    display: flex;
+}
+.col {
+    flex: 1;
+}
+
+</style>
+
+<section style="text-align: center; padding-top: 5em;">
+    <h2>Bernoulli Race Particle Filters</h2>
+
+    <h3>Sebastian Schmon</h3>
+    <h4>University of Oxford</h4>
+    <h3>Babylon Health - March 1, 2019</h3>
+</section>
+
+<section>
+    <h3>Introduction</h3>
+    What is this talk about?
+    <ul>    
+        <li><i>Bernoulli factories</i>
+        <li> Coin flips and unbiased estimators
+        <li><i>Bernoulli races</i>
+        <li>Using coin flips for exact resampling in particle filters when weights are not available
+            analytically: <i>Bernoulli Race Particle Filters</i>
+        <li>Joint work with my supervisors Arnaud Doucet and George Deligiannidis, to be presented at <i>AISTATS 2019</i>
+    </ul>
+</section>
+
+<section>
+    <h3>Introduction</h3>
+    <ul>
+    <li>Assume you are given an unfair coin with some 
+        unknown probability of heads, \(\mathbb{P}(C =1) = p\). 
+    <li>How can this coin be used to produce a fair result, i.e. generate a coin flip with probability \(1/2\)?
+    </ul>
+    <div style="display: flex; justify-content: center;">
+            <img src="coin_toss.gif" height=300 alt="coin_toss">
+    </div>
+</section>
+
+<section>
+    <h3>Von Neumann Extractor</h3>
+    <p> The following algorithm has the desired output: 
+        <ol>
+            <li>throw the coin twice and obtain \(C_1\) and \(C_2\) 
+            <li>if \(C_1 = 1\) and \(C_2 = 0\) set C = 1
+            <li>if \(C_1 = 0\) and \(C_2 = 1\) set C = 0
+            <li>else return to step 1
+        </ol>  
+    Both outcomes have probability \(p(1-p) = (1-p)p\).
+</section>
+
+<section>
+    <h3>Bernoulli Factories</h3>
+    How (if at all) can I create a coin with probability \(f(p) \in [0,1]\) given only access to coins with probability \(p\in (0,1)\)?
+    Von Neumann proposed and solved \(f(p) = 1/2\). Other factories
+    <ol>
+        <li> \(f(p) = \lambda p, \lambda\in[0,1]\): sample \(Z\sim \mathrm{Ber}(\lambda), P\sim \mathrm{Ber}(p)\) and return \(Z\cdot P\)
+        <li> \(f(p_0, p_1) = (p_0 + p_1)/2\): sample \(I \sim \mathrm{Ber}(1/2), P_0\sim \mathrm{Ber}(p_0)\) and \(P_1\sim \mathrm{Ber}(p_1)\) and output \(P_I\) 
+        <li> \(f(p) = \exp(\lambda(p-1))\): sample \(K\sim \mathrm{Pois}(\lambda), P_i \sim \mathrm{Ber}(p), i=1, \ldots, K\) and output \[\prod_{i=1}^K P_i\]
+    </ol>
+</section>
+
+<section>
+    <h3>Coin Flips and Unbiased Estimators</h3>
+    <p>Why are we interested in coin flips?
+    <p>If there is an unbiased estimator available, then we can construct a coin flip. 
+        If \(\hat{Z}\) is an unbiased estimator of \(\mu\), then the event \(1\{U_i \leq \hat{Z}\}\) has probability \(\mu\).
+    <p>We have 
+        $$
+        \begin{align}
+            \mathbb{E}\left[1\{U_i \leq \hat{Z}\}\right] & = \int_0^1\int_0^1 1\{u \leq z\}f_\hat{Z}(z)dz du \\
+                                                         & = \int_0^1 z f_\hat{Z}(z) dz = \mu.
+        \end{align}
+        $$
+    </p>
+</section>
+
+<section>
+    <h3>Hidden Markov Models</h3>
+    <p>HMMs consist of a latent (unobserved) process \((X_t)_{t\in \mathbb{N}}\) with 
+        \[X_t \mid (X_{t-1} = x) \sim f(\cdot \mid x)\]
+        for \(t\geq 2\) and \(X_1 \sim \mu(\cdot)\). The process can be observed through an 
+        an observation process
+        \[Y_t \mid (X_t = x) \sim g(\cdot \mid x). \]
+</section>
+
+<section>
+    <h3>Hidden Markov Models</h3>
+    <br>
+    <div style="display: flex; justify-content: center;">
+            <img src="hmm.png" height=500>
+    </div>
+</section>
+
+<section>
+  <h3>Particle Filters</h3>
+  <p>Particle Filters sequentially approximate the distribution of the hidden states given the observations
+    $$\begin{align}
+        \pi_T(x_{1:T}) &= p(x_{1:T}\mid y_{1:T}) \\
+                       &= \frac{g(y_1 \mid x_1)\mu(x_1)\prod_{t=2}^T g(y_t \mid x_t)f(x_t \mid x_{t-1})}{p(y_{1:T})}
+      \end{align}
+    $$ where $$
+     \begin{align}
+        p(y_{1:T}) = \int g(y_1 \mid x_1)\mu(x_1)\prod_{t=2}^T g(y_t \mid x_t)f(x_t \mid x_{t-1}) dx_{1:T}.
+      \end{align}
+    $$
+</section>
+
+<section>
+    <h3>Particle Filters</h3>
+    <h4>Importance Sampling</h4>
+    At state \(t\geq 2\) for every \(k=1, \ldots, N\)
+    <ul>
+        <li> \(\tilde X_t^k \sim q(\cdot \mid X_{t-1}^k, y_t)\)
+        <li> \[
+                w_k = w(X_{t-1}^k, \tilde{X}_t^k) = \frac{g(y_t \mid \tilde{X}_t^k)f(\tilde{X}_t^k \mid X_{t-1}^k)}{q(\tilde{X}_t^k \mid X_{t-1}^k, y_t)}
+             \]
+    </ul>
+</section>
+
+<section>
+    <h3>Particle Filters</h3>
+    <h4>Sequential Importance Resampling</h4>
+    <ul>
+        <li>Sample \(I_{1:N} \sim \mathrm{Mult}(w_1, \ldots, w_N)\)
+        <li>For \(k=1,\ldots, N\) set
+                \[
+                X_{1:t}^k = \left(X_{1:(t-1)}^{I_k},\tilde{X}_{t}^{I_k}\right).
+                \]
+    </ul>
+    <p>What if the weights \(w_1, \ldots, w_N\) are not available analytically?</p>
+</section>
+
+<section>
+    <h3>Example: Locally Optimal Proposal</h3>
+    The <i>locally optimal proposal</i> \(q^{*}\), is
+    \[
+    q^{*}(x_{t}\mid x_{t-1},y_{t})=\frac{g(y_{t}\mid x_{t})f(x_{t}\mid x_{t-1})}{p(y_{t}\mid x_{t-1})}.
+    \]
+    The weight 
+    $$
+    \begin{align}
+    w_{t}(x_{t-1},x_{t}) & =p(y_{t}\mid x_{t-1}) \\
+						 & =\int g(y_{t}\mid x_{t})f(x_{t}\mid x_{t-1})dx_{t}
+    \end{align}
+    $$
+    is usually intractable.
+</section>
+
+<section>
+  <h3>Bernoulli Races</h3>
+  <ul>
+    <li>Assume we can write \(w_k = c_k b_k\), where 
+      <ul>
+        <li>\(c_k\) is known and can be computed
+        <li>\(b_k\) is an intractable quantity taking values between \(0\) and \(1\)
+        <li>we can sample \(Z \sim \mathrm{Ber}(b_k)\)
+      </ul>
+      <li> How can we sample 
+          \[
+            p(i) = \frac{c_ib_i}{\sum_k{c_kb_k}} = \frac{w_i}{\sum_k w_k}?
+          \]
+  </ul>
+</section>
+
+<section>
+  <h3>Bernoulli Race Algorithm</h3>
+  <ol>
+    <li> 
+    Propose 
+    \[
+    I \sim \mathsf{Mult}\left(\frac{c_1}{\sum_{k=1}^N c_k}, \ldots, \frac{c_N}{\sum_{k=1}^N c_k}\right)
+    \]
+    <li> Draw \(Z_I \sim \mathrm{Ber}(b_I)\)
+    <li> <b>If</b> \(Z_I = 1\) <b>return</b> \(I\)
+    <li> <b>else</b> go to 1.
+  </ol>
+</section>
+
+<section>
+    <h3>Bernoulli Race Algorithm</h3>
+    <b>Proposition.</b>
+    The <i>Bernoulli race</i> samples from the distribution
+    \[
+    p(i) = \mathbb{P}(I=i \mid Z_I=1) = \frac{c_ib_i}{\sum_{k=1}^N c_k b_k}.
+    \]
+</section>
+
+<section>
+  <b>Proof.</b>
+    Note that the probability of sampling \(I=i\) and accepting is
+    $$
+    \begin{equation}
+        \mathbb{P}(I = i, Z_i = 1) = b_i \cdot \frac{c_i}{\sum_k c_k}.
+    \end{equation}
+    $$
+    It follows that observing \(Z_I = 1\) has probability \(\mathbb{P}(Z_I=1) = \sum_k b_k c_k / \sum_k c_k\).
+    Now for any \(i=1,\ldots N\)
+    $$
+    \begin{align}
+    p(i) & = \mathbb{P}(I = i \mid Z_I = 1) \\
+        & =\frac{\mathbb{P}(I = i, Z_i = 1)}{\mathbb{P}(Z_I = 1)} \\
+        & =\frac{b_{i}c_{i}}{\sum_{k}c_{k}}\Big/\frac{\sum_{k}b_{k}c_{k}}{\sum_{k}c_{k}} =\frac{b_{i}c_{i}}{\sum_{k}b_{k}c_{k}}.
+    \end{align}
+    $$
+</section>
+
+<section>
+    <h3>Connection to von Neumann's Algorithm</h3>
+    <b>Remark</b> Von Neumann's algorithm is a special case of this scheme. Set \(c_1 = p, c_2 = 1-p, b_1 = 1 - p, b_2 = p\) then
+    \[
+        p(1) = \frac{p(1-p)}{p(1-p) + (1-p)p} = \frac{1}{2}.
+    \]
+</section>
+
+<section>
+    <h3>Efficient Implementation</h3>
+    <ul>
+        <li>Standard resampling algorithms can sample \(N\) random variables at cost \(O(N)\)</li>
+        <lI>Bernoulli race resampling can also be implemented with an average of \(O(N)\)</lI>
+        <li>In order to get fast samples we need to have an algorithm which can provide us with a constant stream of cheap proposals</li>
+        <li>\(\Rightarrow\) The Alias method needs \(O(N)\) set up and can then sample with \(O(1)\)</li>
+        <li>Now we need to make sure that the number of coin flips required is also linear</li>
+    </ul>
+</section>
+    
+<section>
+    <h3>Efficient Implementation</h3>
+    The number of coin flips \(C_{j,N}\) required for each sample follows a geometric distribution with success probability
+            \begin{equation}
+            \rho_{N}= \mathbb{P}(Z_I = 1) = \frac{\sum_{k=1}^{N}c_{k}b_{k}}{\sum_{k=1}^{N}c_{k}}.\label{eq:geometric_success}
+            \end{equation}
+            The expected number of trials until a value is accepted is then
+            \[
+            \mathbb{E}\left[C_{j,N}\right]=\frac{1}{\rho_N}\quad\left(j=1,\ldots,N\right).
+            \]
+</section>
+
+
+<section>
+        <h3>Efficient Implementation</h3>
+        <b>Proposition.</b> Assume \(\lim_{N\rightarrow\infty}\rho_{N}=:\rho\in(0,1)\).
+        Then we have the following central limit theorem for the average number
+        of coin flips as \(N\rightarrow\infty\)
+        \[
+        \sqrt{N}\left(\frac{1}{N}\sum_{j=1}^{N}C_{j,N}-\frac{1}{\rho_{N}}\right)\overset{d}{\rightarrow}\mathcal{N}\left(0,\frac{1-\rho}{\rho^{2}}\right),
+        \]
+        where \(\overset{d}{\rightarrow}\) denotes convergence in distribution.
+    </section>
+
+
+<section>
+    <h3>Bernoulli Race Particle Filters</h3>
+    How do Bernoulli races help us in the particle filter context?
+    <ul>
+    <li> The Bernoulli race can be used as an implementation of the resampling step.
+    <li> <b>Advantage</b>: works even if the weights are intractable!
+    <li> Just need to be able to generate a coin flip proportional to the weights.
+    </ul>
+</section>
+    
+<section>
+    <h3>Gaussian State Space Model</h3>
+    <p> The latent states evolve according to
+    \[
+    X_t=aX_{t-1}+V_{t}
+    \]
+    where we take \(a = 0.8\) and we observe these hidden variables through the observation equation
+    \[
+    Y_{t}=X_{t}+W_{t}
+    \]
+    with initialization \(X_{1}\sim\mathcal{N}(0,5)\) and \(V_{t}\sim\mathcal{N}(0,5)\),
+    \(W_{t}\sim\mathcal{N}(0,5)\).
+</section>
+
+<section>
+    <h3>Locally Optimal Proposal</h3>
+    We implement the Gaussian state space model with the locally optimal proposal and weights
+    \begin{align}
+    w_{t}(x_{t-1},x_{t}) & =p(y_{t}\mid x_{t-1}) \\
+                         & =\int g(y_{t}\mid x_{t})f(x_{t}\mid x_{t-1})dx_{t} \\
+                         & =\int \frac{1}{\sqrt{10\pi}}\exp\left(-\frac{(y_t - x_t)^2}{10}\right)\frac{1}{\sqrt{10\pi}}\exp\left(-\frac{(x_t - x_{t-1})^2}{10}\right) dx_t 
+    \end{align}
+</section>
+
+<section>
+    <h3>Gaussian State Space Model</h3>
+    Coin flips for the weights for the locally optimal proposal can be obtained by sampling from the model \(\xi_t \sim f(\cdot \mid x_{t-1})\) and computing 
+    \[
+	Z_t = 1 \left\{U \leq \exp\left(-\frac{(y_t - \xi_t)^2}{10} \right)\right\}, \quad U\sim \mathrm{Unif}[0, 1].
+    \]
+    This leads to the choice \(c_{t, 1} = \ldots = c_{t, N} = 1/\sqrt{10\pi}\) and 
+    \[
+	b_{t,k} = \int \exp\left(-\frac{(y_t - x)^2}{10} \right) f(x \mid x_{t-1}) dx_{t-1}.
+    \]
+</section>
+
+<section>
+    <h3>Gaussian State Space Model</h3>
+    <h4>Simulation Study</h4>
+    <ul>
+        <li>    In this toy example we compare the performance of the Bernoulli Race Particle Filter
+                with a competitor, the random weight particle filter (RWPF).</li>
+        <li>    The RWPF is like an ordinary PF but the weights are replaced with unbiased estimates. </li>
+        <li>    Theoretically this is valid, but leads to performance deterioration. </li>
+    </ul>
+</section>
+
+<section>
+    <h3>Gaussian State Space Model</h3>
+    <h4>Simulation results</h4>
+    <table style="width:100%">
+            <tr>
+              <th>Test function</th>
+              <th>\(\sigma_{RWPF}\)</th> 
+              <th>\(\sigma_{BRPF}\)</th>
+              <th>\(\sigma_{BRPF}/\sigma_{RWPF}\)</th>
+            </tr>
+            <tr>
+              <td>\(h_1\)</td>
+              <td>0.17</td> 
+              <td>0.12</td>
+              <td>0.74</td>
+            </tr>
+            <tr>
+              <td>\(h_2\)</td>
+              <td>0.93</td>
+              <td>0.78</td>
+              <td>0.84</td> 
+            </tr>
+            <tr>
+                <td>\(h_3\)</td>
+                <td>0.19</td>
+                <td>0.19</td>
+                <td>0.96</td>
+            </tr>
+            <tr>
+                <td>\(h_4\)</td>
+                <td>0.42</td>
+                <td>0.40</td>
+                <td>0.94</td>
+            </tr>
+          </table>
+</section>
+
+<section>
+    <h3>Cox Process Inference</h3>
+    A <i>random intensity function</i> is a locally integrable function \(\lambda(t)\).
+    A process \(X_t\) is a <i>Cox process</i> if, conditionally upon \(\lambda\) it is a Poisson process and the (conditional) likelihood is 
+    \[
+        p(y_{1:T} \mid \lambda) = \exp\left(-\int_\mathcal{T} \lambda (y) dy\right) \prod_{t=1}^T \lambda(y_t).
+    \] 
+    The quantity \(\exp\left(-\int_\mathcal{T} \lambda (y) dy\right)\) is usually intractable.
+</section>
+
+<section>
+    <h3>Cox Process Inference</h3>
+    In order to perform sequential inference we use a squashed Gauss-Markov process 
+    $$
+    \begin{align*}
+	\begin{pmatrix}
+		dx_{1, t} \\
+		dx_{2, t} \\
+	\end{pmatrix}
+	=
+	\begin{bmatrix}
+		0 & 1 \\
+		0 & \theta \\
+	\end{bmatrix}
+	\begin{pmatrix}
+	 x_{1, t} \\
+	 x_{2, t} \\
+	\end{pmatrix}
+	dt +
+	\begin{pmatrix}
+	0 \\ \sigma
+	\end{pmatrix}
+	dW_t.
+    \end{align*}
+    $$
+    with intensity function
+    \[
+        \lambda(t) = \sigma(x_{1, t}) = \frac{\exp(x_{1, t})}{1 + \exp(x_{1,t})}.
+    \]
+</section>
+
+<section>
+    <h3>Ornstein-Uhlenbeck Process</h3>
+    <div style="display: flex; justify-content: center;">
+            <img src="ou_2d.png" height=800 alt="batch_particle_filter">
+    </div>
+</section>
+
+<section>
+    <h3>Cox Process Inference</h3>
+    <b>Sequential inference.</b> Propose from the prior and the weight is
+    \[
+	g(y_{i\colon y_i \in [t_0, t_1]} \mid x_{1, t}^k) = \exp\left(-\int_{t_0}^{t_1} \lambda^k(y) dy \right) \prod_{i\colon y_i \in [t_0, t_1]} \lambda^k(y_i).	
+    \]
+    We can set
+    $$
+    \begin{align}
+	c_{t_1}^k &= \prod_{i\colon y_i \in [t_0, t_1]} \lambda^k(y_i), \\
+	b_{t_1}^k &= \exp\left(-\int_{t_0}^{t_1} \lambda^k(y) dy\right).
+    \end{align}
+    $$
+</section>
+
+<section>
+    <h3>How to generate coin flips</h3>
+    Note
+    that for a function \(g\) and \(U\sim\mathrm{Unif}[0,t]\) we have
+    \[
+    \mathbb{E}\left[\frac{g(X_{U})}{\lambda}\mid X_{s},0\leq s\leq t\right]=\int_{0}^{t}\frac{g(X_{s})}{\lambda t}ds.
+    \]
+    Using this relationship we can use debiasing schemes such as the Poisson
+    estimator to find a non-negative unbiased estimator of the expectation of the
+    exponential.
+</section>
+
+<section>
+    <h3>How to generate coin flips</h3>
+    Now sample \(K\sim \mathrm{Pois}(t_1-t_0)\), then an unbiased coin flip can be generated using
+    \[
+	Z = \prod_{i=1}^{K}1\left\{ V_{i}\leq 1 - \lambda(U_i)\right\}.
+    \]
+</section>
+
+<section>
+    <h3>Unbiasedness I</h3>
+    This estimator is indeed unbiased as can be seen by
+    \begin{align*}
+     & \mathbb{E}\left[Z\mid X=x\right] = \mathbb{E}\left[\prod_{i=1}^{K}1\left\{ V_{i}\leq 1 - \lambda(U_i)\right\} \mid X=x\right] \\
+     & =e^{-(t_1-t_0)}\sum_{k=0}^{\infty}\frac{\left(t_1-t_0\right)^{k}}{k!}\prod_{i=1}^{k}\mathbb{E}\left[1\left\{ V_{i}\leq 1-\lambda(U_i)\right\} \mid K=k,X=x\right]\\
+     & =e^{-(t_1-t_0)}\sum_{k=0}^{\infty}\frac{\left(t_1-t_0\right)^{k}}{k!}\left(\int_{t_0}^{t_1}\frac{1-\lambda(s)}{t_1-t_0}ds\right)^{k}\\
+    \end{align*}
+    </section>
+
+<section>
+    <h3>Unbiasedness II</h3>
+    \begin{align}
+    & = e^{-(t_1-t_0)}\sum_{k=0}^{\infty}\frac{\left(t_1-t_0\right)^{k}}{k!}\left(\int_{t_0}^{t_1}\frac{1-\lambda(s)}{t_1-t_0}ds\right)^{k} \\
+    & = e^{-(t_1-t_0)}\sum_{k=0}^{\infty}\frac{\left(\int_{t_0}^{t_1}1-\lambda(s)ds\right)^{k}}{k!}\\
+    & = e^{-(t_1-t_0)}e^{t_1-t_0}\exp\left(-\int_{t_0}^{t_1}\lambda(s)ds\right)\\
+    & = \exp\left(-\int_{t_0}^{t_1}\lambda(s)ds\right).
+    \end{align}
+</section>
+
+<section>
+    <h3>Cox Process Inference</h3>
+    <div style="display: flex; justify-content: center;">
+            <img src="bpf_results2.png" height=800 alt="batch_particle_filter">
+    </div>
+</section>
+
+<section>
+    <h3>Notes</h3>
+    <ul>
+        <li> The algorithm has complexity \(O(N)\) where \(N\) is the number of particles used.
+        <li> However, the constant can be very big if the Bernoulli coin flips are very inefficient.
+        <li> If a large number of coin flips is required, a GPU implementation could be very useful.
+    </ul>
+</section>
+
+<!--<section id="time_comparison">
+  <h3>Discrete- versus continuous-time</h3>
+  <div class="container" style="text-align: center;">
+    <div id="mh_graph">
+    </div>
+    
+    <div id="bps_graph">
+    </div>
+  </div>
+</section>
+-->
+
+<section>
+    <h3>Questions?</h3>
+</section>
+
+<section>
+    <h3>Likelihood Estimation</h3>
+    The standard way of estimating the marginal likelihood \(p(y_{1:T})\) is 
+    \[
+        \hat{p}(y_{1:T}) = \prod_{t=1}^T \frac{1}{N} \sum_k w_{t, k}.
+    \]
+    Note that the probability for the Bernoulli race to stop at a given iteration,
+    i.e. to accept a value, is
+    \[
+    \mathbb{P}\left(C_{j,N} = 1\right) = \frac{\sum_{k=1}^{N}c_{t, k}b_{t, k}}{\sum_{k=1}^{N}c_{t, k}}=\frac{\frac{1}{N}\sum_{k=1}^{N}w_{t, k}}{\frac{1}{N}\sum_{k=1}^{N}c_{t, k}}.
+    \]
+</section>
+
+<section>
+    <h3>Likelihood Estimation</h3>
+    Thus, conditional on the weights \(w_{t,k}, k=1,\ldots,N\),
+    an unbiased estimator of the marginal likelihood is 
+    \[
+    \hat{\rho}_{N,T}=\prod_{t=1}^{T}\frac{1}{N}\sum_{k=1}^{N}c_{t, k}\cdot\frac{N-1}{\sum_{k=1}^{N}C_{k,N}-1}.
+    \]
+    <b>Theorem.</b>
+    The estimator is unbiased for \(p(y_{1:T})\), i.e. \(\mathbb{E}\left[\hat{\rho}_{N,T}\right] = p(y_{1:T})\).
+</section>
+
+<script src="d3.v3.min.js"></script>
+<script src="stack.v1.min.js"></script>
+<script>
+
+var mystack = stack()
+    .on("activate", activate)
+    .on("deactivate", deactivate);
+
+var section = d3.selectAll("section"),
+    follow = d3.select("#follow"),
+    followAnchor = d3.select("#follow-anchor"),
+    lorenz = d3.select("#lorenz"),
+    followIndex = section[0].indexOf(follow.node()),
+    lorenzIndex = section[0].indexOf(lorenz.node()),
+    time_comparison = d3.select("#time_comparison"),
+    time_comparison_idx = section[0].indexOf(time_comparison.node())
+    global_local_comparison = d3.select("#global_local_comparison"),
+    global_local_comparison_idx = section[0].indexOf(global_local_comparison.node())
+    ;
+
+function refollow() {
+  followAnchor.style("top", (followIndex + (1 - mystack.scrollRatio()) / 2 - d3.event.offset) * 100 + "%");
+}
+
+function activate(d, i) {
+  if (i === followIndex) mystack.on("scroll.follow", refollow);
+  //if (i === lorenzIndex) startLorenz();
+  if (i === time_comparison_idx) startTimeComparison();
+  if (i === global_local_comparison_idx) startGlobalLocalComparison();
+}
+
+function deactivate(d, i) {
+  if (i === followIndex) mystack.on("scroll.follow", null);
+  if (i === lorenzIndex) stopLorenz();
+}
+
+ 
+
+var lorenzInterval;
+
+function startLorenz() {
+  var δτ = 0.003,
+      ρ = 28,
+      σ = 10,
+      β = 8 / 3,
+      x = .5,
+      y = .5,
+      z = 10,
+      n = 30;
+
+  var width = 1280,
+      height = 720;
+
+  var canvas = d3.select("canvas")
+      .style("position", "absolute")
+      .style("top", 0)
+      .style("left", 0)
+      .style("width", "100%")
+      .style("height", "100%")
+      .attr("width", width)
+      .attr("height", height);
+
+  var color = d3.scale.linear()
+      .domain([0, 20, 30, 50])
+      .range(["yellow", "orange", "brown", "purple"])
+      .interpolate(d3.interpolateHcl);
+
+  var context = canvas.node().getContext("2d");
+
+  context.lineWidth = .2;
+  context.fillStyle = "rgba(0,0,0,.03)";
+
+  d3.timer(function() {
+    context.save();
+    context.globalCompositeOperation = "lighter";
+    context.translate(width / 2, height / 2);
+    context.scale(12, 14);
+    context.rotate(30);
+    for (var i = 0; i < n; ++i) {
+      context.strokeStyle = color(z);
+      context.beginPath();
+      context.moveTo(x, y);
+      x += δτ * σ * (y - x);
+      y += δτ * (x * (ρ - z) - y);
+      z += δτ * (x * y - β * z);
+      context.lineTo(x, y);
+      context.stroke();
+    }
+    context.restore();
+    return !lorenzInterval;
+  });
+
+  lorenzInterval = setInterval(function() {
+    context.fillRect(0, 0, width, height);
+  }, 100);
+}
+
+function stopLorenz() {
+  lorenzInterval = clearInterval(lorenzInterval);
+}
+  
+
+function randn_bm() {
+    var u = 0, v = 0;
+    while(u === 0) u = Math.random(); //Converting [0,1) to (0,1)
+    while(v === 0) v = Math.random();
+    return Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v );
+} 
+
+var d = 6;
+var width = 500;
+var height = 600;
+
+var model_canvas = d3.select("#graphical_model")
+    .attr("width", 100)
+    .attr("height", height);
+
+var axis_gap = 20;
+var axis_height = (height - axis_gap * (d - 1)) / d;
+			
+			var model_context = model_canvas.node().getContext("2d");
+
+			console.log("d is now: " + d);
+
+for (var i = 0; i < d; i++) {
+    model_context.beginPath();
+    model_context.strokeStyle = "white";
+    model_context.arc(
+        30,
+	(axis_height + axis_gap) * i + axis_height / 2,
+	15,
+	0,
+	2 * Math.PI,
+	false
+    );
+    model_context.lineWidth = 1;
+
+		    model_context.stroke();
+		    }
+for (var i = 0; i < d - 1; i++) {
+    model_context.beginPath();
+    model_context.moveTo(
+        30,
+	(axis_height + axis_gap) * i + axis_height / 2 + 15
+    );
+    model_context.strokeStyle = "white";
+    model_context.lineTo(30, (axis_height + axis_gap) * (i + 1) + axis_height / 2 - 15);
+    model_context.lineWidth = 1;
+    model_context.stroke();
+}
+
+			
+function startGlobalLocalComparison() {
+    
+    var canvas1 = d3.select("#global_canvas")
+	.attr("width", width)
+	.attr("height", height);    
+    runLocalBps(global_bps_step, canvas1);
+    
+    var canvas2 = d3.select("#local_canvas")
+	.attr("width", width)
+	.attr("height", height);
+    runLocalBps(local_bps_step, canvas2);   
+}
+  
+function runLocalBps(bps_fn, canvas) {
+    var z = {
+	"x": new Array(d),
+	"v": new Array(d),
+    };
+    
+    for (var i = 0; i < d; i++) {
+	z.x[i] = randn_bm();
+	z.v[i] = randn_bm();
+    }
+	  
+    var hist = [];
+    var elapsed = 0.0;
+
+    var time_step = 0.2;    
+    
+    var width = canvas.attr("width");
+    var height = canvas.attr("height");
+    
+    var time_horizon_steps = 100;
+    var time_horizon = time_step * time_horizon_steps;
+    var time_padding = 10;
+    
+    var axis_gap = 20;
+    var axis_height = (height - axis_gap * (d - 1)) / d;
+    
+    var y_scales = [];
+    for (var i = 0; i < d; i++) {
+	y_scales.push(
+	    d3.scale.linear()
+		.domain([-3, 3])
+		.range([
+		    (axis_height + axis_gap) * i,
+		    (axis_height + axis_gap) * i + axis_height
+		])
+	);
+    }
+
+    var time_scale = d3.scale.linear()
+	.domain([0, time_horizon])
+	.range([0, width - time_padding]);   
+    
+    var context = canvas.node().getContext("2d");
+    context.lineCap = "round";
+    context.lineJoin = "round";
+    context.lineWidth = 1;
+    
+    window.requestAnimFrame = (function(callback) {
+        return window.requestAnimationFrame ||
+	    window.webkitRequestAnimationFrame ||
+	    window.mozRequestAnimationFrame ||
+	    window.oRequestAnimationFrame ||
+	    window.msRequestAnimationFrame ||
+            function(callback) {
+		window.setTimeout(callback, 1000 / 60);
+            };
+    })();
+
+    var count = 0;
+    function animate() {
+	context.save();
+	     
+	context.clearRect(0, 0, width, height);
+
+	var completed = false;
+	var time_left = time_step;
+	while (!completed) {
+	    var prev_z = {
+		"x": z.x.slice(),
+		"v": z.v.slice(),
+	    };
+	    
+	    var result = bps_fn(z, time_left);
+	    
+	    if (result === null) {
+		break;
+	    };
+	    
+	    z = result.z;
+	    
+	    elapsed += result.duration;
+	    
+	    hist.push({
+		"t": elapsed,
+		"x": z.x,
+		"event": result.event_type,
+		"indices": result.indices,
+	    });
+	    
+	    var time_used = result.duration;
+	    var completed = result.event_type === bps_event_types.time_elapsed;
+	    time_left -= time_used;	    
+	}
+
+	time_scale = d3.scale.linear()
+	    .domain([Math.max(0, elapsed - time_horizon), Math.max(time_horizon, elapsed)])
+	    .range([0, width - time_padding]);
+
+	////////////////////////
+	// Paint bounce markers.
+	////////////////////////
+	// Interpolators as function of point age.
+	var m_edge_colour_interp = d3.scale.linear()
+	    .domain([0, time_horizon])
+	    .range(["cyan", "steelblue"])
+	    .interpolate(d3.interpolateHcl);
+	var m_fill_colour_interp = d3.scale.linear()
+	    .domain([0, time_horizon / 2, time_horizon])
+	    .range(["cyan", "black", "black"])
+	    .interpolate(d3.interpolateHcl);
+	var m_opacity_interp = d3.scale.linear()
+	    .domain([0, time_horizon])
+	    .range([1.0, 0.5]);	
+	var m_line_width_interp = d3.scale.linear()
+	    .domain([0, time_horizon])
+	    .range([2, 2]);
+	var m_radius_interp = d3.scale.linear()
+	    .domain([0, time_horizon])
+	    .range([4, 2]);
+
+	
+	for (var i = 0; i < hist.length; i++) {
+	    if (hist[i].event == bps_event_types.bounce &&
+		hist[i].t > elapsed - time_horizon) {
+		var age = elapsed - hist[i].t;
+		for (var di of hist[i].indices) {
+		    context.beginPath();
+		    context.globalAlph = m_opacity_interp(age);
+		    context.arc(
+			time_scale(hist[i].t),
+			y_scales[di](hist[i].x[di]),
+			m_radius_interp(age),
+			0,
+			2 * Math.PI,
+			false
+		    );
+		    context.fillStyle = m_fill_colour_interp(age);
+		    context.fill();
+		    context.lineWidth = m_line_width_interp(age);
+		    context.strokeStyle = m_edge_colour_interp(age);
+		    context.stroke();
+		}
+	    }
+	}
+
+	///////////////
+	// Paint paths.
+	///////////////
+	var head_interp = d3.scale.linear()
+	    .range(["steelblue", "cyan"])
+	    .interpolate(d3.interpolateHcl);
+	
+	var tail_colours = [
+	    {"segment": 0, "colour": "steelblue", "opacity": 0.3, "width": 1.0},
+	    {"segment": 1, "colour": "steelblue", "opacity": 0.7, "width": 1.0},
+	    {"segment": 2, "colour": "steelblue", "opacity": 1.0, "width": 1.0},
+	    {"segment": time_horizon_steps - 4, "colour": head_interp(0.33), "opacity": 1.0, "width": 1.17},
+	    {"segment": time_horizon_steps - 3, "colour": head_interp(0.66), "opacity": 1.0, "width": 1.33},
+	    {"segment": time_horizon_steps - 2, "colour": head_interp(1.0), "opacity": 1.0, "width": 1.5},
+	];
+		
+	// Collect all time_elapsed events.
+	var time_elapsed_events = [];
+	for (var i = 0; i < hist.length; i++) {
+	    if (hist[i].event === bps_event_types.time_elapsed) {
+		time_elapsed_events.push(i);
+	    }
+	}
+
+	// Use only the last time_horizon_steps events.
+	if (time_elapsed_events.length > time_horizon_steps) {
+	    time_elapsed_events = time_elapsed_events.slice(-time_horizon_steps);
+	} else if (time_elapsed_events.length < time_horizon_steps) {
+	    time_elapsed_events = new Array(time_horizon_steps - time_elapsed_events.length)
+		.fill(-1)
+		.concat(time_elapsed_events);
+	}
+				
+	var colour_intervals = [];
+	for (var i = 0; i < tail_colours.length; i++) {
+	    var min = time_elapsed_events[tail_colours[i].segment];
+	    var max;
+	    if (i < tail_colours.length - 1) {
+		max = time_elapsed_events[tail_colours[i + 1].segment];
+	    } else {
+		max = time_elapsed_events.slice(-1)[0];
+	    }
+	    if (max === -1) {
+		continue;
+	    }
+	    if (min === -1) {
+		min = 0;
+	    }
+	    colour_intervals.push({
+		"min": min,
+		"max": max,
+		"colour": tail_colours[i].colour,
+		"opacity": tail_colours[i].opacity,
+		"width": tail_colours[i].width,
+	    });
+	}
+
+	for (var i = 0; i < colour_intervals.length; i++) {
+	    context.strokeStyle = colour_intervals[i].colour;
+	    context.globalAlpha = colour_intervals[i].opacity;
+	    for (var di = 0; di < d; di++) {
+		context.beginPath();
+		var j = colour_intervals[i].min;
+		context.moveTo(
+		    time_scale(hist[j].t),
+		    y_scales[di](hist[j].x[di])
+		);
+		j += 1;
+		while (j <= colour_intervals[i].max) {
+		    context.lineTo(
+			time_scale(hist[j].t),
+			y_scales[di](hist[j].x[di])
+		    );	
+		    j += 1;
+		}
+		context.lineWidth = colour_intervals[i].width;
+		context.stroke();
+	    }	    
+	}
+	
+	context.restore();
+
+	count++;
+	if (true || count < 600) {
+	    requestAnimFrame(function() {
+		animate();
+            });
+	}
+    };
+
+    animate();
+}
+
+function stopLorenz() {
+  lorenzInterval = clearInterval(lorenzInterval);
+}
+
+// Standard D3.js scatterplot set up
+  var margin = {top: 20, right: 20, bottom: 20, left: 20};
+  var samples_width = 400 - margin.left - margin.right;
+  var samples_height = 400 - margin.top  - margin.bottom;
+  
+  var estimate_width = 200 - margin.left - margin.right;
+  var estimate_height = 200 - margin.left - margin.right;
+  
+  var svg_mh_samples = d3.select("#mh_graph").append("svg")
+      .attr("height", samples_height + margin.left + margin.right)
+      .attr("width", samples_width + margin.top + margin.bottom);
+  
+  var chart_mh_samples = svg_mh_samples.append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+           );
+
+  /*
+  var svg_mh_estimate = d3.select("#mh_graph").append("svg")
+      .attr("height", estimate_height + margin.left + margin.right)
+      .attr("width", estimate_width + margin.top + margin.bottom);
+  
+  var chart_mh_estimate = svg_mh_estimate.append("g")
+      .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")"
+           );
+  */
+  
+  var svg_bps_samples = d3.select("#bps_graph").append("svg")
+      .attr("height", samples_height + margin.left + margin.right)
+      .attr("width", samples_width + margin.top + margin.bottom);
+  
+  var chart_bps_samples = svg_bps_samples.append("g")
+      .attr("transform",
+		"translate(" + margin.left + "," + margin.top + ")"
+	   );
+  /*
+  var svg_bps_estimate = d3.select("#bps_graph").append("svg")
+      .attr("height", estimate_height + margin.left + margin.right)
+      .attr("width", estimate_width + margin.top + margin.bottom)
+      .attr("visible", "false");
+  
+  var chart_bps_estimate = svg_bps_estimate.append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+           );
+*/
+  var xScale = d3.scale.linear()
+      .domain([-3, 3])
+      .range([0, samples_width]);
+  
+  var yScale = d3.scale.linear()
+      .domain([-3, 3])
+      .range([samples_height, 0]);
+  
+  var xAxis = d3.svg.axis()
+      .scale(xScale)
+      .orient("bottom")
+      .tickSize(0)
+      .tickFormat("");
+  
+  var yAxis = d3.svg.axis()
+      .scale(yScale)
+      .orient("left")
+      .tickSize(0)
+      .tickFormat("");
+  
+  var mh_estimate_x_scale = d3.scale.linear().domain([0, 1]).range([0, estimate_width]);
+  var bps_estimate_x_scale = d3.scale.linear().domain([0, 1]).range([0, estimate_width]);
+  
+  // Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
+  var estimates_y_scale = d3.scale.linear().domain([0, 3]).range([estimate_height, 0]);
+  // automatically determining max range can work something like this
+  // var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
+                
+  chart_mh_samples.append("g")
+    .attr("class", "axis")
+    .attr("stroke", "white")
+    .attr("transform", "translate(0," + samples_height / 2 + ")")
+    .call(xAxis);
+  
+  chart_mh_samples.append("g")
+    .attr("class", "axis")
+    .attr("stroke", "white")
+    .attr("transform", "translate(" + samples_width / 2 + ",0)")
+			    .call(yAxis);
+
+
+			    
+  
+  chart_bps_samples.append("g")
+    .attr("class", "axis")
+    .attr("stroke", "white")
+    .attr("transform", "translate(0," + samples_height / 2 + ")")      
+    .call(xAxis);
+  
+  chart_bps_samples.append("g")
+    .attr("class", "axis")
+    .attr("stroke", "white")
+    .attr("transform", "translate(" + samples_width / 2 + ",0)")
+			    .call(yAxis);
+
+			    var rads = [50, 100, 150];
+			   for (var i = 0; i < rads.length; i++) {
+		chart_mh_samples
+			    .append("circle")
+			    .attr("fill-opacity", "0")
+			    .attr("opacity", "0.5")
+	  .attr("stroke", "white")
+          .attr("r", rads[i])
+          .attr("cx", samples_width / 2)
+					       .attr("cy", samples_height / 2);
+		chart_bps_samples
+			    .append("circle")
+			    .attr("fill-opacity", "0")
+			    .attr("opacity", "0.5")
+	  .attr("stroke", "white")
+          .attr("r", rads[i])
+          .attr("cx", samples_width / 2)
+					       .attr("cy", samples_height / 2);
+					       }
+
+  /*
+  chart_mh_estimate.append("g")
+    .attr("class", "x axis")
+    .attr("stroke", "white")
+    .attr("transform", "translate(0," + estimate_height + ")")
+    .call(d3.svg.axis()
+	  .scale(mh_estimate_x_scale)
+	  .orient("bottom")
+	  .tickFormat("")
+	  .tickSize(0)
+	 );
+
+  chart_mh_estimate.append("g")
+    .attr("class", "y axis")
+    .attr("stroke", "white")
+    .call(d3.svg.axis()
+	  .scale(estimates_y_scale)
+	  .orient("left")
+	  .tickFormat("")
+	 );
+      
+  chart_bps_estimate.append("g")
+    .attr("class", "x axis")
+    .attr("stroke", "white")
+    .attr("transform", "translate(0," + estimate_height + ")")
+    .call(d3.svg.axis()
+	  .scale(bps_estimate_x_scale)
+	  .orient("bottom"));
+  
+  chart_bps_estimate.append("g")
+    .attr("class", "y axis")
+    .call(d3.svg.axis()
+	  .scale(estimates_y_scale)
+	  .orient("left"));
+*/
+
+
+
+  
+  // Global BPS objects.
+  var global_bps_d = 6;
+  var global_bps_chart_height = 400;
+  var global_bps_chart_width = 400;
+
+  // The graph
+  var svg_sparse_graph = d3.select("#sparse_model").append("svg")
+      .attr("height", global_bps_chart_height + margin.top + margin.bottom)
+      .attr("width", 30 + margin.top + margin.bottom);
+
+  var chart_sparse_graph = svg_sparse_graph
+      .append("g")
+      .attr("transform", "translate(0, " + margin.top + ")");
+
+  for (var i = 0; i < global_bps_d; i++) {
+     chart_sparse_graph
+	  .append("circle")
+	  .attr("stroke", "white")
+          .attr("r", 10)
+          .attr("cx", 12)
+          .attr("cy", (i + 0.5) * global_bps_chart_height / global_bps_d);
+
+      if (i < global_bps_d - 1) {
+	  chart_sparse_graph
+	      .append("line")
+	      .attr("stroke", "white")
+	      .attr("x1", 12)
+	      .attr("x2", 12)
+	      .attr("y1", (i + 0.5) * global_bps_chart_height / global_bps_d + 10)
+	      .attr("y2", (i + 1.5) * global_bps_chart_height / global_bps_d - 10);
+      }
+  }
+  
+
+  var svg_global_bps_samples = d3.select("#global_bps_graph").append("svg")
+      .attr("height", global_bps_chart_height + margin.left + margin.right)
+      .attr("width", samples_width + margin.top + margin.bottom);
+
+  var global_bps_x_scale = d3.scale.linear().domain([0, 11]).range([0, global_bps_chart_width]);
+  var global_bps_y_scale = d3.scale.linear().domain([-3, 3]).range([global_bps_chart_height / global_bps_d, 0]);
+
+  var global_bps_line = d3.svg.line()
+      .x(function(d) { 
+	  return global_bps_x_scale(d[0]);
+      })	  
+      .y(function(d) { 
+	  return global_bps_y_scale(d[1]);
+      });
+  
+  var chart_global_bps_samples = [];
+  for (var i = 0; i < global_bps_d; i++) {
+      chart_global_bps_samples.push(
+	  svg_global_bps_samples
+	      .append("g")
+	      .attr("transform", "translate(" + margin.left + "," + (margin.top + global_bps_chart_height * i / global_bps_d) + ")")
+      );
+
+      chart_global_bps_samples[i]
+	  .append("path")
+	  .attr("class", "line")
+	  .attr("id", "tail")
+	  .attr("fill", "none")
+	  .attr("stroke", "steelblue")
+	  .attr("stroke-width", 1)
+	  .attr("d", global_bps_line([]));
+
+      chart_global_bps_samples[i]
+	  .append("path")
+	  .attr("class", "line")
+	  .attr("id", "head")
+	  .attr("fill", "none")
+	  .attr("stroke", "cyan")
+	  .attr("stroke-width", 2)
+	  .attr("d", global_bps_line([]));
+
+  }
+
+
+  // Local BPS objects.
+  var local_bps_d = global_bps_d;
+  var local_bps_chart_height = 400;
+  var local_bps_chart_width = 400;
+  var svg_local_bps_samples = d3.select("#local_bps_graph").append("svg")
+      .attr("height", local_bps_chart_height + margin.left + margin.right)
+      .attr("width", samples_width + margin.top + margin.bottom);
+
+  var local_bps_x_scale = d3.scale.linear().domain([0, 11]).range([0, local_bps_chart_width]);
+  var local_bps_y_scale = d3.scale.linear().domain([-3, 3]).range([local_bps_chart_height / local_bps_d, 0]);
+
+  var local_bps_line = d3.svg.line()
+      .x(function(d) { 
+	  return local_bps_x_scale(d[0]);
+      })	  
+      .y(function(d) { 
+	  return local_bps_y_scale(d[1]);
+      });
+  
+  var chart_local_bps_samples = [];
+  for (var i = 0; i < local_bps_d; i++) {
+      chart_local_bps_samples.push(
+	  svg_local_bps_samples
+	      .append("g")
+	      .attr("transform", "translate(" + margin.left + "," + (margin.top + local_bps_chart_height * i / local_bps_d) + ")")
+      );
+
+      chart_local_bps_samples[i]
+	  .append("path")
+	  .attr("class", "line")
+	  .attr("id", "tail")
+	  .attr("fill", "none")
+	  .attr("stroke", "steelblue")
+	  .attr("stroke-width", 1)
+	  .attr("d", local_bps_line([]));
+
+      chart_local_bps_samples[i]
+	  .append("path")
+	  .attr("class", "line")
+	  .attr("id", "head")
+	  .attr("fill", "none")
+	  .attr("stroke", "cyan")
+	  .attr("stroke-width", 2)
+	  .attr("d", local_bps_line([]));
+
+  }
+
+  
+
+  
+  var line = d3.svg.line()
+      .x(function(d, i) { 
+	  return mh_estimate_x_scale(i);
+      })
+      .y(function(d) { 
+	  return estimates_y_scale(d); 
+      });
+  
+  var bps_estimate_line = d3.svg.line()
+      .x(function(d) {
+	  return bps_estimate_x_scale(d[0]);
+      })
+      .y(function(d) { 
+	  return estimates_y_scale(d[1] / d[0]);
+      })
+
+      
+  var simple_line = d3.svg.line()
+      .x(function(d) { 
+	  return xScale(d[0]);
+      })
+      .y(function(d) { 
+	  return yScale(d[1]); 
+      });      
+  
+  function addPoint(x, prev) {
+      if (prev) { 
+          prev.transition()
+	      .attr("opacity", "0.5")
+	      .attr("stroke", "steelblue")
+	      .attr("fill", "steelblue")
+	      .attr("r", 3);
+      }
+      return chart_mh_samples
+	  .append("circle")
+          .attr("fill-opacity", "1")
+	  .attr("stroke", "cyan")
+	  .attr("fill", "cyan")
+          .attr("r", 5)
+          .attr("cx", xScale(x[0]))
+          .attr("cy", yScale(x[1]));
+  };     
+  
+  function addSegments(segments, prev) {
+      if (prev) {
+	  prev.transition()
+	      .attr("opacity", "0.5")
+	      .attr("stroke", "steelblue")
+	      .attr("stroke-width", 1);
+      }	  
+      return chart_bps_samples
+	  .append("path")
+	  .attr("class", "line")
+	  .attr("fill", "none")
+	  .attr("stroke", "cyan")
+	  .attr("stroke-width", 2)
+	  .attr("d", simple_line(segments));
+  }
+
+  function addGlobalSegments(global_bps_hist) {
+      var end_points = 2;
+      for (var i = 0; i < d; i++) {
+	  
+	  var path = [];
+	  for (let s of global_bps_hist) {
+	      path.push([s.t, s.x[i]]);
+	  }
+	  
+	  chart_global_bps_samples[i].select("#head")
+	      .attr("d", global_bps_line(path.slice(-end_points)));
+
+	  chart_global_bps_samples[i].select("#tail")
+	      .attr("d", global_bps_line(path));	  
+      }
+  }
+
+  
+
+  function addLocalSegments(local_bps_hist) {
+      var end_points = 2;
+      for (var i = 0; i < d; i++) {
+	  
+	  var path = [];
+	  for (let s of local_bps_hist) {
+	      path.push([s.t, s.x[i]]);
+	  }
+	  
+	  chart_local_bps_samples[i].select("#head")
+	      .attr("d", local_bps_line(path.slice(-end_points)));
+
+	  chart_local_bps_samples[i].select("#tail")
+	      .attr("d", local_bps_line(path));	  
+      }
+  }
+  
+  
+  var max_estimate = 1.0;
+  
+  function updateEstimate(est) {
+      /*
+      if (est > max_estimate) {
+	  max_estimate = est;
+	  estimates_y_scale = d3.scale.linear().domain([0, max_estimate + 0.01]).range([estimate_height, 0]);
+	  chart_bps_estimate.select("g.y.axis")
+	      .call(d3.svg.axis()
+		    .scale(estimates_y_scale)
+		    .orient("left")
+		    .tickFormat("")
+		   );
+	  
+	  chart_mh_estimate.select("g.y.axis")
+	      .call(d3.svg.axis()
+		    .scale(estimates_y_scale)
+		    .orient("left")
+		    .tickFormat("")		    
+		   );
+      }
+*/
+  }
+  
+  var hist_x2 = [];
+  /*
+  chart_mh_estimate.append("path")
+    .attr("class", "line")
+    .attr("fill", "none")
+    .attr("stroke", "steelblue")
+    .attr("stroke-width", 1)
+    .attr("d", line(hist_x2));
+*/
+
+  var U = function(x) {
+      return 0.5 * math.dot(x, x);
+  };
+
+  var GradU = function(x) {
+      return x;
+  }
+  
+  function gaussianRand() {
+      var rand = 0;
+      for (var i = 0; i < 6; i += 1) {
+	  rand += Math.random();
+      }
+      rand -= 3;
+      return rand / 6;
+  };
+  
+  // MH params.
+  var x = [randn_bm(), randn_bm()];      
+  var pts = 0;
+  var prev = addPoint(x);
+  var sd = 1.0;
+  var acc_x2 = 0;
+  
+  function mh_step() {
+      // MH move.
+      var xp = [0, 0];
+      xp[0] = x[0] + sd * randn_bm();
+      xp[1] = x[1] + sd * randn_bm();
+      
+      if (Math.random() < Math.exp(U(x) - U(xp))) {
+	  x = xp;
+      }
+      
+      prev = addPoint(x, prev);
+      
+      acc_x2 += x[0] * x[0] + x[1] * x[1];
+      pts += 1;
+      
+      hist_x2.push(acc_x2 / pts);
+      
+      /*
+      updateEstimate(acc_x2 / pts);
+      
+      
+      mh_estimate_x_scale = d3.scale.linear()
+	  .domain([0, pts])
+	  .range([0, estimate_width]);
+      
+
+      chart_mh_estimate.select("g.x.axis")
+	  .call(d3.svg.axis()
+		.scale(mh_estimate_x_scale)
+		.orient("bottom")
+		.tickFormat("")
+	       );
+      
+      chart_mh_estimate.select(".line")
+	  .attr("d", line(hist_x2));
+      */
+  }
+  
+  var bps_state = {
+      "x": [randn_bm(), randn_bm()],
+      "v": [randn_bm(), randn_bm()],
+  };
+  var lambda_ref = 0.5;
+  
+  var prev_line;
+  var fail = false;
+  
+  function bps_step(z, max_step) {
+      if (fail) {
+	  return [0, true];
+      }
+      
+      var ref_time = 0;
+      if (lambda_ref > 0) {
+          ref_time = -Math.log(Math.random()) / lambda_ref;
+      } else {
+          ref_time = Infinity;
+      }
+      
+      var xv = math.dot(z.x, z.v);
+      var vv = math.dot(z.v, z.v);
+      
+      var V = -Math.log(Math.random());
+      
+      var t0 = -xv / vv;
+      var det = 2 * vv * V;
+      if (t0 < 0) {
+	  det += xv * xv;
+      }
+      var sq = Math.sqrt(det);
+      if (!isFinite(sq)) {
+	  fail = true;
+      }
+      
+      var bounce_time = (-xv + sq) / vv;
+      
+      var time_step = Math.min(max_step, ref_time, bounce_time);
+      
+      var next_z = {
+	  "x": [0, 0],
+	  "v": [0, 0],
+      };
+      next_z.x[0] = z.x[0] + time_step * z.v[0];
+      next_z.x[1] = z.x[1] + time_step * z.v[1];
+      
+      var completed = false;
+      if (max_step < ref_time && max_step < bounce_time) {
+	  next_z.v[0] = z.v[0];
+	  next_z.v[1] = z.v[1];
+	  completed = true;
+      } else if (ref_time < bounce_time) {
+	  next_z.v[0] = randn_bm();
+	  next_z.v[1] = randn_bm();
+      } else {
+          g = GradU(next_z.x);
+	  var coef = math.dot(g, z.v) / math.dot(g, g);
+          next_z.v[0] = z.v[0] - 2 * coef * g[0];
+          next_z.v[1] = z.v[1] - 2 * coef * g[1];
+      }
+      
+      return {
+	  'z': next_z,
+	  'duration': time_step,
+	  'completed': completed,
+      };
+  }
+
+  var d = global_bps_d;
+  var L = math.zeros(d, d);
+  for (var i = 0; i < d; i++) {
+      L.subset(math.index(i, i), 1.0); 
+  }
+  var lambda = -0.49;
+  for (var i = 0; i < d - 1; i++) {
+      L.subset(math.index(i, i + 1), lambda);
+      L.subset(math.index(i + 1, i), lambda);
+  }
+
+  console.log("L:" + L);
+
+  var global_local_lambda_ref = 0.1;
+
+  var bps_event_types = Object.freeze({
+      "time_elapsed": 1,
+      "bounce": 2,
+      "refresh": 3,
+  })
+  
+  function global_bps_step(z, max_step) {
+      if (fail) {
+	  return null;
+      }
+
+      var ref_time = 0;
+      if (global_local_lambda_ref > 0) {
+          ref_time = -Math.log(Math.random()) / global_local_lambda_ref;
+      } else {
+          ref_time = Infinity;
+      }
+      
+      var xv = math.dot(z.x, math.multiply(L, z.v));
+      var vv = math.dot(z.v, math.multiply(L, z.v));
+      
+      var V = -Math.log(Math.random());
+      
+      var t0 = -xv / vv;
+      var det = 2 * vv * V;
+      if (t0 < 0) {
+	  det += xv * xv;
+      }
+      var sq = Math.sqrt(det);
+      if (!isFinite(sq)) {
+	  fail = true;
+      }
+      
+      var bounce_time = (-xv + sq) / vv;		        
+      var time_step = Math.min(max_step, ref_time, bounce_time);
+      
+      var next_z = {
+	  "x": new Array(d).fill(0),
+	  "v": new Array(d).fill(0)
+      };
+      next_z.x = math.add(z.x, math.multiply(time_step, z.v))
+      
+      var completed = false;
+      var event_type;
+      var indices = [];
+      if (max_step < bounce_time && max_step < ref_time) {
+	  next_z.v = z.v.slice();
+	  event_type = bps_event_types.time_elapsed;
+      } else if (ref_time < bounce_time) {
+	  for (var i = 0; i < d; i++) {
+	      next_z.v[i] = randn_bm();
+	  }
+	  event_type = bps_event_types.refresh;
+      } else {
+          g = GradU(next_z.x);
+	  var coef = math.dot(g, z.v) / math.dot(g, g);
+	  next_z.v = math.add(z.v, math.multiply(-2 * coef, g));
+	  event_type = bps_event_types.bounce;
+	  for (var i = 0; i < d; i++) {
+	      indices.push(i);
+	  }
+      }
+      
+      return {
+	  'z': next_z,
+	  'duration': time_step,
+	  'event_type': event_type,
+	  'indices': indices,
+      };
+  }
+
+
+  
+  function local_bps_step(z, max_step) {
+      if (fail) {
+	  return null;
+      }
+
+      var ref_time = 0;
+      if (global_local_lambda_ref > 0) {
+          ref_time = -Math.log(Math.random()) / global_local_lambda_ref;
+      } else {
+          ref_time = Infinity;
+      }
+
+      var single_times = [];
+      for (var i = 0; i < d; i++) {
+	  var V = -Math.log(Math.random());
+	  var xv = z.x[i] * z.v[i];
+	  var vv = z.v[i] * z.v[i];	 
+	  var t0 = -xv / vv;
+	  var det = 2 * vv * V;
+	  if (t0 < 0) {
+	      det += xv * xv;	      
+	  }
+	  var sq = Math.sqrt(det);
+	  var bounce_time = (-xv + sq) / vv;
+	  single_times.push(bounce_time);
+      }
+
+      var pair_times = [];
+      for (var i = 0; i < d - 1; i++) {
+	  var V = -Math.log(Math.random());
+	  var xv = lambda * (z.x[i] * z.v[i + 1]) + lambda * (z.x[i + 1] * z.v[i]);
+	  var vv = 2 * lambda * z.v[i] * z.v[i + 1];
+	  var t0 = -xv / vv;
+	  var det = 2 * vv * V;
+	  if (t0 < 0) {
+	      det += xv * xv;
+	  }
+	  if (det < 0) {
+	      pair_times.push(Infinity);
+	  } else {	      
+	      var sq = Math.sqrt(det);
+	      var bounce_time = (-xv + sq) / vv;
+	      if (bounce_time < 0) {
+		  pair_times.push(Infinity);
+	      } else {		  
+		  pair_times.push(bounce_time);
+	      }
+	  }
+      }
+      
+      //fail = true;
+
+      var min_single_time = Infinity, min_single_time_idx;
+      for (var i = 0; i < single_times.length; i++) {
+	  if (single_times[i] < min_single_time) {
+	      min_single_time = single_times[i];
+	      min_single_time_idx = i;
+	  }
+      }
+      
+      var min_pair_time = Infinity, min_pair_time_idx;
+      for (var i = 0; i < pair_times.length; i++) {
+	  if (pair_times[i] < min_pair_time) {
+	      min_pair_time = pair_times[i];
+	      min_pair_time_idx = i;
+	  }
+      }
+      
+      var time_step = Math.min(max_step, ref_time, min_single_time, min_pair_time);      
+      
+      var next_z = {
+	  "x": new Array(d).fill(0),
+	  "v": new Array(d).fill(0)
+      };
+      next_z.x = math.add(z.x, math.multiply(time_step, z.v))
+
+      var rv = {}
+      
+      var completed = false;
+      if (max_step < ref_time && max_step < min_single_time && max_step < min_pair_time) {
+	  next_z.v = z.v.slice();
+	  rv.event_type = bps_event_types.time_elapsed;
+      } else if (ref_time < min_single_time && ref_time < min_pair_time) {
+	  for (var i = 0; i < d; i++) {
+	      next_z.v[i] = randn_bm();
+	  }
+	  rv.event_type = bps_event_types.refresh;
+      } else if (min_single_time < min_pair_time) {
+	  next_z.v = z.v.slice();
+	  next_z.v[min_single_time_idx] = -next_z.v[min_single_time_idx];
+	  rv.event_type = bps_event_types.bounce;
+	  rv.indices = [min_single_time_idx];
+      } else {	  
+          g = new Array(d).fill(0);
+	  g[min_pair_time_idx] = lambda * z.x[min_pair_time_idx + 1];
+	  g[min_pair_time_idx + 1] = lambda * z.x[min_pair_time_idx];
+	  
+	  var coef = math.dot(g, z.v) / math.dot(g, g);
+	  next_z.v = math.add(z.v, math.multiply(-2 * coef, g));
+
+	  rv.event_type = bps_event_types.bounce;
+	  rv.indices = [min_pair_time_idx, min_pair_time_idx + 1];
+      }
+
+      rv.z = next_z;
+      rv.duration = time_step;
+      
+      return rv;
+  }
+  
+  
+  
+  var hist_bps_x2 = [];
+  var bps_acc_x2 = 0.0;
+  var total_time = 0.0;
+  
+
+  /*
+  chart_bps_estimate.append("path")
+	  .attr("class", "line")
+	  .attr("fill", "none")
+	  .attr("stroke", "steelblue")
+	  .attr("stroke-width", 1)
+	  .attr("d", bps_estimate_line(hist_bps_x2));
+*/
+
+      
+
+   var global_bps_state = {
+       "x": new Array(d),
+       "v": new Array(d),
+   };
+      
+   for (var i = 0; i < d; i++) {
+       global_bps_state.x[i] = randn_bm();
+       global_bps_state.v[i] = randn_bm();
+   }
+
+   var global_bps_time_elapsed = 0.0;
+   var prev_global_lines;
+
+  global_bps_hist = [];
+
+  
+
+   var local_bps_state = {
+       "x": new Array(d),
+       "v": new Array(d),
+   };
+      
+   for (var i = 0; i < d; i++) {
+       local_bps_state.x[i] = randn_bm();
+       local_bps_state.v[i] = randn_bm();
+   }
+
+   var local_bps_time_elapsed = 0.0;
+   var prev_local_lines;
+
+  local_bps_hist = [];
+
+  
+
+  var time_comparison_started = false;
+		       function startTimeComparison() {
+		       if (time_comparison_started) {
+		       return;
+		       } else {
+		       time_comparison_started = true;
+		       }
+      
+      var interval = setInterval(function () {
+	  
+	  // BPS move.
+	  mh_step();
+	  
+	  var points = [bps_state.x];
+	  
+	  var completed = false;
+	  var time_left = 0.5;
+	  while (!completed) {
+	      var prev_z = {
+		  "x": [bps_state.x[0], bps_state.x[1]],
+		  "v": [bps_state.v[0], bps_state.v[1]],
+	      }
+	      
+	      var result = bps_step(bps_state, time_left);
+	      
+	      bps_state = result.z;
+	      
+	      points.push(bps_state.x);
+	      
+	      var time_used = result.duration;
+	      var completed = result.completed;
+	      time_left -= time_used;
+	      
+	      total_time += time_used;
+	      
+	      var xx = math.dot(prev_z.x, prev_z.x);
+	      var xv = math.dot(prev_z.x, prev_z.v);
+	      var vv = math.dot(prev_z.v, prev_z.v);
+	      bps_acc_x2 += xx * time_used + xv * time_used * time_used + vv * time_used * time_used * time_used / 3.0;
+	      
+	      hist_bps_x2.push([total_time, bps_acc_x2]);
+	  }
+	  
+	  updateEstimate(bps_acc_x2 / total_time);
+	  
+
+	  /*
+	  bps_estimate_x_scale = d3.scale.linear()
+	      .domain([0, total_time])
+	      .range([0, estimate_width]);
+	  
+	  chart_bps_estimate.select("g.x.axis")
+	      .call(d3.svg.axis()
+		    .scale(bps_estimate_x_scale)
+		    .orient("bottom"));
+	      
+	  chart_bps_estimate.select(".line")
+	      .attr("d", bps_estimate_line(hist_bps_x2));
+*/
+	  
+	  prev_line = addSegments(points, prev_line);
+	  
+      }, 100);
+  }
+
+  function startGlobalLocalComparison_old() {
+
+      var interval = setInterval(function () {
+	  
+	  var points = [{
+	      "t": global_bps_time_elapsed,
+	      "x": global_bps_state.x,
+	  }];
+
+	  var new_points = [];
+	  
+	  var completed = false;
+	  var time_left = 0.2;	  
+	  while (!completed) {
+	      var prev_z = {
+		  "x": global_bps_state.x.slice(),
+		  "v": global_bps_state.v.slice(),
+	      }
+	      
+	      var result = global_bps_step(global_bps_state, time_left);
+
+	      if (result === null) {
+		  break;
+	      }
+	      
+	      global_bps_state = result.z;
+
+	      global_bps_time_elapsed += result.duration;
+	      
+	      points.push({
+		  "t": global_bps_time_elapsed,
+		  "x": global_bps_state.x,
+	      });
+
+	      global_bps_hist.push({
+		  "t": global_bps_time_elapsed,
+		  "x": global_bps_state.x,
+	      });
+	      
+	      var time_used = result.duration;
+	      var completed = result.completed;
+	      time_left -= time_used;
+	      
+	      total_time += time_used;
+	  }
+
+
+	  if (global_bps_time_elapsed > 10) {
+	      global_bps_x_scale = d3.scale.linear()
+		  .domain([global_bps_time_elapsed - 10.0, global_bps_time_elapsed + 1])
+		  .range([0, global_bps_chart_width]);
+	  }
+
+	  for (var i = 0; i < d; i++) {
+	      chart_global_bps_samples[i]
+		  .select("g.x.axis")
+		  .call(d3.svg.axis()
+			.scale(global_bps_x_scale)
+			.orient("bottom")
+			.tickFormat("")
+		       );	      
+	  }
+	  
+	  addGlobalSegments(global_bps_hist);
+	  
+      }, 50);
+
+      
+      var interval = setInterval(function () {
+	  
+	  var points = [{
+	      "t": local_bps_time_elapsed,
+	      "x": local_bps_state.x,
+	  }];
+
+	  var new_points = [];
+	  
+	  var completed = false;
+	  var time_left = 0.2;	  
+	  while (!completed) {
+	      var prev_z = {
+		  "x": local_bps_state.x.slice(),
+		  "v": local_bps_state.v.slice(),
+	      }
+	      
+	      var result = local_bps_step(local_bps_state, time_left);
+
+	      if (result === null) {
+		  break;
+	      }
+	      
+	      local_bps_state = result.z;
+
+	      local_bps_time_elapsed += result.duration;
+	      
+	      points.push({
+		  "t": local_bps_time_elapsed,
+		  "x": local_bps_state.x,
+	      });
+
+	      local_bps_hist.push({
+		  "t": local_bps_time_elapsed,
+		  "x": local_bps_state.x,
+	      });
+	      
+	      var time_used = result.duration;
+	      var completed = result.completed;
+	      time_left -= time_used;
+	      
+	      total_time += time_used;
+	  }
+
+
+	  if (local_bps_time_elapsed > 10) {
+	      local_bps_x_scale = d3.scale.linear()
+		  .domain([local_bps_time_elapsed - 10.0, local_bps_time_elapsed + 1])
+		  .range([0, local_bps_chart_width]);
+	  }
+
+	  for (var i = 0; i < d; i++) {
+	      chart_local_bps_samples[i]
+		  .select("g.x.axis")
+		  .call(d3.svg.axis()
+			.scale(local_bps_x_scale)
+			.orient("bottom")
+			.tickFormat("")
+		       );	      
+	  }
+	  
+	  addLocalSegments(local_bps_hist);
+	  
+      }, 50);
+
+
+  }
+
+</script>

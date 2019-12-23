@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120594831-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-120594831-1');
+	</script>
+
+	
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Sebastian Schmon</title>
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+    <!-- Custom styles for this template -->
+    <link href="album.css" rel="stylesheet">
+	
+	<!-- Google Code Prettify -->
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autorun=true"></script>
+	
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<!-- Include LaTeX -->
+	<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  
+	/* change all .btn to .btn-sm size on xs */
+	@include media-breakpoint-between(xs,sm){
+	  .btn {
+		  @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $line-height-sm, $btn-border-radius-sm);
+	  }
+	}
+	</script>
+	
+  </head>
+
+  <body  data-spy="scroll" data-target=".navbar" data-offset="50">
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #223A5E;">
+      <a class="navbar-brand" href="#">Sebastian Schmon</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+		  
+          <li class="nav-item">
+            <a class="nav-link" href="#aboutme">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#research">Research</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#teaching">Teaching</a>
+          </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0" id="frmSearch" method="get">
+          <input class="form-control mr-sm-2" type="text" id="txtSearch" placeholder="Search" aria-label="Search">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+	<script type="text/javascript">
+    document.getElementById('frmSearch').onsubmit = function() {
+        window.location = 'http://www.google.com/search?q=site:stats.ox.ac.uk/~schmon ' + document.getElementById('txtSearch').value;
+        return false;
+    }
+	</script>
+
+
+    <main role="main">
+
+      <section class="jumbotron text-center"  id="aboutme">
+        <div class="container">
+		  <div class="text-center">
+			<img src="seb1.jpg" class="rounded" alt="seb" height="200px">
+		  </div>
+          <h1 class="jumbotron-heading">Sebastian Schmon</h1>
+		  <code type="text" id="schmon2018">lastname at stats.ox.ac.uk</code>
+          <p class="lead text-muted"><p class="text-muted">I am a DPhil (PhD) student at the Department of Statistics of the University of Oxford. My research interests lie at the intersection of probability theory, statistics and computational methods.
+			In particular, I am interested in constructing and analysing practical algorithms and simulation techniques for complex statistical or machine learning models such as intractable Bayesian models. 
+										More on that on my <a href="#research" class="link-articles">research</a> page. My supervisors are <a href="http://www.stats.ox.ac.uk/~doucet/" class="link-articles">Arnaud Doucet</a> and <a href="http://www.stats.ox.ac.uk/~deligian/" class="link-articles">George Deligiannidis</a>.			
+<!-- 			<p>
+            <a href="#" class="btn btn-primary my-2">Main call to action</a>
+            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+          </p> -->
+        </div>
+      </section>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+		<div class="page-header" id="research">
+		<h3>Research</h3>
+        <div class="row">
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
+					  <div class="card-body">
+						<h4>Implicit Priors for Knowledge Sharing in Bayesian Neural Networks</h4>
+						<p> with Jack Fitzsimons and Stephen Roberts</p>
+						
+						<p color="grey"><i>4th Neurips workshop on Bayesian Deep Learning 2019</i></p>
+
+						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #6F9FD8;" href="#collapse_IMPP" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #6F9FD8;" onclick="window.location='https://arxiv.org/abs/1912.00874';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #6F9FD8;">Code (coming soon)</button>
+							<button type="button" class="btn text-white border-left" style="background-color: #6F9FD8;" data-toggle="collapse" href="#collapse_IMPP_bibtex" role="button" aria-expanded="false" aria-controls="collapse_IMPP_bibtex">Bibtex</button>
+						</div>
+						<div class="collapse" id="collapse_IMPP">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							Bayesian approaches offer a robust statistical framework to introduce prior knowledge into learning
+							procedures. However, the tasks introduced above can be challenging in practice since "information"
+							gained by one network such as learned features can be difficult to encode into prior distributions over
+							networks that do not share the same architecture or even the same output dimension. We introduce
+							here a Bayesian viewpoint that centres around features and describe a set of prior distributions
+							derived from the theory of Gaussian processes and deep kernel learning that facilitate a variety of
+							deep learning tasks in a unified way. In particular, we will show that our approach is applicable to
+							knowledge distillation, transfer learning and combining experts.		
+						  </div>
+						</div>
+						<div class="collapse" id="collapse_IMPP_bibtex">
+						  <div class="class="card-body">
+							<pre class="prettyprint"><code type="text" id="schmon2018">@Article{impprior,
+  author  = {Jack K Fitzsimons and Sebastian M Schmon and Stephen J Roberts},
+  title   = {Implicit Priors for Knowledge Sharing in Bayesian Neural Networks},
+  journal = {4th Neurips workshop on Bayesian Deep Learning},
+  year    = {2019},
+}
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#schmon2018');this.value='Copy to clipboard ✓'">
+						  </div>
+						</div>
+					  </div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
+					  <div class="card-body">
+						<h4>Bernoulli Race Particle Filters</h4>
+						<p> with Arnaud Doucet, George Deligiannidis</p>
+						
+						<p color="grey"><i>The 22nd International Conference on Artificial Intelligence and Statistics, AISTATS 2019</i></p>
+
+						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #6F9FD8;" href="#collapse_BRPF" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #6F9FD8;" onclick="window.location='https://arxiv.org/abs/1903.00939';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #6F9FD8;">Code (coming soon)</button>
+							<button type="button" class="btn text-white border-left" style="background-color: #6F9FD8;" data-toggle="collapse" href="#collapse_BRPF_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+						</div>
+						<div class="collapse" id="collapse_BRPF">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							When the weights in a particle filter are not
+							available analytically, standard resampling
+							methods cannot be employed. To circumvent
+							this problem state-of-the-art algorithms re-
+							place the true weights with non-negative un-
+							biased estimates. This algorithm is still valid
+							but at the cost of higher variance of the re-
+							sulting filtering estimates in comparison to a
+							particle filter using the true weights. We pro-
+							pose here a novel algorithm that allows for
+							resampling according to the true intractable
+							weights when only an unbiased estimator of
+							the weights is available. We demonstrate our
+							algorithm on several examples.
+						  </div>
+						</div>
+						<div class="collapse" id="collapse_BRPF_bibtex">
+						  <div class="class="card-body">
+							<pre class="prettyprint"><code type="text" id="schmon2018">@Article{bernrace,
+  author  = {Sebastian M Schmon and George Deligiannidis and Arnaud Doucet},
+  title   = {Bernoulli Race Particle Filters},
+  journal = {AISTATS},
+  year    = {2019},
+}
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#schmon2018');this.value='Copy to clipboard ✓'">
+						  </div>
+						</div>
+					  </div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
+					  <div class="card-body">
+						<h4>Large Sample Asymptotics of the Pseudo-Marginal Method</h4>
+						<p> with Arnaud Doucet, George Deligiannidis and Mike Pitt</p>
+						
+						<p color="gray"><i>https://arxiv.org/abs/1806.10060</i></p>
+						
+						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #6F9FD8;" href="#collapse_PMMH" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #6F9FD8;" onclick="window.location='https://arxiv.org/abs/1806.10060';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #6F9FD8;" onclick="window.location='download/Code_submission.zip';">Code (zip)</button>
+							<button type="button" class="btn text-white border-left" style="background-color: #6F9FD8;" data-toggle="collapse" href="#collapse_PMMH_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+						</div>
+						<div class="collapse" id="collapse_PMMH">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							The pseudo-marginal algorithm is a variant of the Metropolis–Hastings algorithm which samples
+							asymptotically from a probability distribution when it is only possible to estimate unbiasedly an unnor-
+							malized version of its density. Practically one has to trade-off the computational resources used to obtain
+							this estimator against the asymptotic variances of the ergodic averages obtained by the pseudo-marginal
+							algorithm. Recent works optimizing this trade-off rely on some strong assumptions which can cast doubts
+							over their practical relevance. In particular, they all assume that the distribution of the additive error in
+							the log-likelihood estimator is independent of the parameter value at which it is evaluated. Under weak
+							regularity conditions we show here that, as the number of data points tends to infinity, a space-rescaled
+							version of the pseudo-marginal chain converges weakly towards another pseudo-marginal chain for which
+							this assumption indeed holds. A study of this limiting chain allows us to provide parameter dimension-
+							dependent guidelines on how to optimally scale a normal random walk proposal and the number of Monte
+							Carlo samples for the pseudo-marginal method in the large sample regime. This complements and vali-
+							dates currently available results.
+						  </div>
+						</div>
+						<div class="collapse" id="collapse_PMMH_bibtex">
+						  <div class="class="card-body">
+							<pre class="prettyprint"><code type="text" id="schmon2018">@Article{SchmonDeligiannidisDoucet2018a,
+  author  = {Sebastian M Schmon and George Deligiannidis and Arnaud Doucet and Michael K Pitt},
+  title   = {Large Sample Asymptotics of the Pseudo-Marginal Algorithm},
+  journal = {https://arxiv.org/abs/1806.10060},
+  year    = {2018},
+}
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#schmon2018');this.value='Copy to clipboard ✓'">
+						  </div>
+						</div>
+					  </div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
+					  <div class="card-body">
+						<h4>Estimating the density of ethnic minorities and aged people in Berlin:</h4>
+						<h5>Multivariate kernel density estimation applied to sensitive georeferenced administrative data protected via measurement error</h5>
+						<p>with Marcus Groß, Ulrich Rendtel, Timo Schmid and Nikos Tzavidis</p>
+						<p color="grey"><i>Journal of the Royal Statistical Society: Series A (Statistics in Society) 180.1 (2017): 161-183</i></p>
+
+						<div class="btn-group d-flex flex-wrap" role="group">
+							<button type="button" class="btn text-white border-right" data-toggle="collapse"  style="background-color: #6F9FD8;" href="#collapse_kde" role="button" aria-expanded="false" aria-controls="collapse_kde"><span class="hidden-xs">Abstract</span></button>
+							<button type="button" class="btn text-white border-left border-right"  style="background-color: #6F9FD8;" onclick="window.location='https://eprints.soton.ac.uk/383719/2/Gross%2520et%2520al%2520-%2520Kernel%2520Density%2520Estimation_Berlin%2520Register%2520-%2520final.pdf';"><span class="hidden-xs glyphicon glyphicon-download-alt">PDF (preprint)</span></button>
+							<button type="button" class="btn text-white border-left border-right"  style="background-color: #6F9FD8;" onclick="window.location='https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12179';"><span class="hidden-sm hidden-xs hidden-md">PDF (JRSSA)</span></button>
+							<button type="button" class="btn text-white border-left" data-toggle="collapse" style="background-color: #6F9FD8;" href="#collapse_kde_bibtex" role="button" aria-expanded="false" aria-controls="collapse_kde_bibtex"><span class="hidden-xs ">Bibtex</span></button>
+						</div>
+
+						<div class="collapse" id="collapse_kde">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							Modern systems of official statistics require the timely estimation of area-specific densities of subpopulations. Ideally estimates should be based on precise geocoded information, which is not available because of confidentiality constraints. One approach for ensuring confidentiality is by rounding the geoco‐ordinates. We propose multivariate non‐parametric kernel density estimation that reverses the rounding process by using a measurement error model. The methodology is applied to the Berlin register of residents for deriving density estimates of ethnic minorities and aged people. Estimates are used for identifying areas with a need for new advisory centres for migrants and infrastructure for older people. 
+						  </div>
+						</div>
+						<div class="collapse" id="collapse_kde_bibtex">
+						  <div class="class="p-3 mb-2 bg-light text-dark">
+							<pre class="prettyprint"><code type="text" id="gross2017">@article{gross2017,
+  title={Estimating the density of ethnic minorities and aged people in Berlin: multivariate kernel density estimation applied to sensitive georeferenced administrative data protected via measurement error},
+  author={Gro{\ss}, Marcus and Rendtel, Ulrich and Schmid, Timo and Schmon, Sebastian and Tzavidis, Nikos},
+  journal={Journal of the Royal Statistical Society: Series A (Statistics in Society)},
+  volume={180},
+  number={1},
+  pages={161--183},
+  year={2017},
+  publisher={Wiley Online Library}
+}
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#gross2017');this.value='Copy to clipboard ✓'">
+							
+						  </div>
+						</div>
+					  </div>
+				</div>
+			</div>
+		  </div>
+		</div>
+	</div>
+	</div>
+	
+	<div class="album py-5 bg-light">
+    <div class="container">
+		<div class="page-header" id="teaching">
+		<h3>Talks & Presentations</h3>
+		<div class="row">
+		<div class="col-sm-6 col-md-6">
+			<div class="card mb-4 box-shadow">
+					<div class="card-body">
+						<h4>Bernoulli Race Particle Filters</h4>
+						<h5>AISTATS 2019</h5>
+						<p>I presented this work at AISTATS 2019 in Okinawa (poster) and Babylon Health in London (slides).</p>
+						<button type="button" class="btn text-white  border-left border-right"  style="background-color: #6F9FD8;" onclick="window.location='download/poster_aistats.pdf';">Poster (pdf)</button>
+						<button type="button" class="btn text-white  border-left border-right"  style="background-color: #6F9FD8;" onclick="window.location='http://www.stats.ox.ac.uk/~schmon/Babylon';">Slides (html)</button>
+						</div>
+			</div>
+			<div class="card mb-4 box-shadow">
+					<div class="card-body">
+						<h4>Large Sample Asymptotics of the Pseudo-Marginal Method</h4>
+						<h5>ISBA 2018, BayesComp 2018</h5>
+						<button type="button" class="btn text-white border-left border-right" style="background-color: #6F9FD8;" onclick="window.location='download/lsapm_isba.pdf';">Poster (pdf)</button>
+						<button type="button" class="btn text-white border-left border-right" style="background-color: #6F9FD8;" onclick="window.location='download/Stats_Beamer.pdf';">Slides (pdf)</button>
+						</div>
+					</div>
+			</div>	
+		</div>			
+
+
+		</div>
+				<h3>Past Teaching</h3>
+				<h3><small>University of Oxford</small></h3>
+				<ul>	
+					<li> Applied Probability, 3rd year Mathematics (Michaelmas 2015)</li>
+					<li> Advanced Simulation, 4th year Mathematics and MSc Statistics (Hilary 2016, 2017, 2018)</li>
+					<li> Graphical Models, 4th year Mathematics and MSc Statistics (Michaelmas 2016, 2017, 2018)</li>
+					<li> Prelims: Probability, 1st year Mathematics (Michaelmas 2016)</li>
+					<li> Part A: Probability, 2nd year Mathematics (Michaelmas 2016)</li>
+					<li> Part A: Statistics, 2nd year Mathematics (Hilary 2017)</li>
+				</ul>
+				<h3><small>Free University Berlin</small></h3>
+				<ul>
+					<li> Statistics for Economists (2012, 2013, 2014), Introduction to probability and random variables, summary statistics, graphical data analysis</li>
+					<li> Statistical Inference (2012) Point estimation, large sample properties and limiting theorems, confidence sets and tests, linear regression</li>
+					<li> Statistical Modelling (2013) Generalised linear models, computational issues and implementation, application to economics.</li>
+				</ul>
+		</div>
+	</div>
+	</div>
+
+	<div class="container">
+		<section>
+			<div class="page-header" id="aboutme">
+						
+						<h3>Curriculum Vitae</h1>
+						
+						<div class="table-responsive">
+						<table class="table table-striped">
+						  <tr>
+							<td valign="top"><i>Since 2015</i></td>
+							<td><b>DPhil</b> candidate in Statistics</br> University of Oxford</td>	
+						  </tr>
+						  <tr>
+							<td valign="top"><i>2015</i></td>
+							<td><b>M.Sc.</b>, Master of Science in Statistics</br>
+						Humboldt Universität zu Berlin (with Distinction)</td>
+						  </tr>
+						  <tr>
+							<td valign="top"><i>2015</i></td>
+							<td><b>B.Sc.</b>, Bachelor of Science in Mathematics</br>
+						Freie Universität Berlin</td>
+						  </tr>		  
+						  <tr>
+							<td valign="top"><i>2013</i></td>
+							<td><b>B.Sc.</b>, Bachelor of Science in Economics</br>
+						Freie Universität Berlin</td>
+						  </tr>
+						</table>
+						</div>
+						
+						<h3 class="mainhead"> Contact: </h3>
+						<address>
+						Sebastian Schmon </br>
+						Department of Statistics </br>
+						University of Oxford </br>	
+						24-29 St Giles' </br>
+						Oxford </br>
+						OX1 3LB </br>
+						United Kingdom </br>
+						</address>
+
+						</article>
+			</div>
+	</div>
+
+    </main>
+	
+	<!-- Default Statcounter code for My personal research page
+	http://www.stats.ox.ac.uk/~schmon/ -->
+	<script type="text/javascript">
+	var sc_project=12002932; 
+	var sc_invisible=1; 
+	var sc_security="0030d57d"; 
+	var sc_https=1; 
+	</script>
+	<script type="text/javascript"
+	src="https://www.statcounter.com/counter/counter.js" async></script>
+	<noscript><div class="statcounter"><a title="Web Analytics Made Easy -
+	StatCounter" href="https://statcounter.com/" target="_blank"><img
+	class="statcounter" src="https://c.statcounter.com/12002932/0/0030d57d/1/"
+	alt="Web Analytics Made Easy - StatCounter"></a></div></noscript>
+	<!-- End of Statcounter Code -->
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+        <p> Created with Bootstrap, Sebastian Schmon, 2018</p>
+       </div>
+    </footer>
+	
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+     <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+	<!-- Own functions -->
+	<script>
+	function copyToClipboard(element) {
+	  var $temp = $("<input>");
+	  $("body").append($temp);
+	  $temp.val($(element).text()).select();
+	  document.execCommand("copy");
+	  $temp.remove();
+	}
+	</script>
+  </body>
+</html>
