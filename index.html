@@ -37,18 +37,13 @@
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
   
 	/* change all .btn to .btn-sm size on xs */
-	@include media-breakpoint-between(xs,sm){
-	  .btn {
-		  @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $line-height-sm, $btn-border-radius-sm);
-	  }
-	}
 	</script>
 	
   </head>
 
   <body  data-spy="scroll" data-target=".navbar" data-offset="50">
 	<!--<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #223A5E;">-->
-	<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #035096;">
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: black;">
       <a class="navbar-brand" href="#">Sebastian Schmon</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -68,7 +63,7 @@
         </ul>
         <form class="form-inline mt-2 mt-md-0" id="frmSearch" method="get">
           <input class="form-control mr-sm-2" type="text" id="txtSearch" placeholder="Search" aria-label="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit" style="background-color: #c1ecff;">Search</button>
+          <button class="btn btn-secondary" type="submit" style="background-color: #C6AD8F">Search</button>
         </form>
       </div>
     </nav>
@@ -113,10 +108,10 @@
 						<p color="grey"><i>4th Neurips workshop on Bayesian Deep Learning 2019</i></p>
 
 						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #036a96;" href="#collapse_IMPP" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #036a96;" onclick="window.location='https://arxiv.org/abs/1912.00874';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #036a96;">Code (coming soon)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #036a96;" data-toggle="collapse" href="#collapse_IMPP_bibtex" role="button" aria-expanded="false" aria-controls="collapse_IMPP_bibtex">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #C6AD8F;" href="#collapse_IMPP" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #C6AD8F;" onclick="window.location='https://arxiv.org/abs/1912.00874';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #C6AD8F;">Code (coming soon)</button>
+							<button type="button" class="btn text-white border-left" style="background-color: #C6AD8F;" data-toggle="collapse" href="#collapse_IMPP_bibtex" role="button" aria-expanded="false" aria-controls="collapse_IMPP_bibtex">Bibtex</button>
 						</div>
 						<div class="collapse" id="collapse_IMPP">
 						  <div class="p-3 mb-2 bg-light text-dark">
@@ -154,10 +149,10 @@
 						<p color="grey"><i>The 22nd International Conference on Artificial Intelligence and Statistics, AISTATS 2019</i></p>
 
 						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #036a96;" href="#collapse_BRPF" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #036a96;" onclick="window.location='https://arxiv.org/abs/1903.00939';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #036a96;">Code (coming soon)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #036a96;" data-toggle="collapse" href="#collapse_BRPF_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #C6AD8F;" href="#collapse_BRPF" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #C6AD8F;" onclick="window.location='https://arxiv.org/abs/1903.00939';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #C6AD8F;">Code (coming soon)</button>
+							<button type="button" class="btn text-white border-left" style="background-color: #C6AD8F;" data-toggle="collapse" href="#collapse_BRPF_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
 						</div>
 						<div class="collapse" id="collapse_BRPF">
 						  <div class="p-3 mb-2 bg-light text-dark">
@@ -201,10 +196,10 @@
 						<p color="gray"><i>https://arxiv.org/abs/1806.10060</i></p>
 						
 						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #036a96;" href="#collapse_PMMH" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #036a96;" onclick="window.location='https://arxiv.org/abs/1806.10060';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #036a96;" onclick="window.location='download/Code_submission.zip';">Code (zip)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #036a96;" data-toggle="collapse" href="#collapse_PMMH_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #C6AD8F;" href="#collapse_PMMH" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #C6AD8F;" onclick="window.location='https://arxiv.org/abs/1806.10060';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #C6AD8F;" onclick="window.location='download/Code_submission.zip';">Code (zip)</button>
+							<button type="button" class="btn text-white border-left" style="background-color: #C6AD8F;" data-toggle="collapse" href="#collapse_PMMH_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
 						</div>
 						<div class="collapse" id="collapse_PMMH">
 						  <div class="p-3 mb-2 bg-light text-dark">
@@ -247,10 +242,10 @@
 						<p color="grey"><i>Journal of the Royal Statistical Society: Series A (Statistics in Society) 180.1 (2017): 161-183</i></p>
 
 						<div class="btn-group d-flex flex-wrap" role="group">
-							<button type="button" class="btn text-white border-right" data-toggle="collapse"  style="background-color: #036a96;" href="#collapse_kde" role="button" aria-expanded="false" aria-controls="collapse_kde"><span class="hidden-xs">Abstract</span></button>
-							<button type="button" class="btn text-white border-left border-right"  style="background-color: #036a96;" onclick="window.location='https://eprints.soton.ac.uk/383719/2/Gross%2520et%2520al%2520-%2520Kernel%2520Density%2520Estimation_Berlin%2520Register%2520-%2520final.pdf';"><span class="hidden-xs glyphicon glyphicon-download-alt">PDF (preprint)</span></button>
-							<button type="button" class="btn text-white border-left border-right"  style="background-color: #036a96;" onclick="window.location='https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12179';"><span class="hidden-sm hidden-xs hidden-md">PDF (JRSSA)</span></button>
-							<button type="button" class="btn text-white border-left" data-toggle="collapse" style="background-color: #036a96;" href="#collapse_kde_bibtex" role="button" aria-expanded="false" aria-controls="collapse_kde_bibtex"><span class="hidden-xs ">Bibtex</span></button>
+							<button type="button" class="btn text-white border-right" data-toggle="collapse"  style="background-color: #C6AD8F;" href="#collapse_kde" role="button" aria-expanded="false" aria-controls="collapse_kde"><span class="hidden-xs">Abstract</span></button>
+							<button type="button" class="btn text-white border-left border-right"  style="background-color: #C6AD8F;" onclick="window.location='https://eprints.soton.ac.uk/383719/2/Gross%2520et%2520al%2520-%2520Kernel%2520Density%2520Estimation_Berlin%2520Register%2520-%2520final.pdf';"><span class="hidden-xs glyphicon glyphicon-download-alt">PDF (preprint)</span></button>
+							<button type="button" class="btn text-white border-left border-right"  style="background-color: #C6AD8F;" onclick="window.location='https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12179';"><span class="hidden-sm hidden-xs hidden-md">PDF (JRSSA)</span></button>
+							<button type="button" class="btn text-white border-left" data-toggle="collapse" style="background-color: #C6AD8F;" href="#collapse_kde_bibtex" role="button" aria-expanded="false" aria-controls="collapse_kde_bibtex"><span class="hidden-xs ">Bibtex</span></button>
 						</div>
 
 						<div class="collapse" id="collapse_kde">
@@ -294,16 +289,16 @@
 						<h4>Bernoulli Race Particle Filters</h4>
 						<h5>AISTATS 2019</h5>
 						<p>I presented this work at AISTATS 2019 in Okinawa (poster) and Babylon Health in London (slides).</p>
-						<button type="button" class="btn text-white  border-left border-right"  style="background-color: #036a96;" onclick="window.location='download/poster_aistats.pdf';">Poster (pdf)</button>
-						<button type="button" class="btn text-white  border-left border-right"  style="background-color: #036a96;" onclick="window.location='http://www.stats.ox.ac.uk/~schmon/Babylon';">Slides (html)</button>
+						<button type="button" class="btn text-white  border-left border-right"  style="background-color: #C6AD8F;" onclick="window.location='download/poster_aistats.pdf';">Poster (pdf)</button>
+						<button type="button" class="btn text-white  border-left border-right"  style="background-color: #C6AD8F;" onclick="window.location='http://www.stats.ox.ac.uk/~schmon/Babylon';">Slides (html)</button>
 						</div>
 			</div>
 			<div class="card mb-4 box-shadow">
 					<div class="card-body">
 						<h4>Large Sample Asymptotics of the Pseudo-Marginal Method</h4>
 						<h5>ISBA 2018, BayesComp 2018</h5>
-						<button type="button" class="btn text-white border-left border-right" style="background-color: #036a96;" onclick="window.location='download/lsapm_isba.pdf';">Poster (pdf)</button>
-						<button type="button" class="btn text-white border-left border-right" style="background-color: #036a96;" onclick="window.location='download/Stats_Beamer.pdf';">Slides (pdf)</button>
+						<button type="button" class="btn text-white border-left border-right" style="background-color: #C6AD8F;" onclick="window.location='download/lsapm_isba.pdf';">Poster (pdf)</button>
+						<button type="button" class="btn text-white border-left border-right" style="background-color: #C6AD8F;" onclick="window.location='download/Stats_Beamer.pdf';">Slides (pdf)</button>
 						</div>
 					</div>
 			</div>	
