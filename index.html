@@ -11,7 +11,6 @@
 	  gtag('config', 'UA-120594831-1');
 	</script>
 
-	
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -35,15 +34,13 @@
 	<!-- Include LaTeX -->
 	<script type="text/javascript" async
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-  
-	/* change all .btn to .btn-sm size on xs */
 	</script>
 	
   </head>
 
   <body  data-spy="scroll" data-target=".navbar" data-offset="50">
 	<!--<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #223A5E;">-->
-	<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: black;">
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-transparent">
       <a class="navbar-brand" href="#">Sebastian Schmon</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -69,7 +66,7 @@
     </nav>
 	<script type="text/javascript">
     document.getElementById('frmSearch').onsubmit = function() {
-        window.location = 'http://www.google.com/search?q=site:stats.ox.ac.uk/~schmon ' + document.getElementById('txtSearch').value;
+        window.location = 'http://www.google.com/search?q=site:schmons.github.io' + document.getElementById('txtSearch').value;
         return false;
     }
 	</script>
@@ -394,7 +391,7 @@
         <p class="float-right">
           <a href="#">Back to top</a>
         </p>
-        <p> Created with Bootstrap, Sebastian Schmon, 2018</p>
+        <p> Sebastian Schmon, 2018 - 2020, Created with Bootstrap</p>
        </div>
     </footer>
 	
@@ -418,6 +415,29 @@
 	  document.execCommand("copy");
 	  $temp.remove();
 	}
+	(function ($) {
+
+	var navbar = $('.navbar');
+	var lastScrollTop = 0;
+
+	$(window).scroll(function () {
+		var st = $(this).scrollTop();
+		// Scroll down
+		if (st > lastScrollTop) {
+			navbar.removeClass('bg-transparent').addClass('bg-custom');
+		} 
+		// Scroll up
+		else if(st < lastScrollTop && st > 200) {
+
+        }
+		// Reached top
+		else {
+			navbar.removeClass('bg-custom').addClass('bg-transparent'); // for lighter pic replace navbar-dark with navbar
+		}
+		lastScrollTop = st;
+	});
+
+	})(jQuery);
 	</script>
   </body>
 </html>
