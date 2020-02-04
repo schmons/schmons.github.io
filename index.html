@@ -81,9 +81,10 @@
 		  </div>
           <h1 class="jumbotron-heading">Sebastian Schmon</h1>
 		  <code type="text" id="schmon2018">lastname at stats.ox.ac.uk</code>
-          <p class="lead text-muted"><p class="text-muted">I am a DPhil (PhD) student at the Department of Statistics of the University of Oxford. My research interests lie at the intersection of probability theory, statistics and computational methods.
+          <p class="lead text-muted"><p class="text-muted">I am a DPhil (PhD) student at the Department of Statistics of the University of Oxford, a Data Scientist, and a consultant. My research interests lie at the intersection of probability theory, statistics, and computational methods.
 			In particular, I am interested in constructing and analysing practical algorithms and simulation techniques for complex statistical or machine learning models such as intractable Bayesian models. 
-										More on that on my <a href="#research" class="link-articles">research</a> page. My supervisors are <a href="http://www.stats.ox.ac.uk/~doucet/" class="link-articles">Arnaud Doucet</a> and <a href="http://www.stats.ox.ac.uk/~deligian/" class="link-articles">George Deligiannidis</a>.			
+										More on that on my <a href="#research" class="link-articles">research</a> page. My supervisors are <a href="http://www.stats.ox.ac.uk/~doucet/" class="link-articles">Arnaud Doucet</a> and <a href="http://www.stats.ox.ac.uk/~deligian/" class="link-articles">George Deligiannidis</a>.	
+		  <p class="text-muted">As a consultant with several years of experience I support start-ups as well as large multinational companies to improve their analytical capabilites and learn the true story behind their data.</p>
 <!-- 			<p>
             <a href="#" class="btn btn-primary my-2">Main call to action</a>
             <a href="#" class="btn btn-secondary my-2">Secondary action</a>
@@ -96,6 +97,53 @@
 		<div class="page-header" id="research">
 		<h3>Research</h3>
         <div class="row">
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
+					  <div class="card-body">
+						<h4>Large Sample Asymptotics of the Pseudo-Marginal Method</h4>
+						<p> with Arnaud Doucet, George Deligiannidis and Mike Pitt</p>
+						
+						<p color="gray"><i>Biometrika, 2020 (forthcoming)</i></p>
+						
+						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: rgb(0, 153, 255);" href="#collapse_PMMH" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://arxiv.org/abs/1806.10060';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='download/Code_submission.zip';">Code (zip)</button>
+							<button type="button" class="btn text-white border-left" style="background-color: rgb(0, 153, 255);" data-toggle="collapse" href="#collapse_PMMH_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+						</div>
+						<div class="collapse" id="collapse_PMMH">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							The pseudo-marginal algorithm is a variant of the Metropolis–Hastings algorithm which samples
+							asymptotically from a probability distribution when it is only possible to estimate unbiasedly an unnor-
+							malized version of its density. Practically one has to trade-off the computational resources used to obtain
+							this estimator against the asymptotic variances of the ergodic averages obtained by the pseudo-marginal
+							algorithm. Recent works optimizing this trade-off rely on some strong assumptions which can cast doubts
+							over their practical relevance. In particular, they all assume that the distribution of the additive error in
+							the log-likelihood estimator is independent of the parameter value at which it is evaluated. Under weak
+							regularity conditions we show here that, as the number of data points tends to infinity, a space-rescaled
+							version of the pseudo-marginal chain converges weakly towards another pseudo-marginal chain for which
+							this assumption indeed holds. A study of this limiting chain allows us to provide parameter dimension-
+							dependent guidelines on how to optimally scale a normal random walk proposal and the number of Monte
+							Carlo samples for the pseudo-marginal method in the large sample regime. This complements and vali-
+							dates currently available results.
+						  </div>
+						</div>
+						<div class="collapse" id="collapse_PMMH_bibtex">
+						  <div class="class="card-body">
+							<pre class="prettyprint"><code type="text" id="schmon2018">@Article{SchmonDeligiannidisDoucet2018a,
+  author  = {Sebastian M Schmon and George Deligiannidis and Arnaud Doucet and Michael K Pitt},
+  title   = {Large Sample Asymptotics of the Pseudo-Marginal Algorithm},
+  journal = {https://arxiv.org/abs/1806.10060},
+  year    = {2018},
+}
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#schmon2018');this.value='Copy to clipboard ✓'">
+						  </div>
+						</div>
+					  </div>
+				</div>
+			</div>
+
 			<div class="col-sm-6 col-md-12">
 				<div class="card mb-4 box-shadow">
 					  <div class="card-body">
@@ -176,52 +224,6 @@
   title   = {Bernoulli Race Particle Filters},
   journal = {AISTATS},
   year    = {2019},
-}
-							</code></pre>
-							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#schmon2018');this.value='Copy to clipboard ✓'">
-						  </div>
-						</div>
-					  </div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-12">
-				<div class="card mb-4 box-shadow">
-					  <div class="card-body">
-						<h4>Large Sample Asymptotics of the Pseudo-Marginal Method</h4>
-						<p> with Arnaud Doucet, George Deligiannidis and Mike Pitt</p>
-						
-						<p color="gray"><i>Biometrika</i> (accepted)</p>
-						
-						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: rgb(0, 153, 255);" href="#collapse_PMMH" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://arxiv.org/abs/1806.10060';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='download/Code_submission.zip';">Code (zip)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: rgb(0, 153, 255);" data-toggle="collapse" href="#collapse_PMMH_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
-						</div>
-						<div class="collapse" id="collapse_PMMH">
-						  <div class="p-3 mb-2 bg-light text-dark">
-							The pseudo-marginal algorithm is a variant of the Metropolis–Hastings algorithm which samples
-							asymptotically from a probability distribution when it is only possible to estimate unbiasedly an unnor-
-							malized version of its density. Practically one has to trade-off the computational resources used to obtain
-							this estimator against the asymptotic variances of the ergodic averages obtained by the pseudo-marginal
-							algorithm. Recent works optimizing this trade-off rely on some strong assumptions which can cast doubts
-							over their practical relevance. In particular, they all assume that the distribution of the additive error in
-							the log-likelihood estimator is independent of the parameter value at which it is evaluated. Under weak
-							regularity conditions we show here that, as the number of data points tends to infinity, a space-rescaled
-							version of the pseudo-marginal chain converges weakly towards another pseudo-marginal chain for which
-							this assumption indeed holds. A study of this limiting chain allows us to provide parameter dimension-
-							dependent guidelines on how to optimally scale a normal random walk proposal and the number of Monte
-							Carlo samples for the pseudo-marginal method in the large sample regime. This complements and vali-
-							dates currently available results.
-						  </div>
-						</div>
-						<div class="collapse" id="collapse_PMMH_bibtex">
-						  <div class="class="card-body">
-							<pre class="prettyprint"><code type="text" id="schmon2018">@Article{SchmonDeligiannidisDoucet2018a,
-  author  = {Sebastian M Schmon and George Deligiannidis and Arnaud Doucet and Michael K Pitt},
-  title   = {Large Sample Asymptotics of the Pseudo-Marginal Algorithm},
-  journal = {https://arxiv.org/abs/1806.10060},
-  year    = {2018},
 }
 							</code></pre>
 							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#schmon2018');this.value='Copy to clipboard ✓'">
