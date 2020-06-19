@@ -11,11 +11,12 @@
 	  gtag('config', 'UA-120594831-1');
 	</script>
 
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Sebastian Schmon">
-    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="icon" href="test2.ico">
 
     <title>Sebastian Schmon</title>
 
@@ -35,13 +36,20 @@
 	<script type="text/javascript" async
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 	</script>
+
+	<style>
+		h1, h2 {
+			display: inline;
+		}
+	</style>
 	
   </head>
 
   <body  data-spy="scroll" data-target=".navbar" data-offset="50">
 	<!--<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #223A5E;">-->
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-transparent">
-      <a class="navbar-brand" href="#">Sebastian Schmon</a>
+	  <a class="navbar-brand" href="#">Sebastian Schmon</a>
+	  <!--<a class="navbar-brand" href="https://www.probabilistic.blog"><img src="probabilistic-02.png" class="rounded" alt="blog" height="40px"></a> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -56,7 +64,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#teaching">Teaching</a>
-          </li>
+		  </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0" id="frmSearch" method="get">
           <input class="form-control mr-sm-2" type="text" id="txtSearch" placeholder="Search" aria-label="Search">
@@ -79,24 +87,96 @@
 		  <div class="text-center">
 			<img src="seb1.jpg" class="rounded" alt="seb" height="200px">
 		  </div>
-          <h1 class="jumbotron-heading">Sebastian Schmon</h1>
-		  <code type="text" id="schmon2018">lastname at stats.ox.ac.uk</code>
-          <p class="lead text-muted"><p class="text-muted">I am a DPhil (PhD) student at the Department of Statistics of the University of Oxford, a Data Scientist, and a consultant. My research interests lie at the intersection of probability theory, statistics, and computational methods.
-			In particular, I am interested in constructing and analysing practical algorithms and simulation techniques for complex statistical or machine learning models such as intractable Bayesian models. 
-										More on that on my <a href="#research" class="link-articles">research</a> page. My supervisors are <a href="http://www.stats.ox.ac.uk/~doucet/" class="link-articles">Arnaud Doucet</a> and <a href="http://www.stats.ox.ac.uk/~deligian/" class="link-articles">George Deligiannidis</a>.	
-		  <p class="text-muted">As a consultant with several years of experience I support start-ups as well as large multinational companies to improve their analytical capabilites.</p> <!--and learn the true story behind their data-->
+          <h1 display="inline" class="jumbotron-heading">Sebastian Schmon, </h1><code type="text" id="schmon2018">DPhil (Oxon)</code>
+		  
+		  <p class="lead text-muted"><p class="text-muted"> Welcome to my webpage. I am a Research Scientist in the Complexity Research team at <a href="http://improbable.io" class="link-articles">Improbable</a>. 
+			My research interests lie at the intersection of statistics, machine learning and probability theory.
+			In particular, I am interested in constructing and analysing practical algorithms and simulation techniques for complex statistical or machine learning models such as intractable Bayesian models or large scale simulation engines. 
+			A list of <a href="#research" class="link-articles">publications</a> can be found below. I obtained my DPhil (Oxford parlance for PhD) at the Department of Statistics of the University of Oxford under the supervision of <a href="http://www.stats.ox.ac.uk/~doucet/" class="link-articles">Arnaud Doucet</a> and <a href="http://www.stats.ox.ac.uk/~deligian/" class="link-articles">George Deligiannidis</a>.	
+		  <p class="text-muted">As a consultant with several years of experience I have supported start-ups as well as large multinational companies to improve their analytical capabilites.</p> <!--and learn the true story behind their data-->
 <!-- 			<p>
             <a href="#" class="btn btn-primary my-2">Main call to action</a>
             <a href="#" class="btn btn-secondary my-2">Secondary action</a>
           </p> -->
         </div>
-      </section>
+	  </section>
 
-      <div class="album py-5 bg-light">
+
+	  <div class="album py-5 bg-light">
         <div class="container">
 		<div class="page-header" id="research">
-		<h3>Research</h3>
+		<h3>Publications and Preprints</h3>
         <div class="row">
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
+					  <div class="card-body">
+						<h4>Rethinking Semi–Supervised Learning in VAEs</h4>
+						<p> with Tom Joy, Philipp Torr, Siddharth Narayanaswamy and Tom Rainforth</p>
+						
+						<p color="gray"><i>arxiv.org/abs/2006.10102, submitted to Neurips 2020</i></p>
+						
+						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: rgb(0, 153, 255);" href="#collapse_revae" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://arxiv.org/abs/2006.10102';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://github.com/thwjoy/revae-demo';">Code (Github)</button>
+							<button type="button" class="btn text-white border-left" style="background-color: rgb(0, 153, 255);" data-toggle="collapse" href="#collapse_revae_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+						</div>
+						<div class="collapse" id="collapse_revae">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							We present an alternative approach to semi-supervision in variational autoencoders (VAEs) that incorporates labels through auxiliary variables rather than directly through the latent variables. Prior work has generally conﬂated the meaning of labels, i.e. the associated characteristics of interest, with the actual label values themselves—learning latent variables that directly correspond to the label values. We argue that to learn meaningful representations, semi-supervision should instead try to capture these richer characteristics and that the construction of latent variables as label values is not just unnecessary, but actively harmful. To this end, we develop a novel VAE model, the reparameterized VAE (ReVAE), which “reparameterises” supervision through auxiliary variables and a concomitant variational objective. Through judicious structuring of mappings between latent and auxiliary variables, we show that the ReVAE can effectively learn meaningful representations of data. In particular, we demonstrate that the ReVAE is able to match, and even improve on the classiﬁcation accuracy of previous approaches, but more importantly, it also allows for more effective and more general interventions to be performed.
+						  </div>
+						</div>
+						<div class="collapse" id="collapse_revae_bibtex">
+						  <div class="class="card-body">
+							<pre class="prettyprint"><code type="text" id="joy2020">@Article{Joy2020,
+  author  = {Tom Joy, Philipp Torr, Siddharth Narayanaswamy and Tom Rainforth},
+  title   = {Rethinking Semi–Supervised Learning in VAEs},
+  journal = {https://arxiv.org/abs/2006.10102},
+  year    = {2020},
+}
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#joy2020');this.value='Copy to clipboard ✓'">
+						  </div>
+						</div>
+					  </div>
+				</div>
+			</div>
+	  
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
+					  <div class="card-body">
+						<h4>Neural ODEs for Multi-state Survival Analysis</h4>
+						<p> with Stefan Groha and Alexander Gusev</p>
+						
+						<p color="gray"><i>arxiv.org/abs/2006.04893, submitted to Neurips 2020</i></p>
+						
+						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: rgb(0, 153, 255);" href="#collapse_survnode" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://arxiv.org/abs/2006.04893';">PDF (arXiv)</button>
+							<!--<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='download/code_pm_asymptotics.zip';">Code (zip)</button> -->
+							<button type="button" class="btn text-white border-left" style="background-color: rgb(0, 153, 255);" data-toggle="collapse" href="#collapse_survnode_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+						</div>
+						<div class="collapse" id="collapse_survnode">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							Survival models are a popular tool for the analysis of time to event data with applications in medicine, engineering, economics and many more. Advances like the Cox proportional hazard model have enabled researchers to better describe hazard rates for the occurrence of single fatal events, but are limited by modeling assumptions, like proportionality of hazard rates and linear effects. Moreover, common phenomena are often better described through multiple states, for example, the progress of a disease might be modeled as healthy, sick and dead instead of healthy and dead, where the competing nature of death and disease has to be taken into account. Also, individual characteristics can vary significantly between observational units, like patients, resulting in idiosyncratic hazard rates and different disease trajectories. These considerations require flexible modeling assumptions. Current standard models, however, are often ill-suited for such an analysis. To overcome these issues, we propose the use of neural ordinary differential equations as a flexible and general method for estimating multi-state survival models by directly solving the Kolmogorov forward equations. To quantify the uncertainty in the resulting individual cause-specific hazard rates, we further introduce a variational latent variable model. We show that our model exhibits state-of-the-art performance on popular survival data sets and demonstrate its efficacy in a multi-state setting.
+						  </div>
+						</div>
+						<div class="collapse" id="collapse_survnode_bibtex">
+						  <div class="class="card-body">
+							<pre class="prettyprint"><code type="text" id="groha2020">@Article{Groha2020,
+  author  = {Stefan Groha, Sebastian M Schmon and Alexander Gusev},
+  title   = {Neural ODEs for Multi-state Survival Analysis},
+  journal = {https://arxiv.org/abs/2006.04893},
+  year    = {2020},
+}
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#groha2020');this.value='Copy to clipboard ✓'">
+						  </div>
+						</div>
+					  </div>
+				</div>
+			</div>
+
 			<div class="col-sm-6 col-md-12">
 				<div class="card mb-4 box-shadow">
 					  <div class="card-body">
@@ -324,51 +404,6 @@
 				</ul>
 		</div>
 	</div>
-	</div>
-
-	<div class="container">
-		<section>
-			<div class="page-header" id="aboutme">
-						
-						<h3>Curriculum Vitae</h1>
-						
-						<div class="table-responsive">
-						<table class="table table-striped">
-						  <tr>
-							<td valign="top"><i>Since 2015</i></td>
-							<td><b>DPhil</b> candidate in Statistics</br> University of Oxford</td>	
-						  </tr>
-						  <tr>
-							<td valign="top"><i>2015</i></td>
-							<td><b>M.Sc.</b>, Master of Science in Statistics</br>
-						Humboldt Universität zu Berlin (with Distinction)</td>
-						  </tr>
-						  <tr>
-							<td valign="top"><i>2015</i></td>
-							<td><b>B.Sc.</b>, Bachelor of Science in Mathematics</br>
-						Freie Universität Berlin</td>
-						  </tr>		  
-						  <tr>
-							<td valign="top"><i>2013</i></td>
-							<td><b>B.Sc.</b>, Bachelor of Science in Economics</br>
-						Freie Universität Berlin</td>
-						  </tr>
-						</table>
-						</div>
-						
-						<h3 class="mainhead"> Contact: </h3>
-						<address>
-						Sebastian Schmon </br>
-						Department of Statistics </br>
-						University of Oxford </br>	
-						24-29 St Giles' </br>
-						Oxford </br>
-						OX1 3LB </br>
-						United Kingdom </br>
-						</address>
-
-						</article>
-			</div>
 	</div>
 
     </main>
