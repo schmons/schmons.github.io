@@ -25,7 +25,10 @@
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 
     <!-- Custom styles for this template -->
-    <link href="album.css" rel="stylesheet">
+	<link href="album.css" rel="stylesheet">
+	
+	<!-- Get Roboto-->
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
 	
 	<!-- Google Code Prettify -->
 	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autorun=true"></script>
@@ -40,6 +43,12 @@
 	<style>
 		h1, h2 {
 			display: inline;
+		}
+		h3 {
+			font-family: 'Roboto', sans-serif;
+		}
+		h4 {
+			font-family: 'Roboto', sans-serif;
 		}
 	</style>
 	
@@ -106,6 +115,7 @@
         <div class="container">
 		<div class="page-header" id="research">
 		<h3>Publications and Preprints</h3>
+		<p></p>
         <div class="row">
 			<div class="col-sm-6 col-md-12">
 				<div class="card mb-4 box-shadow">
@@ -188,6 +198,7 @@
 						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
 							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: rgb(0, 153, 255);" href="#collapse_PMMH" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
 							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://arxiv.org/abs/1806.10060';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://doi.org/10.1093/biomet/asaa044';">PDF (Biometrika)</button>
 							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='download/code_pm_asymptotics.zip';">Code (zip)</button>
 							<button type="button" class="btn text-white border-left" style="background-color: rgb(0, 153, 255);" data-toggle="collapse" href="#collapse_PMMH_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
 						</div>
