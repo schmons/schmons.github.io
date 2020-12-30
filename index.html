@@ -53,6 +53,18 @@
 		h4 {
 			font-family: 'Roboto', sans-serif;
 		}
+		.social-icons .social-icon {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			height: 2.5rem;
+			width: 2.5rem;
+			background-color: rgb(0, 153, 255);
+			color: #fff;
+			border-radius: 100%;
+			font-size: 1.5rem;
+			margin-right: 1.5rem;
+		}
 	</style>
 	
   </head>
@@ -80,7 +92,8 @@
         </ul>
         <form class="form-inline mt-2 mt-md-0" id="frmSearch" method="get">
           <input class="form-control mr-sm-2" type="text" id="txtSearch" placeholder="Search" aria-label="Search">
-          <button class="btn btn-secondary btn-light" type="submit" style="background-color: rgb(0, 221, 255)">Search</button>
+		  <button class="btn btn-secondary" type="submit" style="background-color: rgb(0, 153, 255)">Search</button>
+		  <!--rgb(0, 221, 255)-->
         </form>
       </div>
     </nav>
@@ -106,10 +119,12 @@
 			In particular, I am interested in constructing and analysing practical algorithms and simulation techniques for complex statistical or machine learning models such as intractable Bayesian models or large scale simulation engines. 
 			A list of <a href="#research" class="link-articles">publications</a> can be found below. I obtained my DPhil (Oxford parlance for PhD) at the Department of Statistics of the University of Oxford under the supervision of <a href="http://www.stats.ox.ac.uk/~doucet/" class="link-articles">Arnaud Doucet</a> and <a href="http://www.stats.ox.ac.uk/~deligian/" class="link-articles">George Deligiannidis</a>.	
 		  <p class="text-muted">As a consultant with several years of experience I have supported start-ups as well as large multinational companies to improve their analytical capabilites.</p> <!--and learn the true story behind their data-->
-<!-- 			<p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-          </p> -->
+		  <div class="social-icons">
+			<a class="social-icon" href="https://scholar.google.com/citations?user=hs2WrYYAAAAJ&hl=en"><i class="fa fa-graduation-cap"></i></a>
+			<a class="social-icon" href="https://www.linkedin.com/in/sebastian-schmon/"><i class="fab fa-linkedin-in"></i></a>
+			<a class="social-icon" href="https://github.com/schmons"><i class="fab fa-github"></i></a>
+			<a class="social-icon" href="https://twitter.com/SebastianSchmon"><i class="fab fa-twitter"></i></a>
+		</div>
         </div>
 	  </section>
 
