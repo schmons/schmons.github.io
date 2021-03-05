@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.2.3/math.js"></script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        "HTML-CSS" : {
+            availableFonts : ["STIX"],
+            preferredFont : "STIX",
+            webFont : "STIX-Web",
+            imageFont : null,
+            scale : [80]
+        }
+    });
+    </script>
+<!-- <script src ="mathjax/MathJax.js?config=TeX-AMS_HTML-full"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<!-- Font Awesome icons (free version)-->
+<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+
+
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+
+<style>
+h1 {
+  color: #525368;
+  font-size: 46px;
+}
+
+h2 {
+  color: #7A7A7A;
+}
+
+h3 {
+  color: #E26C22;
+}
+
+h4 {
+  color: #1A4E66;
+}
+
+hr {
+    background-color: #E26C22;
+}
+
+section {
+  background: #EFEFEF;
+  color: #000;
+  padding: 2em;
+  /*font-family: "PT Serif", Baskerville, Georgia;*/
+  font-family:  'Fira Sans'; 
+  font-size: 22px;
+}
+
+#follow {
+  background: none;
+}
+
+.grey {
+  color: #777;
+}
+
+a:link,
+a:visited {
+  color: orange;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+    display: flex;
+}
+.col {
+    flex: 1;
+}
+
+</style>
+
+<section style="text-align: left; padding-top: 5em;">
+    <h1>Bayesian Inference for Models</h2> 
+    <h1> with Intractable Likelihood</h1> 
+    <hr size=2 noshade>
+    <h2>Sebastian Schmon, DPhil</h2>
+    <h3>Department of Mathematical Sciences, Durham University</h3>
+</section>
+
+<section>
+    <h2>Problem Setting</h2>
+    <hr size=2 noshade>
+    <h4>Intractable and Implicit Models</h4>
+
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+</section>
+
+<section>
+<h2>Example: Pandemic Modelling</h2>
+        <div style="display: flex; justify-content: center;">
+            <iframe width="900" height="500" src="https://www.youtube.com/embed/LfjbSrnJ00g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+</section>
+
+
+<section>
+  <h2>Summary</h2>
+  <ul>
+    <li> 
+    <li> 
+    <li> 
+    <li> 
+    <li> </li>
+  </ul>
+</section>
+
+
+<script src="d3.v3.min.js"></script>
+<script src="stack.v1.min.js"></script>
+<script>
+
+var mystack = stack()
+    .on("activate", activate)
+    .on("deactivate", deactivate);
+
+var section = d3.selectAll("section"),
+    follow = d3.select("#follow"),
+    followAnchor = d3.select("#follow-anchor"),
+    lorenz = d3.select("#lorenz"),
+    followIndex = section[0].indexOf(follow.node()),
+    lorenzIndex = section[0].indexOf(lorenz.node()),
+    time_comparison = d3.select("#time_comparison"),
+    time_comparison_idx = section[0].indexOf(time_comparison.node())
+    global_local_comparison = d3.select("#global_local_comparison"),
+    global_local_comparison_idx = section[0].indexOf(global_local_comparison.node())
+    ;
+
+function refollow() {
+  followAnchor.style("top", (followIndex + (1 - mystack.scrollRatio()) / 2 - d3.event.offset) * 100 + "%");
+}
+
+function activate(d, i) {
+  if (i === followIndex) mystack.on("scroll.follow", refollow);
+  //if (i === lorenzIndex) startLorenz();
+  if (i === time_comparison_idx) startTimeComparison();
+  if (i === global_local_comparison_idx) startGlobalLocalComparison();
+}
+
+function deactivate(d, i) {
+  if (i === followIndex) mystack.on("scroll.follow", null);
+  if (i === lorenzIndex) stopLorenz();
+}
+
+ 
+function startGlobalLocalComparison() {
+    
+    var canvas1 = d3.select("#global_canvas")
+	.attr("width", width)
+	.attr("height", height);    
+    runLocalBps(global_bps_step, canvas1);
+    
+    var canvas2 = d3.select("#local_canvas")
+	.attr("width", width)
+	.attr("height", height);
+    runLocalBps(local_bps_step, canvas2);   
+}
+  
+
+
+// Standard D3.js scatterplot set up
+  var margin = {top: 20, right: 20, bottom: 20, left: 20};
+  var samples_width = 400 - margin.left - margin.right;
+  var samples_height = 400 - margin.top  - margin.bottom;
+  
+  var estimate_width = 200 - margin.left - margin.right;
+  var estimate_height = 200 - margin.left - margin.right;
+  
+  var svg_mh_samples = d3.select("#mh_graph").append("svg")
+      .attr("height", samples_height + margin.left + margin.right)
+      .attr("width", samples_width + margin.top + margin.bottom);
+  
+  var chart_mh_samples = svg_mh_samples.append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+           );
+
+  var xScale = d3.scale.linear()
+      .domain([-3, 3])
+      .range([0, samples_width]);
+  
+  var yScale = d3.scale.linear()
+      .domain([-3, 3])
+      .range([samples_height, 0]);
+  
+  var xAxis = d3.svg.axis()
+      .scale(xScale)
+      .orient("bottom")
+      .tickSize(0)
+      .tickFormat("");
+  
+  var yAxis = d3.svg.axis()
+      .scale(yScale)
+      .orient("left")
+      .tickSize(0)
+      .tickFormat("");
+  
+		
+
+
+
+
+</script>
