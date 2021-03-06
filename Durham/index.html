@@ -11,7 +11,7 @@
             preferredFont : "STIX",
             webFont : "STIX-Web",
             imageFont : null,
-            scale : [80]
+            scale : [70]
         }
     });
     </script>
@@ -52,7 +52,7 @@ section {
   padding: 2em;
   /*font-family: "PT Serif", Baskerville, Georgia;*/
   font-family:  'Fira Sans'; 
-  font-size: 22px;
+  font-size: 30px;
 }
 
 #follow {
@@ -96,10 +96,29 @@ a:hover {
     <h4>Intractable and Implicit Models</h4>
 
     <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li>Statistical models are commonly defined through a likelihood function \(f(x \mid \theta)\)</li>
+        <li>E.g. linear regression:
+            $$
+                y \sim \mathcal{N}(x^T\beta, \sigma^2).
+            $$
+        </li>
+        <li>However, some models are very cumbersome or defined implicitely (Diggle and Gratton, 1984). </li>
+        <li>Examples: 
+            <ul>
+            <li>
+                Simulators of complex systems.
+            </li>
+            <li>
+                Population genetics/phylogentics.
+            </li>
+            <li>
+                Social dynamics/economic models.
+            </li>
+            <li>
+                Agent-based models are defined on an individual level.
+            </li>    
+            </ul>
+            </li>
     </ul>
 
 </section>
@@ -111,6 +130,100 @@ a:hover {
         </div>
 </section>
 
+<section>
+    <h2>Inverse Problems</h2>
+    <hr size=2 noshade>
+    <ul>
+        <li>Often we are interested in finding the parameters that most likely produce certian outputs
+        (inverse problem).</li>
+        <li>
+            Example:
+            <ul>
+                <li>Finding a virus' reproduction rate \(r_t\)</li>
+                <li>Finding coalescence time (time since the most
+                    recent common ancestor, eg. Tavaré, 1997)</li>
+            </ul>
+        </li>
+    </ul>
+
+</section>
+
+<section>
+    <h2>Bayesian Infernce</h2>
+    <hr size=2 noshade>
+    <h4>Basic Idea</h4>
+    <ul>
+        <li>Bayesians encode their <i>belief</i> about the model in a probability distribution \(p(\theta)\). </li>
+        <li>Having observed data, Bayesians can <i>update</i> their beliefs by computing the conditional distribution</li>
+        $$
+            p(\theta \mid y) = \frac{{f(y \mid \theta)}p(\theta)}{f(y)} \propto {f(y \mid \theta)}p(\theta)
+        $$
+        with \(f(y) = \int {f(y \mid \theta)}p(\theta)d\theta\).
+    </ul>
+</section>
+
+<section>
+    <h2>Bayesian Infernce</h2>
+    <hr size=2 noshade>
+    <h4>Monte Carlo Principle</h4>
+    <ul>
+        <li><i>"All information about</i> \(p(\theta \mid y)\) <i>can be learned from samples</i> \(\theta \sim p(\theta \mid y)\)"</i></li>
+        <li>The problem of computing \(p(\theta \mid y)\) is reduced to drawing samples, which is often easier.</li>
+        <li>There are many Monte Carlo algorithms to sample from</li>
+        $$
+            p(\theta \mid y) \propto \color{grey}{f(y \mid \theta)}p(\theta).
+        $$
+        <li>But what can be done when \(\color{grey}{f(y \mid \theta)}\) cannot be computed?</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Bayesian Infernce</h2>
+    <hr size=2 noshade>
+    <h4>(Approximate) Bayesian computation</h4>
+    <ul>
+        <li>
+            Sample:
+            $$
+                \theta \sim p(\theta)
+            $$
+            then run simulator
+            $$
+                y' \sim f(y' \mid \theta).
+            $$
+            if \(y' = y_{obs}\) keep \(\theta\).
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Bayesian Infernce</h2>
+    <hr size=2 noshade>
+    <h4>Approximate Bayesian computation</h4>
+    <ul>
+        <li>
+            Sample:
+            $$
+                \theta \sim p(\theta)
+            $$
+            then run simulator
+            $$
+                y' \sim f(y' \mid \theta).
+            $$
+            if \(d(y',y_{obs}) \leq \varepsilon\) keep \(\theta\).
+        </li>
+    </ul>
+</section>
+
+
+<section>
+    <h2>Machine Learning</h2>
+    <hr size=2 noshade>
+    <h4>Basic Idea</h4>
+    <ul>
+        <li>Modern machine learning is blurring the line between implicit/generative and likelihood models.
+    </ul>
+</section>
 
 <section>
   <h2>Summary</h2>
