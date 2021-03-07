@@ -44,6 +44,8 @@ h4 {
 
 hr {
     background-color: #E26C22;
+    color: #E26C22;
+    border: 1px solid #E26C22;
 }
 
 section {
@@ -90,6 +92,12 @@ a:hover {
     <h3>Department of Mathematical Sciences, Durham University</h3>
 </section>
 
+<section style="text-align: left; padding-top: 5em;">
+    <h2>Part I</h2> 
+    <hr size=2 noshade>
+    <h3>Foundations of Simulation-based Inference</h3>
+</section>
+
 <section>
     <h2>Problem Setting</h2>
     <hr size=2 noshade>
@@ -102,7 +110,7 @@ a:hover {
                 y \sim \mathcal{N}(x^T\beta, \sigma^2).
             $$
         </li>
-        <li>However, some models are very cumbersome or defined implicitely (Diggle and Gratton, 1984). </li>
+        <li>However, some models are very cumbersome or defined implicitely through the stochastic data generating mechanism (Diggle and Gratton, 1984). </li>
         <li>Examples: 
             <ul>
             <li>
@@ -139,7 +147,7 @@ a:hover {
         <li>
             Example:
             <ul>
-                <li>Finding a virus' reproduction rate \(r_t\)</li>
+                <li>Finding a virus' reproduction rate \(r_{0t}\)</li>
                 <li>Finding coalescence time (time since the most
                     recent common ancestor, eg. Tavaré, 1997)</li>
             </ul>
@@ -159,6 +167,12 @@ a:hover {
             p(\theta \mid y) = \frac{{f(y \mid \theta)}p(\theta)}{f(y)} \propto {f(y \mid \theta)}p(\theta)
         $$
         with \(f(y) = \int {f(y \mid \theta)}p(\theta)d\theta\).
+        <li>
+            Example: \(r_{0t} \sim \log\mathcal{N}(0, \sigma^2)\) what is
+            $$
+                p(r_{0t} \leq 1 \mid \text{observed epidemic curve}).
+            $$
+        </li>
     </ul>
 </section>
 
@@ -193,6 +207,9 @@ a:hover {
             $$
             if \(y' = y_{obs}\) keep \(\theta\).
         </li>
+        <li>
+            The accepted samples of \(\theta\) are distributed according to \(p(\theta \mid y_{obs})\). 
+        </li>
     </ul>
 </section>
 
@@ -212,30 +229,339 @@ a:hover {
             $$
             if \(d(y',y_{obs}) \leq \varepsilon\) keep \(\theta\).
         </li>
+        <li>
+            The accepted samples of \(\theta\) are distributed according to \(E[p(\theta \mid d(y',y_{obs}) \leq \varepsilon)]\). 
+        </li>
     </ul>
 </section>
 
 
 <section>
-    <h2>Machine Learning</h2>
+    <h2>Bayesian Infernce</h2>
     <hr size=2 noshade>
-    <h4>Basic Idea</h4>
+    <h4>Approximate Bayesian computation: drawbacks</h4>
+    <ol>
+    <li>
+            Not exact:
+        <ul>
+        <li>
+            We only obtain samples from an approximation of the posterior. 
+        </li>
+        </ul>
+    </li>
+    <li> Not scalable:
+        <ul>
+            <li>
+                Threshold parameter, \(\varepsilon\), usually needs to be very small.
+            </li>
+            <li>
+                Requires many samples from \(y' \sim f(y' \mid \theta)\) to obtain a reasonable amount of samples from the approximate posterior.
+            </li>
+            <li>
+                Problem: calling the simulator is often the most expensive part of the algorithm.
+            </li>
+        </ul>
+    </li>
+       
+    </ol>
+</section>
+
+<section style="text-align: left; padding-top: 5em;">
+    <h2>Part II</h2> 
+    <hr size=2 noshade>
+    <h3>Measurement Error and Model Inadequacy</h3>
+</section>
+
+
+<section>
+    <h2>Measurement Error and Model Inadequacy</h2>
+    <hr size=2 noshade>
     <ul>
-        <li>Modern machine learning is blurring the line between implicit/generative and likelihood models.
+        <li>
+            In practice, the assumption \(y_{obs} \sim f( \cdot \mid \theta)\) if often unrealistic.
+        </li>
+        <li>
+            E.g. an agent-based model of the Covid pandemic will not be able to reproduce the real data exactly because
+            of model inadequacy and measurement error.
+        </li>
+        <li>
+            Instead of \(f(y \mid \theta)\) "true" likelihood is given by
+            $$
+                p(y \mid \theta) = \int g(y \mid x,\theta) f(x \mid \theta)dx.
+            $$
+        </li>
     </ul>
 </section>
+
+
+<section>
+    <h2>Measurement Error and Model Inadequacy</h2>
+    <hr size=2 noshade>
+    <ul>
+        <li>
+            Instead of \(f(y \mid \theta)\) "true" likelihood is given by
+            $$
+                p(y \mid \theta) = \int g(y \mid x,\theta) f(x \mid \theta)dx.
+            $$
+        </li>
+        <li>
+            Compare this to the ABC likelihood
+            $$
+                p_{ABC}(y \mid \theta) = \int 1_{d(s(x),s(y_{obs})) \leq \varepsilon} f(x \mid \theta)dx
+            $$
+        </li>
+        <li>If \(g(y \mid x,\theta)\) is close to \(1_{d(s(x),s(y_{obs})) \leq \varepsilon}\), ABC is exact (unrealistic).</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Measurement Error and Model Inadequacy</h2>
+    <hr size=2 noshade>
+    <ul>
+        <li>
+            Instead of \(f(y \mid \theta)\) "true" likelihood is given by
+            $$
+                p(y \mid \theta) = \int g(y \mid x,\theta) f(x \mid \theta)dx.
+            $$
+        </li>
+        <li>
+            Alternative
+            $$
+                p_{GABC}(y \mid \theta) = \int e^{-w \ell\left(y_{obs}, x,\right)} f(x \mid \theta)dx.
+            $$
+        </li>
+        <li>Exact if \(g(y \mid x,\theta) \approx e^{-w \ell\left(y_{obs}, x,\right)}\) (Schmon et. al., 2020).</li>
+        <li><i>Principled Bayesian belief update</i> following Bissiri et.al (2016).</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Measurement Error and Model Inadequacy</h2>
+    <hr size=2 noshade>
+    <h4>Inference Algorithms: Pseudo-Marginal Methods (Andrieu et.al. 2010)</h4>
+    Input: \(\theta, x\)
+    <ul>
+        <li> Sample new \(\theta' \sim q(\cdot \mid \theta)\) (usually with MCMC)
+        <li> Sample \(x' \sim f(x' \mid \theta')\)
+        <li> With probability 
+            $$
+                a(\theta, x; \theta', x') = \min\left\{1, \frac{e^{-w \ell\left(y_{obs}, x'\right)}}{e^{-w \ell\left(y_{obs}, x\right)}}\right\}
+            $$
+            accept (\(theta', y')\) otherwise keep \((\theta, x)\).
+    </ul>
+</section>
+
+
+<section>
+    <h2>Measurement Error and Model Inadequacy</h2>
+    <hr size=2 noshade>
+    Examples:
+    <ul>
+        <li> Soft-threshold ABC \(\ell(y, x) = \frac{1}{M} \sum_{i=1}^M d(s_{obs}, s_i)\)
+        <li> Wasserstein ABC  \(\ell(y, x) = \frac{1}{M} \sum_{i=1}^M  W(y_{obs}, x_i)\)
+        <li> K2-ABC  \(\ell(y, x) = \frac{1}{M} \sum_{i=1}^M  MMD(y_{obs}, x_i)\)
+    </ul>
+</section>
+
+<section>
+    <h2>Measurement Error and Model Inadequacy</h2>
+    <hr size=2 noshade>
+    <div style="display: flex; justify-content: center;">
+        <img src="true_posterior.JPG" height=480 alt="coin_toss">
+    </div>
+</section>
+
+<section>
+    <h2>Robustness to Misspecification</h2>
+    <hr size=2 noshade>
+    <ul>
+        <li> What happens for different loss functions when under various levels of model misspecification?
+        <li> We study the following model: the "true" model is set to be 100 samples from \(y \sim \mathcal{N}(\theta=1, \sigma^2=2)\).
+        <li> As a model we take the misspecified \(f(x \mid \theta) = \mathcal{N}(x; \theta, \sigma^2\in [0.5, 5])\) with prior beliefs \(p(\theta) = \mathcal{N}(\theta; 0, 25)\).
+    </ul>
+</section>
+
+<section>
+    <h2>Robustness to Misspecification</h2>
+    <hr size=2 noshade>
+    <div style="display: flex; justify-content: center;">
+        <img src="comparison.JPG" height=480 alt="coin_toss">
+    </div>
+</section>
+
+<section>
+    <h2>Robustness to Misspecification</h2>
+    <hr size=2 noshade>
+    <h4>Conclusion</h4>
+    <ul>
+        <li>
+            The "approximative" nature of ABC can be a feature, not a bug, when dealt with properly.
+        </li>
+        <lI>
+            Soft-threshold ABC with general loss functions provide a princpled method for robust Bayesian inference.
+        </lI>
+        <li>
+            Biggest unsolved issue: how to set \(w\).
+        </li>
+    </ul>
+</section>
+
+
+<section style="text-align: left; padding-top: 5em;">
+    <h2>Part III</h2> 
+    <hr size=2 noshade>
+    <h3>Scalable Models for Simulation-based Inference</h3>
+</section>
+
+<section>
+    <h2>The Frontier of Simulation-based Inference</h2>
+    <hr size=2 noshade>
+    <h4>(Cranmer et.al. 2020)</h4>
+    <ul>
+        <li>Modern machine learning techniques allow for flexible estimation of complex posteriors.
+        <li>For example, given a sample of \((x_i, \theta_i) \sim p(x \mid \theta)p(\theta)\), we can use modern (conditional) density estimation techniques, such as <i>normalizing flows</i>
+            or <i>Gaussian mixture models</i> to learn either
+            $$
+                p_\phi(\theta \mid x) \quad {\mathsf{(neural\, posterior\, estimation)}}
+            $$
+            or 
+            $$
+                p_\phi(x \mid \theta) \quad {\mathsf{(neural\, density\, estimation)}}.
+            $$
+    </ul>
+</section>
+
+
+<section>
+    <h2>Neural Density Estimation</h2>
+    <hr size=2 noshade>
+    <h4>Normalizing Flows</h4>
+    <ul>
+        <li> Density transformation formula
+            $$
+                f_x(x) = f_u(T^{-1}(x)) |\det J_{T^{-1}}(x)| 
+            $$
+        <li> Choosing a base distribution \(f_u\), we can parameterize the transformation as \(T_\phi\) and thus learn a new density
+            $$
+                \log f_x(x) = \log f_u(T_\phi^{-1}(x)) + \log |\det J_{T_\phi^{-1}}(x)|.
+            $$
+        <li> This can be evaluated easily if the transformation is choosen well and optimized using automatic differentiation.
+        <li> Examples: ResFlows, Masked Autoregressive Flows, Neural Spline Flows, Householder Flows, etc...
+    </ul>
+</section>
+
+
+<section>
+    <h2>Neural Density Estimation</h2>
+    <hr size=2 noshade>
+    <h4>(Sequential) Neural Likelihood (Papamakarios, 2018)</h4>
+    Set \(r = 0, p_r(\theta \mid y_{obs}) = p(\theta)\) </br>
+    For \(r = 1:R\)
+    <ul>
+        <li> Sample dataset \(x_i \sim f(x \mid \theta_i), \, \theta_i \sim p_{r-1}(\theta \mid y_{obs}), i=1, \ldots, N\)
+        <li> Train \(q_\phi(x \mid \theta)\)
+        <li> Set \(p_r(\theta\mid y_{obs}) = q_\phi(y_{obs} \mid \theta)p(\theta)\) 
+    </ul>
+</section>
+
+
+<section>
+    <h2>Neural Likelihood Estimation</h2>
+    <hr size=2 noshade>
+    <b>Advantages:</b>
+    <li> Analytic expression for likelihood allows for traditional inference mechanisms (NUTS, HMC, slice sampling)
+    <li> Because sampling from flows is easy (sample \(u\) and compute \(x = T(u)\)) we have a genreative surrogate model.
+    <li> Often requires much fewer samples than ABC.
+    </li>
+    </br>
+    <b>Disadvantages:</b>
+    <li> Likelihood is still only an approximation: induces measurement error.
+    </li> 
+</section>
+
+<section>
+    <h2>Neural Likelihood Estimation: Model Inadequacy</h2>
+    <hr size=2 noshade>
+    <div style="display: flex; justify-content: center;">
+        <img src="Slide1.PNG" height=480 alt="coin_toss">
+    </div>
+</section>
+
+
+<section>
+    <h2>Neural Likelihood Estimation</h2>
+    <hr size=2 noshade>
+    <h4>Solution (Schmon et. at. <i>forthcoming</i>)</h4>
+    <li>Combine use the general ABC approach with neural likelihood.
+    $$
+        p(y \mid \theta) = \int e^{- w\ell(y_{obs}; x)} q_\phi(x \mid \theta)dx,
+    $$
+    where \(q_\phi(x \mid \theta) \approx f(x \mid \theta)\).
+    </li>
+</section>
+
+<section>
+    <h2>Neural Likelihood Estimation</h2>
+    <hr size=2 noshade>
+    <h4>So what?</h4>
+    <li> Combines the advantages of neural density estimation and ABC.
+    <li> Sampling is amortized since we only require samples from the flow surrogate instead of the simulator itself.
+    <li> Can use recent advancements in pseudo-marginal methods, e.g. correlated pseudo-marginal (Deligiannidis et.al., 2018). 
+    </li>
+</section>
+
+
+<section>
+    <h2>Measurement Error and Model Inadequacy</h2>
+    <hr size=2 noshade>
+    <h4>Inference Algorithms: Pseudo-Marginal Methods (Andrieu et.al. 2010)</h4>
+    Input: \(\(theta, u), x = T(u)\)
+    <ul>
+        <li> Sample new \(\theta' \sim q(\cdot \mid \theta)\) (usually with MCMC)
+        <li> Set \(u' = \rho u + \sqrt{1 -\rho^2} \epsilon, \epsilon \sim \mathcal{N}(0, I)\)
+        <li> Set \(x' = T(u')\)
+        <li> With probability 
+            $$
+                a(\theta, x; \theta', x') = \min\left\{1, \frac{e^{-w \ell\left(y_{obs}, x'\right)}}{e^{-w \ell\left(y_{obs}, x\right)}}\right\}
+            $$
+            accept (\(theta', y')\) otherwise keep \((\theta, x)\).
+    </ul>
+</section>
+
+
+<section>
+    <h2>Neural Likelihood Estimation: Model Inadequacy</h2>
+    <hr size=2 noshade>
+    <div style="display: flex; justify-content: center;">
+        <img src="pmh_flow_model_02-02-2021_14_44.png" height=480 alt="coin_toss">
+    </div>
+</section>
+
+<section>
+    <h2>Lotka-Volterra</h2>
+    <hr size=2 noshade>
+    <div style="display: flex; justify-content: center;">
+        <img src="lotvol_mis_model.png" height=480 alt="coin_toss">
+    </div>
+</section>
+
 
 <section>
   <h2>Summary</h2>
+  <hr size=2 noshade>
   <ul>
-    <li> 
-    <li> 
-    <li> 
-    <li> 
-    <li> </li>
+    <li> We have shown that model inadequacy and measurement error can lead to considerable deviations from the desired posterior distribution.
+    <li> Generalized ABC can help overcome these issues, in standard ABC and in particular in neural density estimation.
+    </li>
   </ul>
 </section>
 
+
+<section style="text-align: left; padding-top: 5em;">
+    <h2>Part IV</h2> 
+    <hr size=2 noshade>
+    <h3>Optimal Implementation of Inference Algorithms</h3>
+</section>
 
 <script src="d3.v3.min.js"></script>
 <script src="stack.v1.min.js"></script>
