@@ -114,7 +114,7 @@
 		  </div>
           <h1 display="inline" class="jumbotron-heading">Sebastian Schmon, </h1><code type="text" id="schmon2018">DPhil (Oxon)</code>
 		  
-		  <p class="lead text-muted"><p class="text-muted"> Welcome to my webpage. I am a Research Scientist in the Complexity Research team at <a href="http://improbable.io" class="link-articles">Improbable</a>. 
+		  <p class="lead text-muted"><p class="text-muted"> Welcome to my webpage. I am a Research Scientist in the Complexity Research team at <a href="http://improbable.io" class="link-articles">Improbable</a> and incoming Assistant Professor in Statistics at Durham University. 
 			My research interests lie at the intersection of statistics, machine learning and probability theory.
 			In particular, I am interested in constructing and analysing practical algorithms and simulation techniques for complex statistical or machine learning models such as intractable Bayesian models or large scale simulation engines. 
 			A list of <a href="#research" class="link-articles">publications</a> can be found below. I obtained my DPhil (Oxford parlance for PhD) at the Department of Statistics of the University of Oxford under the supervision of <a href="http://www.stats.ox.ac.uk/~doucet/" class="link-articles">Arnaud Doucet</a> and <a href="http://www.stats.ox.ac.uk/~deligian/" class="link-articles">George Deligiannidis</a>.	
@@ -186,7 +186,8 @@
 							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: rgb(0, 153, 255);" href="#collapse_revae" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
 							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://arxiv.org/abs/2006.10102';">PDF (arXiv)</button>
 							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://openreview.net/forum?id=wQRlSUZ5V7B';">ICLR (Openreview)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://github.com/thwjoy/revae-demo';">Code (Github)</button>
+							<!-- <button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://github.com/thwjoy/revae-demo';">Code (Github)</button> -->
+							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://polar-escarpment-85610.herokuapp.com/';">Demo</button>
 							<button type="button" class="btn text-white border-left" style="background-color: rgb(0, 153, 255);" data-toggle="collapse" href="#collapse_revae_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
 						</div>
 		
@@ -215,6 +216,65 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 				</div>
 			</div>
 		
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
+					  <div class="card-body">
+						<h4>Large Sample Asymptotics of the Pseudo-Marginal Method</h4>
+						<p> with Arnaud Doucet, George Deligiannidis and Mike Pitt</p>
+						
+						<p color="gray"><i>Biometrika, 2021</i></p>
+						
+						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: rgb(0, 153, 255);" href="#collapse_PMMH" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://arxiv.org/abs/1806.10060';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://doi.org/10.1093/biomet/asaa044';">PDF (Biometrika)</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='download/code_pm_asymptotics.zip';">Code (zip)</button>
+							<button type="button" class="btn text-white border-left" style="background-color: rgb(0, 153, 255);" data-toggle="collapse" href="#collapse_PMMH_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+						</div>
+
+						<div data-badge-popover="right" data-badge-type="1" data-doi="10.1093/biomet/asaa044" data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
+
+						<div class="collapse" id="collapse_PMMH">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							The pseudo-marginal algorithm is a variant of the Metropolis–Hastings algorithm which samples
+							asymptotically from a probability distribution when it is only possible to estimate unbiasedly an unnor-
+							malized version of its density. Practically one has to trade-off the computational resources used to obtain
+							this estimator against the asymptotic variances of the ergodic averages obtained by the pseudo-marginal
+							algorithm. Recent works optimizing this trade-off rely on some strong assumptions which can cast doubts
+							over their practical relevance. In particular, they all assume that the distribution of the additive error in
+							the log-likelihood estimator is independent of the parameter value at which it is evaluated. Under weak
+							regularity conditions we show here that, as the number of data points tends to infinity, a space-rescaled
+							version of the pseudo-marginal chain converges weakly towards another pseudo-marginal chain for which
+							this assumption indeed holds. A study of this limiting chain allows us to provide parameter dimension-
+							dependent guidelines on how to optimally scale a normal random walk proposal and the number of Monte
+							Carlo samples for the pseudo-marginal method in the large sample regime. This complements and vali-
+							dates currently available results.
+						  </div>
+						</div>
+						<div class="collapse" id="collapse_PMMH_bibtex">
+						  <div class="class="card-body">
+							<pre class="prettyprint"><code type="text" id="schmon2018">@Article{SchmonDeligiannidisDoucet2018a,
+	author = {Schmon, S M and Deligiannidis, G and Doucet, A and Pitt, M K},
+	title = "{Large-sample asymptotics of the pseudo-marginal method}",
+	journal = {Biometrika},
+	volume = {108},
+	number = {1},
+	pages = {37-51},
+	year = {2021},
+	month = {03},
+	issn = {0006-3444},
+	doi = {10.1093/biomet/asaa044},
+	url = {https://doi.org/10.1093/biomet/asaa044},
+	eprint = {https://academic.oup.com/biomet/article-pdf/108/1/37/36440998/asaa044.pdf},
+}
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#schmon2018');this.value='Copy to clipboard ✓'">
+						  </div>
+						</div>
+					  </div>
+				</div>
+			</div>
+
 
 			<div class="col-sm-6 col-md-12">
 				<div class="card mb-4 box-shadow">
@@ -222,7 +282,7 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 						<h4>Generalized Posteriors in Approximate Bayesian Computation</h4>
 						<p> with Patrick W Cannon and Jeremias Knoblauch</p>
 						
-						<p color="gray"><i>The 3rd Symposium on Advances in Approximate Bayesian Inference, AABI 2021</i></p>
+						<p color="gray"><i>The 3rd Symposium on Advances in Approximate Bayesian Inference, AABI 2020</i></p>
 						
 						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
 							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: rgb(0, 153, 255);" href="#collapse_gbi_abc" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
@@ -287,65 +347,6 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 }
 							</code></pre>
 							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#groha2020');this.value='Copy to clipboard ✓'">
-						  </div>
-						</div>
-					  </div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-12">
-				<div class="card mb-4 box-shadow">
-					  <div class="card-body">
-						<h4>Large Sample Asymptotics of the Pseudo-Marginal Method</h4>
-						<p> with Arnaud Doucet, George Deligiannidis and Mike Pitt</p>
-						
-						<p color="gray"><i>Biometrika, 2021</i></p>
-						
-						<div class="btn-group d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: rgb(0, 153, 255);" href="#collapse_PMMH" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://arxiv.org/abs/1806.10060';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://doi.org/10.1093/biomet/asaa044';">PDF (Biometrika)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='download/code_pm_asymptotics.zip';">Code (zip)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: rgb(0, 153, 255);" data-toggle="collapse" href="#collapse_PMMH_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
-						</div>
-
-						<div data-badge-popover="right" data-badge-type="1" data-doi="10.1093/biomet/asaa044" data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
-
-						<div class="collapse" id="collapse_PMMH">
-						  <div class="p-3 mb-2 bg-light text-dark">
-							The pseudo-marginal algorithm is a variant of the Metropolis–Hastings algorithm which samples
-							asymptotically from a probability distribution when it is only possible to estimate unbiasedly an unnor-
-							malized version of its density. Practically one has to trade-off the computational resources used to obtain
-							this estimator against the asymptotic variances of the ergodic averages obtained by the pseudo-marginal
-							algorithm. Recent works optimizing this trade-off rely on some strong assumptions which can cast doubts
-							over their practical relevance. In particular, they all assume that the distribution of the additive error in
-							the log-likelihood estimator is independent of the parameter value at which it is evaluated. Under weak
-							regularity conditions we show here that, as the number of data points tends to infinity, a space-rescaled
-							version of the pseudo-marginal chain converges weakly towards another pseudo-marginal chain for which
-							this assumption indeed holds. A study of this limiting chain allows us to provide parameter dimension-
-							dependent guidelines on how to optimally scale a normal random walk proposal and the number of Monte
-							Carlo samples for the pseudo-marginal method in the large sample regime. This complements and vali-
-							dates currently available results.
-						  </div>
-						</div>
-						<div class="collapse" id="collapse_PMMH_bibtex">
-						  <div class="class="card-body">
-							<pre class="prettyprint"><code type="text" id="schmon2018">@Article{SchmonDeligiannidisDoucet2018a,
-	author = {Schmon, S M and Deligiannidis, G and Doucet, A and Pitt, M K},
-	title = "{Large-sample asymptotics of the pseudo-marginal method}",
-	journal = {Biometrika},
-	volume = {108},
-	number = {1},
-	pages = {37-51},
-	year = {2021},
-	month = {03},
-	issn = {0006-3444},
-	doi = {10.1093/biomet/asaa044},
-	url = {https://doi.org/10.1093/biomet/asaa044},
-	eprint = {https://academic.oup.com/biomet/article-pdf/108/1/37/36440998/asaa044.pdf},
-}
-							</code></pre>
-							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#schmon2018');this.value='Copy to clipboard ✓'">
 						  </div>
 						</div>
 					  </div>
