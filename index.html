@@ -140,47 +140,48 @@
 		<p></p>
         <div class="row">
 
-
 			<div class="col-sm-6 col-md-12">
 				<div class="card mb-4 box-shadow">
 					  <!-- <div class="card-header">
 					  Approximate Bayesian Computation with Path Signatures
 					  </div> -->
 					  <div class="card-body">
-						<h4>Amortized inference for expensive time-series simulators with signatured ratio estimation</h4>
-						<p> with Joel Dyer and Patrick Cannon</p>
+						<h4>Black-box Bayesian inference for economic agent-based models</h4>
+						<p> with Joel Dyer, Patrick Cannon and Doyne Farmer</p>
 
-						<p color="gray"><i>The 25th International Conference on Artificial Intelligence and Statistics, AISTATS 2022</i></p>
+						<p color="gray"><i>https://arxiv.org/abs/2202.00625</i></p>
 										
 						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: rgb(0, 153, 255);" href="#collapse_sig_ratio" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://arxiv.org/abs/2106.12555';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: rgb(0, 153, 255);" data-toggle="collapse" href="#collapse_sig_ratio_bib" role="button" aria-expanded="false" aria-controls="collapse_sig_abc_bib">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: rgb(0, 153, 255);" href="#collapse_sbi4bm" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://arxiv.org/abs/2202.00625';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left" style="background-color: rgb(0, 153, 255);" data-toggle="collapse" href="#collapse_sbi4bm_bib" role="button" aria-expanded="false" aria-controls="collapse_sig_abc_bib">Bibtex</button>
 						</div>
 
-						<div class="collapse" id="collapse_sig_ratio">
+						<div class="collapse" id="collapse_sbi4bm">
 						  <div class="p-3 mb-2 bg-light text-dark">
-							Simulation models of complex dynamics in the natural and social sciences commonly lack a tractable likelihood function, rendering traditional likelihood-based statistical inference impossible. Recent advances in machine learning have introduced novel algorithms for estimating otherwise intractable likelihood functions using a likelihood ratio trick based on binary classifiers. Consequently, efficient likelihood approximations can be obtained whenever good probabilistic classifiers can be constructed. We propose a kernel classifier for sequential data using path signatures based on the recently introduced signature kernel. We demonstrate that the representative power of signatures yields a highly performant classifier, even in the crucially important case where sample numbers are low. In such scenarios, our approach can outperform sophisticated neural networks for common posterior inference tasks.
-						  </div>
+							Simulation models, in particular agent-based models, are gaining popularity in economics. The considerable flexibility they offer, as well as their capacity to reproduce a variety of empirically observed behaviours of complex systems, give them broad appeal, and the increasing availability of cheap computing power has made their use feasible. Yet a widespread adoption in real-world modelling and decision-making scenarios has been hindered by the difficulty of performing parameter estimation for such models. In general, simulation models lack a tractable likelihood function, which precludes a straightforward application of standard statistical inference techniques. Several recent works have sought to address this problem through the application of likelihood-free inference techniques, in which parameter estimates are determined by performing some form of comparison between the observed data and simulation output. However, these approaches are (a) founded on restrictive assumptions, and/or (b) typically require many hundreds of thousands of simulations. These qualities make them unsuitable for large-scale simulations in economics and can cast doubt on the validity of these inference methods in such scenarios. In this paper, we investigate the efficacy of two classes of black-box approximate Bayesian inference methods that have recently drawn significant attention within the probabilistic machine learning community: neural posterior estimation and neural density ratio estimation. We present benchmarking experiments in which we demonstrate that neural network based black-box methods provide state of the art parameter inference for economic simulation models, and crucially are compatible with generic multivariate time-series data. In addition, we suggest appropriate assessment criteria for future benchmarking of approximate Bayesian inference procedures for economic simulation models.						  </div>
 						</div>
-						<div class="collapse" id="collapse_sig_ratio_bib">
+						<div class="collapse" id="collapse_sbi4bm_bib">
 						  <div class="class="card-body">
-							<pre class="prettyprint"><code type="text" id="collapse_sig_ratio_bib">@misc{dyer2022,
-	title={Amortized inference for expensive time-series simulators with signatured ratio estimation}, 
-	author={Joel Dyer and Patrick Cannon and Sebastian M Schmon},
+							<pre class="prettyprint"><code type="text" id="collapse_sbi4bm_bib">@misc{dyer2022blackbox,
+	title={Black-box Bayesian inference for economic agent-based models}, 
+	author={Joel Dyer and Patrick Cannon and J. Doyne Farmer and Sebastian Schmon},
 	year={2022},
-    journal={International Conference on Artificial Intelligence and Statistics}
+	eprint={2202.00625},
+	archivePrefix={arXiv},
+	primaryClass={econ.EM}
 }
 							</code></pre>
-							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_sig_ratio_bib');this.value='Copy to clipboard ✓'">
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_bwm_mcmc_bibtex');this.value='Copy to clipboard ✓'">
 						  </div>
 						</div>
 					  </div>
 					  <div class="card-footer">
-						<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
+						<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2202.00625' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
 					  </div>
 				</div>
 			</div>
+
 
 			<div class="col-sm-6 col-md-12">
 				<div class="card mb-4 box-shadow">
@@ -221,6 +222,47 @@
 					  </div>
 					  <div class="card-footer">
 						<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2106.12555' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
+					  </div>
+				</div>
+			</div>
+
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
+					  <!-- <div class="card-header">
+					  Approximate Bayesian Computation with Path Signatures
+					  </div> -->
+					  <div class="card-body">
+						<h4>Amortized inference for expensive time-series simulators with signatured ratio estimation</h4>
+						<p> with Joel Dyer and Patrick Cannon</p>
+
+						<p color="gray"><i>The 25th International Conference on Artificial Intelligence and Statistics, AISTATS 2022</i></p>
+										
+						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: rgb(0, 153, 255);" href="#collapse_sig_ratio" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: rgb(0, 153, 255);" onclick="window.location='https://arxiv.org/abs/2106.12555';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left" style="background-color: rgb(0, 153, 255);" data-toggle="collapse" href="#collapse_sig_ratio_bib" role="button" aria-expanded="false" aria-controls="collapse_sig_abc_bib">Bibtex</button>
+						</div>
+
+						<div class="collapse" id="collapse_sig_ratio">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							Simulation models of complex dynamics in the natural and social sciences commonly lack a tractable likelihood function, rendering traditional likelihood-based statistical inference impossible. Recent advances in machine learning have introduced novel algorithms for estimating otherwise intractable likelihood functions using a likelihood ratio trick based on binary classifiers. Consequently, efficient likelihood approximations can be obtained whenever good probabilistic classifiers can be constructed. We propose a kernel classifier for sequential data using path signatures based on the recently introduced signature kernel. We demonstrate that the representative power of signatures yields a highly performant classifier, even in the crucially important case where sample numbers are low. In such scenarios, our approach can outperform sophisticated neural networks for common posterior inference tasks.
+						  </div>
+						</div>
+						<div class="collapse" id="collapse_sig_ratio_bib">
+						  <div class="class="card-body">
+							<pre class="prettyprint"><code type="text" id="collapse_sig_ratio_bib">@misc{dyer2022,
+	title={Amortized inference for expensive time-series simulators with signatured ratio estimation}, 
+	author={Joel Dyer and Patrick Cannon and Sebastian M Schmon},
+	year={2022},
+    journal={International Conference on Artificial Intelligence and Statistics}
+}
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_sig_ratio_bib');this.value='Copy to clipboard ✓'">
+						  </div>
+						</div>
+					  </div>
+					  <div class="card-footer">
+						<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
 					  </div>
 				</div>
 			</div>
