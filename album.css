@@ -2,19 +2,37 @@
   --jumbotron-padding-y: 3rem;
 }
 
+a {
+  color: #08D9D6;
+}
+
+head {
+  background: #252A3490 !important;
+}
+
+body {
+  background: #252A3490 !important;
+}
+
+.card-body {
+  background-color: #EAEAEA;
+  color: #252A34;
+}
+
 .jumbotron {
   padding-top: var(--jumbotron-padding-y);
   padding-bottom: var(--jumbotron-padding-y);
   margin-bottom: 0;
-  background-color: #fff;
+  color: #EAEAEA;
+  background-color: #252A34;
   /*background-image: linear-gradient(skyblue, silver);*/
-  background-image: url("bg.jpg");
+  background-image: url("background.jpg");
   background-size: cover;
 }
 
 /* Set your background color */
 .bg-custom {
-  background-color: #000
+  background-color: #252A34
 }
 /* Transition effect */
 .navbar {
@@ -43,11 +61,15 @@
 }
 
 .container {
-  background: rgb(255, 255, 255);
-  background: rgba(255, 255, 255, 0.9);
+  /* background: #252A3490; */
+  background: #252A34;
   padding-top: calc(var(--jumbotron-padding-y) *0.5 );
   padding-bottom: calc(var(--jumbotron-padding-y) *0.5 );
   border-radius: 25px,
+}
+
+.card-footer {
+  background: #252A3490;
 }
 
 footer {
