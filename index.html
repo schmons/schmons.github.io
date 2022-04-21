@@ -118,8 +118,8 @@
 		  </div>
           <h1 display="inline" class="jumbotron-heading">Sebastian Schmon, </h1><code type="text" id="schmon2018" style="color:#FF2E63">DPhil (Oxon)</code>
 		  
-		  <p class="lead text-muted"><p class="text-muted"> Welcome to my webpage. I am an Assistant Professor in Statistics at <a href="https://www.durham.ac.uk/departments/academic/mathematical-sciences/">Durham University</a> and a Research Scientist in the Complexity Research team at <a href="https://defence.improbable.io/research-and-insights" class="link-articles">Improbable</a>. 
-			My research interests lie at the intersection of statistics, machine learning and probability theory.
+		  <p class="lead text-muted"><p class="text-muted"> Welcome to my webpage. I am an Assistant Professor in Statistics at <a href="https://www.durham.ac.uk/departments/academic/mathematical-sciences/">Durham University</a> and a Research Scientist in the Research team at <a href="https://defence.improbable.io/research-and-insights" class="link-articles">Improbable</a>. 
+			My research interests lie at the intersection of statistics, machine learning and probability theory as well as applications to the sciences.
 			In particular, I am interested in constructing and analysing practical algorithms and simulation techniques for complex statistical or machine learning models such as intractable Bayesian models or large scale simulation engines. 
 			A list of <a href="#research" class="link-articles">publications</a> can be found below. I obtained my DPhil (Oxford parlance for PhD) at the Department of Statistics of the University of Oxford under the supervision of <a href="http://www.stats.ox.ac.uk/~doucet/" class="link-articles">Arnaud Doucet</a> and <a href="http://www.stats.ox.ac.uk/~deligian/" class="link-articles">George Deligiannidis</a>.	
 		  <p class="text-muted">As a consultant with several years of experience I have supported start-ups as well as large multinational companies to improve their analytical capabilites.</p> <!--and learn the true story behind their data-->
@@ -142,9 +142,76 @@
 
 			<div class="col-sm-6 col-md-12">
 				<div class="card mb-4 box-shadow">
-					  <!-- <div class="card-header">
-					  Approximate Bayesian Computation with Path Signatures
+					  <div class="card-body">
+						<h4>AnoDDPM: Anomaly Detection with Denoising Diffusion Probabilistic Models using Simplex Noise</h4>
+						<p> with Julian Wyatt, Adam Leach and Chris G. Willcocks</p>
+
+						<p color="gray"><i>NTIRE, New Trends in Image Restoration and Enhancement workshop, CVPR 2022</i></p>
+										
+						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_annoddpm" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://data.vision.ee.ethz.ch/cvl/ntire22/';">Workshop</button>
+							<!-- <button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_annoddpm_bib" role="button" aria-expanded="false" aria-controls="collapse_annoddpm_bib">Bibtex</button> -->
+						</div>
+
+						<div class="collapse" id="collapse_annoddpm">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							Generative models have been shown to provide a powerful mechanism for anomaly detection by learning to model healthy or normal reference data which can subsequently be used as a baseline for scoring anomalies. 
+							In this work we consider denoising diffusion probabilistic models (DDPMs) for unsupervised anomaly detection.
+							DDPMs have superior mode coverage over generative adversarial networks (GANs) and higher sample quality than variational autoencoders (VAEs). However, this comes at the expense of poor scalability and increased sampling times due to the long Markov chain sequences required. We observe that within reconstruction-based anomaly detection a full-length Markov chain diffusion is not required. This leads us to develop a novel partial diffusion anomaly detection strategy that scales to high-resolution imagery, named AnoDDPM. A secondary problem is that Gaussian diffusion fails to capture larger anomalies; therefore we develop a multi-scale simplex noise diffusion process that gives control over the target anomaly size. AnoDDPM with simplex noise is shown to significantly outperform both f-AnoGAN and Gaussian diffusion for the tumorous dataset of 22 T1-weighted MRI scans (CCBS Edinburgh) qualitatively and quantitatively (improvement of +25.5\% Sørensen–Dice coefficient, +17.6\% IoU and +7.4\% AUC).						
+						  </div>
+						</div>
+						<div class="collapse" id="collapse_annoddpm_bib">
+						  <div class="card-body bg-light">
+							<pre class="prettyprint"><code type="text" id="collapse_annoddpm_bib">
+								test
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_annoddpm_bib');this.value='Copy to clipboard ✓'">
+						  </div>
+						</div>
+					  </div>
+					  <!-- <div class="card-footer">
+						<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2202.00625' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
 					  </div> -->
+				</div>
+			</div>
+
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
+					  <div class="card-body">
+						<h4>Denoising diffusion probabilistic models on SO(3) for rotational alignment</h4>
+						<p> with Adam Leach, Matteo T. Degiacomi and Chris G. Willcocks</p>
+
+						<p color="gray"><i>Workshop on Geometrical and Topological Representation Learning, ICLR 2022</i></p>
+										
+						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
+							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_so3" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://openreview.net/forum?id=BY88eBbkpe5';">PDF</button>
+							<!-- <button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_so3_bib" role="button" aria-expanded="false" aria-controls="collapse_so3_bib">Bibtex</button> -->
+						</div>
+
+						<div class="collapse" id="collapse_so3">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							Probabilistic diffusion models are capable of modeling complex data distributions on high-dimensional Euclidean spaces for a range applications. However, many real world tasks involve more complex structures such as data distributions defined on manifolds which cannot be easily represented by diffusions on $\mathbb{R}^n$. This paper proposes denoising diffusion models for tasks involving 3D rotations leveraging diffusion processes on the Lie group $SO(3)$ in order to generate candidate solutions to rotational alignment tasks. The experimental results show the proposed $SO(3)$ diffusion process outperforms naïve approaches such as Euler angle diffusion in synthetic rotational distribution sampling and in a 3D object alignment task.
+						</div>
+						</div>
+						<div class="collapse" id="collapse_so3_bib">
+						  <div class="card-body bg-light">
+							<pre class="prettyprint"><code type="text" id="collapse_so3_bib">
+								
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_so3_bib');this.value='Copy to clipboard ✓'">
+						  </div>
+						</div>
+					  </div>
+					  <!-- <div class="card-footer">
+						<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2202.00625' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
+					  </div> -->
+				</div>
+			</div>
+
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
 					  <div class="card-body">
 						<h4>Black-box Bayesian inference for economic agent-based models</h4>
 						<p> with Joel Dyer, Patrick Cannon and Doyne Farmer</p>
@@ -317,11 +384,12 @@
 						<h4>Optimal scaling of random walk Metropolis algorithms using Bayesian large-sample asymptotics</h4>
 						<p> with Philippe Gagnon</p>
 						
-						<p color="gray"><i>Statistics and Computing, forthcoming 2022</i></p>
+						<p color="gray"><i>Statistics and Computing, 2022</i></p>
 						
 						<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
 							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_bwm_mcmc" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
 							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://arxiv.org/abs/2104.06384';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://link.springer.com/article/10.1007/s11222-022-10080-8';">PDF (Statistics and Computing)</button>
 							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://www.youtube.com/watch?v=-KpTbeZlxn0';">Video (Youtube)</button>
 							<button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_bwm_mcmc_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
 						</div>
