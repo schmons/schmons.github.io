@@ -73,11 +73,11 @@
 	
   </head>
 
-  <body data-spy="scroll" data-target=".navbar" data-offset="50" style="color: #EAEAEA; background:#08D9D6">
+  <body data-spy="scroll" data-target=".navbar" data-offset="50">
 	<!--<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #223A5E;">-->
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-transparent">
-	  <a class="navbar-brand" href="#"><img src="icon200.png" class="rounded" alt="blog" height="40px"></a>
-	  <a class="navbar-brand" href="#">Sebastian Schmon</a>
+	  <a class="navbar-brand" href="#"><img src="icon200.png" class="rounded d-inline-block align-top" alt="blog" height="40px"></a>
+	  <!-- <a class="navbar-brand" href="#"></a> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -93,6 +93,19 @@
           <li class="nav-item">
             <a class="nav-link" href="#teaching">Teaching</a>
 		  </li>
+
+		  <li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#opportunities" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Opportunities
+			  </a>
+			  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				<a class="dropdown-item" href="#projects">Projects (Undergrad & MSc)</a>
+				<a class="dropdown-item" href="#phd">PhD Supervision</a>
+				<a class="dropdown-item" href="#visiting">Visiting Scholars</a>
+				<!-- <a class="dropdown-item" href="#"></a> -->
+			  </div>
+		  </li>
+
         </ul>
         <form class="form-inline mt-2 mt-md-0" id="frmSearch" method="get">
           <input class="form-control mr-sm-2" type="text" id="txtSearch" placeholder="Search" aria-label="Search">
@@ -136,7 +149,7 @@
 	  <div class="album py-5 bg-light" style="background: #252A34 !important">
         <div class="container">
 		<div class="page-header" id="research">
-		<h3>Publications and Preprints</h3>
+		<h3 style="color: #08D9D6 !important">Publications and Preprints</h3>
 		<p></p>
         <div class="row">
 
@@ -149,9 +162,9 @@
 						<p color="gray"><i>NTIRE, New Trends in Image Restoration and Enhancement workshop, CVPR 2022</i></p>
 										
 						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_annoddpm" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://data.vision.ee.ethz.ch/cvl/ntire22/';">Workshop</button>
-							<!-- <button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_annoddpm_bib" role="button" aria-expanded="false" aria-controls="collapse_annoddpm_bib">Bibtex</button> -->
+							<button type="button" class="btn text-white border-right" data-toggle="collapse" href="#collapse_annoddpm" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://data.vision.ee.ethz.ch/cvl/ntire22/';">Workshop</button>
+							<!-- <button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_annoddpm_bib" role="button" aria-expanded="false" aria-controls="collapse_annoddpm_bib">Bibtex</button> -->
 						</div>
 
 						<div class="collapse" id="collapse_annoddpm">
@@ -185,9 +198,9 @@
 						<p color="gray"><i>Workshop on Geometrical and Topological Representation Learning, ICLR 2022</i></p>
 										
 						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_so3" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://openreview.net/forum?id=BY88eBbkpe5';">PDF</button>
-							<!-- <button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_so3_bib" role="button" aria-expanded="false" aria-controls="collapse_so3_bib">Bibtex</button> -->
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_so3" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://openreview.net/forum?id=BY88eBbkpe5';">PDF</button>
+							<!-- <button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_so3_bib" role="button" aria-expanded="false" aria-controls="collapse_so3_bib">Bibtex</button> -->
 						</div>
 
 						<div class="collapse" id="collapse_so3">
@@ -219,9 +232,9 @@
 						<p color="gray"><i>https://arxiv.org/abs/2202.00625</i></p>
 										
 						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_sbi4bm" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://arxiv.org/abs/2202.00625';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_sbi4bm_bib" role="button" aria-expanded="false" aria-controls="collapse_sig_abc_bib">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_sbi4bm" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2202.00625';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_sbi4bm_bib" role="button" aria-expanded="false" aria-controls="collapse_sig_abc_bib">Bibtex</button>
 						</div>
 
 						<div class="collapse" id="collapse_sbi4bm">
@@ -262,9 +275,9 @@
 						<p color="gray"><i>https://arxiv.org/abs/2106.12555</i></p>
 										
 						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_sig_abc" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://arxiv.org/abs/2106.12555';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_sig_abc_bib" role="button" aria-expanded="false" aria-controls="collapse_sig_abc_bib">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_sig_abc" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2106.12555';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_sig_abc_bib" role="button" aria-expanded="false" aria-controls="collapse_sig_abc_bib">Bibtex</button>
 						</div>
 
 						<div class="collapse" id="collapse_sig_abc">
@@ -305,9 +318,9 @@
 						<p color="gray"><i>The 25th International Conference on Artificial Intelligence and Statistics, AISTATS 2022</i></p>
 										
 						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_sig_ratio" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://arxiv.org/abs/2106.12555';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_sig_ratio_bib" role="button" aria-expanded="false" aria-controls="collapse_sig_abc_bib">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_sig_ratio" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2106.12555';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_sig_ratio_bib" role="button" aria-expanded="false" aria-controls="collapse_sig_abc_bib">Bibtex</button>
 						</div>
 
 						<div class="collapse" id="collapse_sig_ratio">
@@ -345,10 +358,10 @@
 						<p color="gray"><i>International Conference on Learning Representations, ICLR 2022 (Spotlight)</i></p>
 						
 						<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_meme" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://arxiv.org/abs/2106.12570';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://openreview.net/forum?id=1xXvPrAshao';">PDF (Openreview)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_meme_bibtex" role="button" aria-expanded="false" aria-controls="collapse_meme_bibtex">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_meme" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2106.12570';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://openreview.net/forum?id=1xXvPrAshao';">PDF (Openreview)</button>
+							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_meme_bibtex" role="button" aria-expanded="false" aria-controls="collapse_meme_bibtex">Bibtex</button>
 						</div>
 
 						<div class="collapse" id="collapse_meme">
@@ -387,11 +400,11 @@
 						<p color="gray"><i>Statistics and Computing, 2022</i></p>
 						
 						<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_bwm_mcmc" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://arxiv.org/abs/2104.06384';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://link.springer.com/article/10.1007/s11222-022-10080-8';">PDF (Statistics and Computing)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://www.youtube.com/watch?v=-KpTbeZlxn0';">Video (Youtube)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_bwm_mcmc_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_bwm_mcmc" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2104.06384';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://link.springer.com/article/10.1007/s11222-022-10080-8';">PDF (Statistics and Computing)</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://www.youtube.com/watch?v=-KpTbeZlxn0';">Video (Youtube)</button>
+							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_bwm_mcmc_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
 						</div>
 
 						<div class="collapse" id="collapse_bwm_mcmc">
@@ -428,12 +441,12 @@
 						<p color="gray"><i>International Conference on Learning Representations, ICLR 2021</i></p>
 						
 						<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_revae" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://arxiv.org/abs/2006.10102';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://openreview.net/forum?id=wQRlSUZ5V7B';">ICLR (Openreview)</button>
-							<!-- <button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://github.com/thwjoy/revae-demo';">Code (Github)</button> -->
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://polar-escarpment-85610.herokuapp.com/';">Demo</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_revae_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_revae" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2006.10102';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://openreview.net/forum?id=wQRlSUZ5V7B';">ICLR (Openreview)</button>
+							<!-- <button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://github.com/thwjoy/revae-demo';">Code (Github)</button> -->
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://polar-escarpment-85610.herokuapp.com/';">Demo</button>
+							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_revae_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
 						</div>
 			
 						<div class="collapse" id="collapse_revae">
@@ -471,11 +484,11 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 						<p color="gray"><i>Biometrika, 2021</i></p>
 						
 						<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_PMMH" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://arxiv.org/abs/1806.10060';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://doi.org/10.1093/biomet/asaa044';">PDF (Biometrika)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='download/code_pm_asymptotics.zip';">Code (zip)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_PMMH_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_PMMH" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/1806.10060';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://doi.org/10.1093/biomet/asaa044';">PDF (Biometrika)</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='download/code_pm_asymptotics.zip';">Code (zip)</button>
+							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_PMMH_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
 						</div>
 
 						<div class="collapse" id="collapse_PMMH">
@@ -532,9 +545,9 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 						<p color="gray"><i>The 3rd Symposium on Advances in Approximate Bayesian Inference, AABI 2020</i></p>
 						
 						<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_gbi_abc" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://arxiv.org/abs/2011.08644';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_gbi_abc_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_gbi_abc" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2011.08644';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_gbi_abc_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
 						</div>
 
 						<div class="collapse" id="collapse_gbi_abc">
@@ -571,10 +584,10 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 						<p color="gray"><i>arxiv.org/abs/2006.04893</i></p>
 						
 						<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_survnode" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://arxiv.org/abs/2006.04893';">PDF (arXiv)</button>
-							<!--<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='download/code_pm_asymptotics.zip';">Code (zip)</button> -->
-							<button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_survnode_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_survnode" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2006.04893';">PDF (arXiv)</button>
+							<!--<button type="button" class="btn text-white border-left border-right"  onclick="window.location='download/code_pm_asymptotics.zip';">Code (zip)</button> -->
+							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_survnode_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
 						</div>
 
 						<div class="collapse" id="collapse_survnode">
@@ -610,10 +623,10 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 						<p color="grey"><i>4th Neurips workshop on Bayesian Deep Learning 2019</i></p>
 
 						<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_IMPP" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://arxiv.org/abs/1912.00874';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='http://bayesiandeeplearning.org/2019/papers/53.pdf';">PDF (BDL)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_IMPP_bibtex" role="button" aria-expanded="false" aria-controls="collapse_IMPP_bibtex">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_IMPP" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/1912.00874';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='http://bayesiandeeplearning.org/2019/papers/53.pdf';">PDF (BDL)</button>
+							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_IMPP_bibtex" role="button" aria-expanded="false" aria-controls="collapse_IMPP_bibtex">Bibtex</button>
 						</div>
 
 						<div class="collapse" id="collapse_IMPP">
@@ -655,11 +668,11 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 						<p color="grey"><i>The 22nd International Conference on Artificial Intelligence and Statistics, AISTATS 2019</i></p>
 
 						<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_BRPF" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://arxiv.org/abs/1903.00939';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='http://proceedings.mlr.press/v89/schmon19a.html';">PDF (AISTATS)</button>
-							<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://github.com/schmons/bernoulli_race_particle_filters';">Code (GitHub)</button>
-							<button type="button" class="btn text-white border-left" style="background-color: #FF2E63;" data-toggle="collapse" href="#collapse_BRPF_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_BRPF" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/1903.00939';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='http://proceedings.mlr.press/v89/schmon19a.html';">PDF (AISTATS)</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://github.com/schmons/bernoulli_race_particle_filters';">Code (GitHub)</button>
+							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_BRPF_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
 						</div>
 
 						<div class="collapse" id="collapse_BRPF">
@@ -708,10 +721,10 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 						<p color="grey"><i>Journal of the Royal Statistical Society: Series A (Statistics in Society) 180.1 (2017): 161-183</i></p>
 
 						<div class="btn-group btn-group-sm d-flex flex-wrap" role="group">
-							<button type="button" class="btn text-white border-right" data-toggle="collapse"  style="background-color: #FF2E63;" href="#collapse_kde" role="button" aria-expanded="false" aria-controls="collapse_kde"><span class="hidden-xs">Abstract</span></button>
-							<button type="button" class="btn text-white border-left border-right"  style="background-color: #FF2E63;" onclick="window.location='https://eprints.soton.ac.uk/383719/2/Gross%2520et%2520al%2520-%2520Kernel%2520Density%2520Estimation_Berlin%2520Register%2520-%2520final.pdf';"><span class="hidden-xs glyphicon glyphicon-download-alt">PDF (preprint)</span></button>
-							<button type="button" class="btn text-white border-left border-right"  style="background-color: #FF2E63;" onclick="window.location='https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12179';"><span class="hidden-sm hidden-xs hidden-md">PDF (JRSSA)</span></button>
-							<button type="button" class="btn text-white border-left" data-toggle="collapse" style="background-color: #FF2E63;" href="#collapse_kde_bibtex" role="button" aria-expanded="false" aria-controls="collapse_kde_bibtex"><span class="hidden-xs ">Bibtex</span></button>
+							<button type="button" class="btn text-white border-right" data-toggle="collapse"   href="#collapse_kde" role="button" aria-expanded="false" aria-controls="collapse_kde"><span class="hidden-xs">Abstract</span></button>
+							<button type="button" class="btn text-white border-left border-right"   onclick="window.location='https://eprints.soton.ac.uk/383719/2/Gross%2520et%2520al%2520-%2520Kernel%2520Density%2520Estimation_Berlin%2520Register%2520-%2520final.pdf';"><span class="hidden-xs glyphicon glyphicon-download-alt">PDF (preprint)</span></button>
+							<button type="button" class="btn text-white border-left border-right"   onclick="window.location='https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12179';"><span class="hidden-sm hidden-xs hidden-md">PDF (JRSSA)</span></button>
+							<button type="button" class="btn text-white border-left" data-toggle="collapse"  href="#collapse_kde_bibtex" role="button" aria-expanded="false" aria-controls="collapse_kde_bibtex"><span class="hidden-xs ">Bibtex</span></button>
 						</div>
 
 						<div class="collapse" id="collapse_kde">
@@ -758,7 +771,7 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 					<h4>Neural ODEs for Multi-state Survival Analysis</h4>
 					<h5>Neurips Workshop on Machine Learning 4 Healthcare, ML4h 2020</h5>
 					<p></p>
-					<button type="button" class="btn text-white  border-left border-right"  style="background-color: #FF2E63;" onclick="window.location='';">Poster (pdf)</button>
+					<button type="button" class="btn text-white  border-left border-right"   onclick="window.location='';">Poster (pdf)</button>
 					</div>
 			</div>
 			<div class="card mb-4 box-shadow">
@@ -766,35 +779,66 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 						<h4>Bernoulli Race Particle Filters</h4>
 						<h5>AISTATS 2019</h5>
 						<p>I presented this work at AISTATS 2019 in Okinawa (poster) and Babylon Health in London (slides).</p>
-						<button type="button" class="btn text-white  border-left border-right"  style="background-color: #FF2E63;" onclick="window.location='download/poster_aistats.pdf';">Poster (pdf)</button>
-						<button type="button" class="btn text-white  border-left border-right"  style="background-color: #FF2E63;" onclick="window.location='http://www.stats.ox.ac.uk/~schmon/Babylon';">Slides (html)</button>
+						<button type="button" class="btn text-white  border-left border-right"   onclick="window.location='download/poster_aistats.pdf';">Poster (pdf)</button>
+						<button type="button" class="btn text-white  border-left border-right"   onclick="window.location='http://www.stats.ox.ac.uk/~schmon/Babylon';">Slides (html)</button>
 						</div>
 			</div>
 			<div class="card mb-4 box-shadow">
 					<div class="card-body">
 						<h4>Large Sample Asymptotics of the Pseudo-Marginal Method</h4>
 						<h5>ISBA 2018, BayesComp 2018</h5>
-						<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='download/lsapm_isba.pdf';">Poster (pdf)</button>
-						<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='download/Stats_Beamer.pdf';">Slides (pdf)</button>
+						<button type="button" class="btn text-white border-left border-right"  onclick="window.location='download/lsapm_isba.pdf';">Poster (pdf)</button>
+						<button type="button" class="btn text-white border-left border-right"  onclick="window.location='download/Stats_Beamer.pdf';">Slides (pdf)</button>
 						</div>
 					</div>
 			</div>	
 		</div>			 -->
 
 
+			
+
+			<h3 style="color: #08D9D6 !important">Opportunities</h3>
+			<p></p>
+			<div class="card mb-4 box-shadow">
+				<div class="card-body">
+					<h4>Undergraduate and MSc Projects</h4>
+					<p>I regularly offer projects relevant to my research areas. For the academic year 2022/23 you can find the project description below.</p>
+					<button type="button" class="btn text-white border-left border-right"  onclick="window.location='projects.html';">Project Description</button>
+				</div>
+				<div class="card-body">
+					<h4>PhD Supervision</h4>
+					<p>I am always looking for talented PhD students with an interested in Bayesian methods and/or Machine Learning. If you are interested in persuing a PhD under my supervision, please contact me at <br><code>sebastian [dot] schmon [at] durham [dot] ac [dot] uk</code>.</p>
+					<p>As part of my position at Improbable I am currently co-supervising PhD students:</p>
+					<ul>
+						<li>Joel Dyer, Oxford
+						<li>Dan Ward, Bristol
+					</ul>
+					<!-- <p>I regularly offer projects relevant to my research areas. The projects appear alongside the project lists in your degree. You can also suggest your own projects. Please contact me beforehand if you would like me to supervise a project suggested by yourself.</p> -->
+					<!-- <button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://blackboard.durham.ac.uk/ultra/course';">Course Material</button> -->
+				</div>
+				<!-- <div class="card-body">
+					<h4>Visiting</h4>
+					<p>I regularly offer projects relevant to my research areas. The projects appear alongside the project lists in your degree. You can also suggest your own projects. Please contact me beforehand if you would like me to supervise a project suggested by yourself.</p>
+				</div> -->
 			</div>
-				<h3>Teaching</h3>
-				<h3><small>Durham University</small></h3>
+
+			</div>
+
+				<h3 style="color: #08D9D6 !important">Teaching</h3>
+				<a></a>
+				<h3 style="color: #EAEAEA !important"><small>Durham University</small></h3>
 				<div class="card mb-4 box-shadow">
 					<div class="card-body">
 						<h4>Unsupervised Learning</h4>
 						<p>Part of Advanced Statistical and Machine Learning: Foundations and
 							Unsupervised Learning, <a href="https://miscada.webspace.durham.ac.uk/">MSc Scientific Computing and Data Analysis</a>, 2022</p>
-						<button type="button" class="btn text-white border-left border-right" style="background-color: #FF2E63;" onclick="window.location='https://blackboard.durham.ac.uk/ultra/course';">Course Material</button>
+						<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://blackboard.durham.ac.uk/ultra/course';">Course Material</button>
 					</div>
 				</div>
 				
-				<h3><small>University of Oxford</small></h3>
+				<h3 style="color: #EAEAEA !important"><small>University of Oxford</small></h3>
+				<div class="card mb-4 box-shadow">
+					<div class="card-body">
 				<ul>	
 					<li> Applied Probability, 3rd year Mathematics (Michaelmas 2015)</li>
 					<li> Advanced Simulation, 4th year Mathematics and MSc Statistics (Hilary 2016, 2017, 2018)</li>
@@ -803,12 +847,20 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 					<li> Part A: Probability, 2nd year Mathematics (Michaelmas 2016)</li>
 					<li> Part A: Statistics, 2nd year Mathematics (Hilary 2017)</li>
 				</ul>
-				<h3><small>Free University Berlin</small></h3>
+				</div>
+				</div>
+
+				<h3 style="color: #EAEAEA !important"><small>Free University Berlin</small></h3>
+				<div class="card mb-4 box-shadow">
+					<div class="card-body">
 				<ul>
 					<li> Statistics for Economists (2012, 2013, 2014), Introduction to probability and random variables, summary statistics, graphical data analysis</li>
 					<li> Statistical Inference (2012) Point estimation, large sample properties and limiting theorems, confidence sets and tests, linear regression</li>
 					<li> Statistical Modelling (2013) Generalised linear models, computational issues and implementation, application to economics.</li>
 				</ul>
+				</div>
+			</div>
+				
 			</div>
 		</div>
 	</div>

@@ -34,12 +34,22 @@ body {
 .bg-custom {
   background-color: #252A34
 }
+
+.btn {
+  background-color: #FF2E63;
+}
+
+.btn:hover {
+  background-color: #08D9D6;
+  color: #252A34 !important;
+}
+
+
 /* Transition effect */
 .navbar {
   -webkit-transition: all .3s ease 0s;
   transition: all .3s ease 0s;
 }
-
 
 @media (min-width: 768px) {
   .jumbotron {
@@ -58,6 +68,16 @@ body {
 
 .jumbotron .container {
   max-width: 40rem;
+}
+
+.dropdown .dropdown-menu {
+  /* background: rgb(37,42,52); */
+  background: linear-gradient(149deg, rgba(37,42,52,1) 5%, rgba(37,42,52,1) 53%, rgba(57,62,70,1) 100%);
+  border: 0.1px solid rgb(37,42,52);
+}
+
+.dropdown-item {
+  color: #EAEAEA;
 }
 
 .container {
