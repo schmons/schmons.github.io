@@ -315,14 +315,15 @@
 					  Approximate Bayesian Computation with Path Signatures
 					  </div> -->
 					  <div class="card-body">
-						<h4>Amortized inference for expensive time-series simulators with signatured ratio estimation</h4>
+						<h4>Amortised Likelihood-free Inference for Expensive Time-series Simulators with Signatured Ratio Estimation</h4>
 						<p> with Joel Dyer and Patrick Cannon</p>
 
 						<p color="gray"><i>The 25th International Conference on Artificial Intelligence and Statistics, AISTATS 2022</i></p>
 										
 						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
 							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_sig_ratio" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2106.12555';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2202.11585';">PDF (arXiv)</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://proceedings.mlr.press/v151/dyer22a.html';">PDF (AISTATS)</button>
 							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_sig_ratio_bib" role="button" aria-expanded="false" aria-controls="collapse_sig_abc_bib">Bibtex</button>
 						</div>
 
@@ -333,11 +334,20 @@
 						</div>
 						<div class="collapse" id="collapse_sig_ratio_bib">
 						  <div class="class="card-body">
-							<pre class="prettyprint"><code type="text" id="collapse_sig_ratio_bib">@misc{dyer2022,
-	title={Amortized inference for expensive time-series simulators with signatured ratio estimation}, 
-	author={Joel Dyer and Patrick Cannon and Sebastian M Schmon},
-	year={2022},
-    journal={International Conference on Artificial Intelligence and Statistics}
+							<pre class="prettyprint"><code type="text" id="collapse_sig_ratio_bib">@InProceedings{pmlr-v151-dyer22a,
+  title = 	 { Amortised Likelihood-free Inference for Expensive Time-series Simulators with Signatured Ratio Estimation },
+  author =       {Dyer, Joel and Cannon, Patrick W. and Schmon, Sebastian M.},
+  booktitle = 	 {Proceedings of The 25th International Conference on Artificial Intelligence and Statistics},
+  pages = 	 {11131--11144},
+  year = 	 {2022},
+  editor = 	 {Camps-Valls, Gustau and Ruiz, Francisco J. R. and Valera, Isabel},
+  volume = 	 {151},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {28--30 Mar},
+  publisher =    {PMLR},
+  pdf = 	 {https://proceedings.mlr.press/v151/dyer22a/dyer22a.pdf},
+  url = 	 {https://proceedings.mlr.press/v151/dyer22a.html},
+  abstract = 	 { Simulation models of complex dynamics in the natural and social sciences commonly lack a tractable likelihood function, rendering traditional likelihood-based statistical inference impossible. Recent advances in machine learning have introduced novel algorithms for estimating otherwise intractable likelihood functions using a likelihood ratio trick based on binary classifiers. Consequently, efficient likelihood approximations can be obtained whenever good probabilistic classifiers can be constructed. We propose a kernel classifier for sequential data using <em>path signatures</em> based on the recently introduced signature kernel. We demonstrate that the representative power of signatures yields a highly performant classifier, even in the crucially important case where sample numbers are low. In such scenarios, our approach can outperform sophisticated neural networks for common posterior inference tasks. }
 }
 							</code></pre>
 							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_sig_ratio_bib');this.value='Copy to clipboard ✓'">
