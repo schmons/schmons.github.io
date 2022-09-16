@@ -153,77 +153,39 @@
 	  <div class="album py-5 bg-light" style="background: #252A34 !important">
         <div class="container">
 		<div class="page-header" id="research">
-		<h3 style="color: #08D9D6 !important">Publications and Preprints</h3>
+		<h3 style="color: #08D9D6 !important">Unpublished Preprints</h3>
 		<p></p>
         <div class="row">
 
 			<div class="col-sm-6 col-md-12">
 				<div class="card mb-4 box-shadow">
 					  <div class="card-body">
-						<h4>AnoDDPM: Anomaly Detection with Denoising Diffusion Probabilistic Models using Simplex Noise</h4>
-						<p> with Julian Wyatt, Adam Leach and Chris G. Willcocks</p>
+						<h4>Investigating the Impact of Model Misspecification in Neural Simulation-based Inference</h4>
+						<p> with Patrick Cannon and Daniel Ward</p>
 
-						<p color="gray"><i>NTIRE, New Trends in Image Restoration and Enhancement workshop, CVPR 2022</i></p>
+						<p color="gray"><i>https://arxiv.org/abs/2209.01845</i></p>
 										
 						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
-							<button type="button" class="btn text-white border-right" data-toggle="collapse" href="#collapse_annoddpm" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://openaccess.thecvf.com/content/CVPR2022W/NTIRE/papers/Wyatt_AnoDDPM_Anomaly_Detection_With_Denoising_Diffusion_Probabilistic_Models_Using_Simplex_CVPRW_2022_paper.pdf';">PDF (CVPR)</button>
-							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_annoddpm_bib" role="button" aria-expanded="false" aria-controls="collapse_annoddpm_bib">Bibtex</button>
-						</div>
-
-						<div class="collapse" id="collapse_annoddpm">
-						  <div class="p-3 mb-2 bg-light text-dark">
-							Generative models have been shown to provide a powerful mechanism for anomaly detection by learning to model healthy or normal reference data which can subsequently be used as a baseline for scoring anomalies. 
-							In this work we consider denoising diffusion probabilistic models (DDPMs) for unsupervised anomaly detection.
-							DDPMs have superior mode coverage over generative adversarial networks (GANs) and higher sample quality than variational autoencoders (VAEs). However, this comes at the expense of poor scalability and increased sampling times due to the long Markov chain sequences required. We observe that within reconstruction-based anomaly detection a full-length Markov chain diffusion is not required. This leads us to develop a novel partial diffusion anomaly detection strategy that scales to high-resolution imagery, named AnoDDPM. A secondary problem is that Gaussian diffusion fails to capture larger anomalies; therefore we develop a multi-scale simplex noise diffusion process that gives control over the target anomaly size. AnoDDPM with simplex noise is shown to significantly outperform both f-AnoGAN and Gaussian diffusion for the tumorous dataset of 22 T1-weighted MRI scans (CCBS Edinburgh) qualitatively and quantitatively (improvement of +25.5\% Sørensen–Dice coefficient, +17.6\% IoU and +7.4\% AUC).						
-						  </div>
-						</div>
-						<div class="collapse" id="collapse_annoddpm_bib">
-						  <div class="card-body bg-light">
-							<pre class="prettyprint"><code type="text" id="collapse_annoddpm_bib">@InProceedings{Wyatt_2022_CVPR,     
-author = {Wyatt, Julian and Leach, Adam and Schmon, Sebastian M. and Willcocks, Chris G.},     
-title = {AnoDDPM: Anomaly Detection With Denoising Diffusion Probabilistic Models Using Simplex Noise},
-booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
-month = {June},
-year = {2022},
-pages = {650-656} 
-}
-							</code></pre>
-							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_annoddpm_bib');this.value='Copy to clipboard ✓'">
-						  </div>
-						</div>
-					  </div>
-					  <!-- <div class="card-footer">
-						<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2202.00625' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
-					  </div> -->
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-12">
-				<div class="card mb-4 box-shadow">
-					  <div class="card-body">
-						<h4>Denoising diffusion probabilistic models on SO(3) for rotational alignment</h4>
-						<p> with Adam Leach, Matteo T. Degiacomi and Chris G. Willcocks</p>
-
-						<p color="gray"><i>Workshop on Geometrical and Topological Representation Learning, ICLR 2022</i></p>
-										
-						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_so3" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://openreview.net/forum?id=BY88eBbkpe5';">PDF</button>
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_misimp" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2209.01845';">PDF</button>
 							<!-- <button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_so3_bib" role="button" aria-expanded="false" aria-controls="collapse_so3_bib">Bibtex</button> -->
 						</div>
 
-						<div class="collapse" id="collapse_so3">
+						<div class="collapse" id="collapse_misimp">
 						  <div class="p-3 mb-2 bg-light text-dark">
-							Probabilistic diffusion models are capable of modeling complex data distributions on high-dimensional Euclidean spaces for a range applications. However, many real world tasks involve more complex structures such as data distributions defined on manifolds which cannot be easily represented by diffusions on $\mathbb{R}^n$. This paper proposes denoising diffusion models for tasks involving 3D rotations leveraging diffusion processes on the Lie group $SO(3)$ in order to generate candidate solutions to rotational alignment tasks. The experimental results show the proposed $SO(3)$ diffusion process outperforms naïve approaches such as Euler angle diffusion in synthetic rotational distribution sampling and in a 3D object alignment task.
+							Aided by advances in neural density estimation, considerable progress has been made in recent years towards a suite of simulation-based inference (SBI) methods capable of performing flexible, black-box, approximate Bayesian inference for stochastic simulation models. While it has been demonstrated that neural SBI methods can provide accurate posterior approximations, the simulation studies establishing these results have considered only well-specified problems -- that is, where the model and the data generating process coincide exactly. However, the behaviour of such algorithms in the case of model misspecification has received little attention. In this work, we provide the first comprehensive study of the behaviour of neural SBI algorithms in the presence of various forms of model misspecification. We find that misspecification can have a profoundly deleterious effect on performance. Some mitigation strategies are explored, but no approach tested prevents failure in all cases. We conclude that new approaches are required to address model misspecification if neural SBI algorithms are to be relied upon to derive accurate scientific conclusions.
 						</div>
 						</div>
-						<div class="collapse" id="collapse_so3_bib">
+						<div class="collapse" id="collapse_misimp_bib">
 						  <div class="card-body bg-light">
-							<pre class="prettyprint"><code type="text" id="collapse_so3_bib">
-								
+							<pre class="prettyprint"><code type="text" id="collapse_misimp_bib">@article{cannon2022investigating,
+	title={Investigating the Impact of Model Misspecification in Neural Simulation-based Inference},
+	author={Cannon, Patrick and Ward, Daniel and Schmon, Sebastian M},
+	journal={arXiv preprint arXiv:2209.01845},
+	year={2022}
+}						
 							</code></pre>
-							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_so3_bib');this.value='Copy to clipboard ✓'">
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_misimp_bib');this.value='Copy to clipboard ✓'">
 						  </div>
 						</div>
 					  </div>
@@ -312,6 +274,89 @@ pages = {650-656}
 					  </div>
 					  <!-- <div class="card-footer">
 						<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2106.12555' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
+					  </div> -->
+				</div>
+			</div>
+
+	  
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
+					  <div class="card-body">
+						<h4>Neural ODEs for Multi-state Survival Analysis</h4>
+						<p> with Stefan Groha and Alexander Gusev</p>
+						
+						<p color="gray"><i>arxiv.org/abs/2006.04893</i></p>
+						
+						<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_survnode" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2006.04893';">PDF (arXiv)</button>
+							<!--<button type="button" class="btn text-white border-left border-right"  onclick="window.location='download/code_pm_asymptotics.zip';">Code (zip)</button> -->
+							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_survnode_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
+						</div>
+
+						<div class="collapse" id="collapse_survnode">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							Survival models are a popular tool for the analysis of time to event data with applications in medicine, engineering, economics and many more. Advances like the Cox proportional hazard model have enabled researchers to better describe hazard rates for the occurrence of single fatal events, but are limited by modeling assumptions, like proportionality of hazard rates and linear effects. Moreover, common phenomena are often better described through multiple states, for example, the progress of a disease might be modeled as healthy, sick and dead instead of healthy and dead, where the competing nature of death and disease has to be taken into account. Also, individual characteristics can vary significantly between observational units, like patients, resulting in idiosyncratic hazard rates and different disease trajectories. These considerations require flexible modeling assumptions. Current standard models, however, are often ill-suited for such an analysis. To overcome these issues, we propose the use of neural ordinary differential equations as a flexible and general method for estimating multi-state survival models by directly solving the Kolmogorov forward equations. To quantify the uncertainty in the resulting individual cause-specific hazard rates, we further introduce a variational latent variable model. We show that our model exhibits state-of-the-art performance on popular survival data sets and demonstrate its efficacy in a multi-state setting.
+						  </div>
+						</div>
+						<div class="collapse" id="collapse_survnode_bibtex">
+						  <div class="class="card-body">
+							<pre class="prettyprint"><code type="text" id="groha2020">@Article{Groha2020,
+  author  = {Stefan Groha, Sebastian M Schmon and Alexander Gusev},
+  title   = {Neural ODEs for Multi-state Survival Analysis},
+  journal = {https://arxiv.org/abs/2006.04893},
+  year    = {2020},
+}
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#groha2020');this.value='Copy to clipboard ✓'">
+						  </div>
+						</div>
+					  </div>
+					  <!-- <div class="card-footer">
+						<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2006.04893' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
+					  </div> -->
+				</div>
+			</div>
+
+
+
+			<h3 style="color: #08D9D6 !important">Publications (Peer Reviewed)</h3>
+			<p></p>
+
+			<div class="col-sm-6 col-md-12">
+				<div class="card mb-4 box-shadow">
+					  <div class="card-body">
+						<h4>Robust Neural Posterior Estimation and Statistical Model Criticism</h4>
+						<p> with Daniel Ward, Patrick Cannon, Mark Beaumont and Matteo Fasiolo</p>
+
+						<p color="gray"><i>Neural Information Processig Systems, NeurIPS 2022</i></p>
+										
+						<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
+							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_rnpe" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+							<!-- <button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2209.01845';">PDF</button> -->
+							<!-- <button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_so3_bib" role="button" aria-expanded="false" aria-controls="collapse_so3_bib">Bibtex</button> -->
+						</div>
+
+						<div class="collapse" id="collapse_rnpe">
+						  <div class="p-3 mb-2 bg-light text-dark">
+							Computer simulations have proven a valuable tool for understanding complex phenomena across the sciences. However, the utility of simulators for modelling and forecasting purposes is often restricted by low data quality, as well as practical limits to model fidelity. In order to circumvent these difficulties, we argue that modellers must treat simulators as idealistic representations of the true data generating process, and consequently should thoughtfully consider the risk of model misspecification. In this work we revisit neural posterior estimation (NPE), a class of algorithms that enable black-box parameter inference in simulation models, and consider the implication of a simulation-to-reality gap. While recent works have demonstrated reliable performance of these methods, the analyses have been performed using synthetic data generated by the simulator model itself, and have therefore only addressed the well-specified case. In this paper, we find that the presence of misspecification, in contrast, leads to unreliable inference when NPE is used naively. As a remedy we argue that principled scientific inquiry with simulators should incorporate a model criticism component, to facilitate interpretable identification of misspecification and a robust inference component, to fit "wrong but useful" models. We propose robust neural posterior estimation (RNPE), an extension of NPE to simultaneously achieve both these aims, through explicitly modelling the discrepancies between simulations and the observed data. We assess the approach on a range of artificially misspecified examples, and find RNPE performs well across the tasks, whereas naively using NPE leads to misleading and erratic posteriors.
+						</div>
+						</div>
+						<div class="collapse" id="collapse_rnpe_bib">
+						  <div class="card-body bg-light">
+							<pre class="prettyprint"><code type="text" id="collapse_rnpe_bib">@article{ward2022,
+	title={Robust Neural Posterior Estimation and Statistical Model Criticism},
+	author={Ward, Daniel and Cannon, Patrick and Beaumont, Mark and Fasiolo, Matteo and Schmon, Sebastian M},
+	journal={Neural Information Processing Sytems},
+	year={2022}
+}						
+							</code></pre>
+							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_rnpe_bib');this.value='Copy to clipboard ✓'">
+						  </div>
+						</div>
+					  </div>
+					  <!-- <div class="card-footer">
+						<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2202.00625' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
 					  </div> -->
 				</div>
 			</div>
@@ -595,91 +640,6 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 				</div>
 			</div>
 
-	  
-			<div class="col-sm-6 col-md-12">
-				<div class="card mb-4 box-shadow">
-					  <div class="card-body">
-						<h4>Neural ODEs for Multi-state Survival Analysis</h4>
-						<p> with Stefan Groha and Alexander Gusev</p>
-						
-						<p color="gray"><i>arxiv.org/abs/2006.04893</i></p>
-						
-						<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_survnode" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2006.04893';">PDF (arXiv)</button>
-							<!--<button type="button" class="btn text-white border-left border-right"  onclick="window.location='download/code_pm_asymptotics.zip';">Code (zip)</button> -->
-							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_survnode_bibtex" role="button" aria-expanded="false" aria-controls="collapse_PMMH_bibtex">Bibtex</button>
-						</div>
-
-						<div class="collapse" id="collapse_survnode">
-						  <div class="p-3 mb-2 bg-light text-dark">
-							Survival models are a popular tool for the analysis of time to event data with applications in medicine, engineering, economics and many more. Advances like the Cox proportional hazard model have enabled researchers to better describe hazard rates for the occurrence of single fatal events, but are limited by modeling assumptions, like proportionality of hazard rates and linear effects. Moreover, common phenomena are often better described through multiple states, for example, the progress of a disease might be modeled as healthy, sick and dead instead of healthy and dead, where the competing nature of death and disease has to be taken into account. Also, individual characteristics can vary significantly between observational units, like patients, resulting in idiosyncratic hazard rates and different disease trajectories. These considerations require flexible modeling assumptions. Current standard models, however, are often ill-suited for such an analysis. To overcome these issues, we propose the use of neural ordinary differential equations as a flexible and general method for estimating multi-state survival models by directly solving the Kolmogorov forward equations. To quantify the uncertainty in the resulting individual cause-specific hazard rates, we further introduce a variational latent variable model. We show that our model exhibits state-of-the-art performance on popular survival data sets and demonstrate its efficacy in a multi-state setting.
-						  </div>
-						</div>
-						<div class="collapse" id="collapse_survnode_bibtex">
-						  <div class="class="card-body">
-							<pre class="prettyprint"><code type="text" id="groha2020">@Article{Groha2020,
-  author  = {Stefan Groha, Sebastian M Schmon and Alexander Gusev},
-  title   = {Neural ODEs for Multi-state Survival Analysis},
-  journal = {https://arxiv.org/abs/2006.04893},
-  year    = {2020},
-}
-							</code></pre>
-							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#groha2020');this.value='Copy to clipboard ✓'">
-						  </div>
-						</div>
-					  </div>
-					  <!-- <div class="card-footer">
-						<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2006.04893' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
-					  </div> -->
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-12">
-				<div class="card mb-4 box-shadow">
-					  <div class="card-body">
-						<h4>Implicit Priors for Knowledge Sharing in Bayesian Neural Networks</h4>
-						<p> with Jack Fitzsimons and Stephen Roberts</p>
-						
-						<p color="grey"><i>4th Neurips workshop on Bayesian Deep Learning 2019</i></p>
-
-						<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
-							<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_IMPP" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
-							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/1912.00874';">PDF (arXiv)</button>
-							<button type="button" class="btn text-white border-left border-right"  onclick="window.location='http://bayesiandeeplearning.org/2019/papers/53.pdf';">PDF (BDL)</button>
-							<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_IMPP_bibtex" role="button" aria-expanded="false" aria-controls="collapse_IMPP_bibtex">Bibtex</button>
-						</div>
-
-						<div class="collapse" id="collapse_IMPP">
-						  <div class="p-3 mb-2 bg-light text-dark">
-							Bayesian approaches offer a robust statistical framework to introduce prior knowledge into learning
-							procedures. However, the tasks introduced above can be challenging in practice since "information"
-							gained by one network such as learned features can be difficult to encode into prior distributions over
-							networks that do not share the same architecture or even the same output dimension. We introduce
-							here a Bayesian viewpoint that centres around features and describe a set of prior distributions
-							derived from the theory of Gaussian processes and deep kernel learning that facilitate a variety of
-							deep learning tasks in a unified way. In particular, we will show that our approach is applicable to
-							knowledge distillation, transfer learning and combining experts.		
-						  </div>
-						</div>
-						<div class="collapse" id="collapse_IMPP_bibtex">
-						  <div class="class="card-body">
-							<pre class="prettyprint"><code type="text" id="schmon2018">@Article{impprior,
-  author  = {Jack K Fitzsimons and Sebastian M Schmon and Stephen J Roberts},
-  title   = {Implicit Priors for Knowledge Sharing in Bayesian Neural Networks},
-  journal = {4th Neurips workshop on Bayesian Deep Learning},
-  year    = {2019},
-}
-							</code></pre>
-							<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#schmon2018');this.value='Copy to clipboard ✓'">
-						  </div>
-						</div>
-					  </div>
-					  <!-- <div class="card-footer">
-						<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='1912.00874' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
-					  </div> -->
-				</div>
-			</div>
 			<div class="col-sm-6 col-md-12">
 				<div class="card mb-4 box-shadow">
 					  <div class="card-body">
@@ -778,9 +738,217 @@ url={https://openreview.net/forum?id=wQRlSUZ5V7B}
 			</div>
 		  </div>
 		</div>
+
+	<h3 style="color: #08D9D6 !important">Workshop Papers</h3>
+	<p></p>
+	<div class="row">
+
+		<div class="col-sm-6 col-md-12">
+			<div class="card mb-4 box-shadow">
+				  <div class="card-body">
+					<h4>High Performance Simulation for Scalable Multi-Agent Reinforcement Learning</h4>
+					<p> with Jordan Langham-Lopez and Patrick Cannon
+					</p>
+
+					<p color="gray"><i>AI4ABM Workshop, ICML 2022</i></p>
+									
+					<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
+						<button type="button" class="btn text-white border-right" data-toggle="collapse" href="#collapse_marl" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+						<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2207.03945';">PDF (arXiv)</button>
+						<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_marl_bib" role="button" aria-expanded="false" aria-controls="collapse_marl_bib">Bibtex</button>
+					</div>
+
+					<div class="collapse" id="collapse_marl">
+					  <div class="p-3 mb-2 bg-light text-dark">
+						Multi-agent reinforcement learning experiments and open-source training environments are typically limited in scale, supporting tens or sometimes up to hundreds of interacting agents. In this paper we demonstrate the use of Vogue, a high performance agent based model (ABM) framework. Vogue serves as a multi-agent training environment, supporting thousands to tens of thousands of interacting agents while maintaining high training throughput by running both the environment and reinforcement learning (RL) agents on the GPU. High performance multi-agent environments at this scale have the potential to enable the learning of robust and flexible policies for use in ABMs and simulations of complex systems. We demonstrate training performance with two newly developed, large scale multi-agent training environments. Moreover, we show that these environments can train shared RL policies on time-scales of minutes and hours.
+					</div>
+					</div>
+					<div class="collapse" id="collapse_marl_bib">
+					  <div class="card-body bg-light">
+						<pre class="prettyprint"><code type="text" id="collapse_marl_bib">@article{langham2022high,
+title={High Performance Simulation for Scalable Multi-Agent Reinforcement Learning},
+author={Langham-Lopez, Jordan and Schmon, Sebastian M and Cannon, Patrick},
+journal={arXiv preprint arXiv:2207.03945},
+year={2022}
+}
+						</code></pre>
+						<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_marl_bib');this.value='Copy to clipboard ✓'">
+					  </div>
+					</div>
+				  </div>
+				  <!-- <div class="card-footer">
+					<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2202.00625' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
+				  </div> -->
+			</div>
+		</div>
+
+		<div class="col-sm-6 col-md-12">
+			<div class="card mb-4 box-shadow">
+				  <div class="card-body">
+					<h4>Calibrating Agent-based Models to Microdata with Graph Neural Networks</h4>
+					<p> with Joel Dyer and Patrick Cannon</p>
+
+					<p color="gray"><i>AI4ABM Workshop, ICML 2022 (Best Paper Award)</i></p>
+									
+					<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
+						<button type="button" class="btn text-white border-right" data-toggle="collapse" href="#collapse_gnnabm" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+						<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/2206.07570">PDF (arXiv)</button>
+						<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_gnnabm_bib" role="button" aria-expanded="false" aria-controls="collapse_gnnabm_bib">Bibtex</button>
+					</div>
+
+					<div class="collapse" id="collapse_gnnabm">
+					  <div class="p-3 mb-2 bg-light text-dark">
+						Calibrating agent-based models (ABMs) to data is among the most fundamental requirements to ensure the model fulfils its desired purpose. In recent years, simulation-based inference methods have emerged as powerful tools for performing this task when the model likelihood function is intractable, as is often the case for ABMs. In some real-world use cases of ABMs, both the observed data and the ABM output consist of the agents' states and their interactions over time. In such cases, there is a tension between the desire to make full use of the rich information content of such granular data on the one hand, and the need to reduce the dimensionality of the data to prevent difficulties associated with high-dimensional learning tasks on the other. A possible resolution is to construct lower-dimensional time-series through the use of summary statistics describing the macrostate of the system at each time point. However, a poor choice of summary statistics can result in an unacceptable loss of information from the original dataset, dramatically reducing the quality of the resulting calibration. In this work, we instead propose to learn parameter posteriors associated with granular microdata directly using temporal graph neural networks. We will demonstrate that such an approach offers highly compelling inductive biases for Bayesian inference using the raw ABM microstates as output.					  </div>
+					</div>
+					<div class="collapse" id="collapse_gnnabm_bib">
+					  <div class="card-body bg-light">
+						<pre class="prettyprint"><code type="text" id="collapse_gnnabm_bib">@article{dyer2022calibrating,
+title={Calibrating Agent-based Models to Microdata with Graph Neural Networks},
+author={Dyer, Joel and Cannon, Patrick and Farmer, J Doyne and Schmon, Sebastian M},
+journal={arXiv preprint arXiv:2206.07570},
+year={2022}
+}
+						</code></pre>
+						<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_annoddpm_bib');this.value='Copy to clipboard ✓'">
+					  </div>
+					</div>
+				  </div>
+				  <!-- <div class="card-footer">
+					<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2202.00625' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
+				  </div> -->
+			</div>
+		</div>
+
+
+		<div class="col-sm-6 col-md-12">
+			<div class="card mb-4 box-shadow">
+				  <div class="card-body">
+					<h4>AnoDDPM: Anomaly Detection with Denoising Diffusion Probabilistic Models using Simplex Noise</h4>
+					<p> with Julian Wyatt, Adam Leach and Chris G. Willcocks</p>
+
+					<p color="gray"><i>NTIRE, New Trends in Image Restoration and Enhancement workshop, CVPR 2022</i></p>
+									
+					<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
+						<button type="button" class="btn text-white border-right" data-toggle="collapse" href="#collapse_annoddpm" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+						<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://openaccess.thecvf.com/content/CVPR2022W/NTIRE/papers/Wyatt_AnoDDPM_Anomaly_Detection_With_Denoising_Diffusion_Probabilistic_Models_Using_Simplex_CVPRW_2022_paper.pdf';">PDF (CVPR)</button>
+						<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_annoddpm_bib" role="button" aria-expanded="false" aria-controls="collapse_annoddpm_bib">Bibtex</button>
+					</div>
+
+					<div class="collapse" id="collapse_annoddpm">
+					  <div class="p-3 mb-2 bg-light text-dark">
+						Generative models have been shown to provide a powerful mechanism for anomaly detection by learning to model healthy or normal reference data which can subsequently be used as a baseline for scoring anomalies. 
+						In this work we consider denoising diffusion probabilistic models (DDPMs) for unsupervised anomaly detection.
+						DDPMs have superior mode coverage over generative adversarial networks (GANs) and higher sample quality than variational autoencoders (VAEs). However, this comes at the expense of poor scalability and increased sampling times due to the long Markov chain sequences required. We observe that within reconstruction-based anomaly detection a full-length Markov chain diffusion is not required. This leads us to develop a novel partial diffusion anomaly detection strategy that scales to high-resolution imagery, named AnoDDPM. A secondary problem is that Gaussian diffusion fails to capture larger anomalies; therefore we develop a multi-scale simplex noise diffusion process that gives control over the target anomaly size. AnoDDPM with simplex noise is shown to significantly outperform both f-AnoGAN and Gaussian diffusion for the tumorous dataset of 22 T1-weighted MRI scans (CCBS Edinburgh) qualitatively and quantitatively (improvement of +25.5\% Sørensen–Dice coefficient, +17.6\% IoU and +7.4\% AUC).						
+					  </div>
+					</div>
+					<div class="collapse" id="collapse_annoddpm_bib">
+					  <div class="card-body bg-light">
+						<pre class="prettyprint"><code type="text" id="collapse_annoddpm_bib">@InProceedings{Wyatt_2022_CVPR,     
+author = {Wyatt, Julian and Leach, Adam and Schmon, Sebastian M. and Willcocks, Chris G.},     
+title = {AnoDDPM: Anomaly Detection With Denoising Diffusion Probabilistic Models Using Simplex Noise},
+booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+month = {June},
+year = {2022},
+pages = {650-656} 
+}
+						</code></pre>
+						<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_annoddpm_bib');this.value='Copy to clipboard ✓'">
+					  </div>
+					</div>
+				  </div>
+				  <!-- <div class="card-footer">
+					<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2202.00625' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
+				  </div> -->
+			</div>
+		</div>
+
+		<div class="col-sm-6 col-md-12">
+			<div class="card mb-4 box-shadow">
+				  <div class="card-body">
+					<h4>Denoising diffusion probabilistic models on SO(3) for rotational alignment</h4>
+					<p> with Adam Leach, Matteo T. Degiacomi and Chris G. Willcocks</p>
+
+					<p color="gray"><i>Workshop on Geometrical and Topological Representation Learning, ICLR 2022</i></p>
+									
+					<div class="btn-group btn-group-sm flex-wrap rounded-4" role="group" aria-label="Basic example">
+						<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_so3" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+						<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://openreview.net/forum?id=BY88eBbkpe5';">PDF</button>
+						<!-- <button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_so3_bib" role="button" aria-expanded="false" aria-controls="collapse_so3_bib">Bibtex</button> -->
+					</div>
+
+					<div class="collapse" id="collapse_so3">
+					  <div class="p-3 mb-2 bg-light text-dark">
+						Probabilistic diffusion models are capable of modeling complex data distributions on high-dimensional Euclidean spaces for a range applications. However, many real world tasks involve more complex structures such as data distributions defined on manifolds which cannot be easily represented by diffusions on $\mathbb{R}^n$. This paper proposes denoising diffusion models for tasks involving 3D rotations leveraging diffusion processes on the Lie group $SO(3)$ in order to generate candidate solutions to rotational alignment tasks. The experimental results show the proposed $SO(3)$ diffusion process outperforms naïve approaches such as Euler angle diffusion in synthetic rotational distribution sampling and in a 3D object alignment task.
+					</div>
+					</div>
+					<div class="collapse" id="collapse_so3_bib">
+					  <div class="card-body bg-light">
+						<pre class="prettyprint"><code type="text" id="collapse_so3_bib">
+							
+						</code></pre>
+						<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#collapse_so3_bib');this.value='Copy to clipboard ✓'">
+					  </div>
+					</div>
+				  </div>
+				  <!-- <div class="card-footer">
+					<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='2202.00625' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
+				  </div> -->
+			</div>
+		</div>
+
+
+		<div class="col-sm-6 col-md-12">
+			<div class="card mb-4 box-shadow">
+				  <div class="card-body">
+					<h4>Implicit Priors for Knowledge Sharing in Bayesian Neural Networks</h4>
+					<p> with Jack Fitzsimons and Stephen Roberts</p>
+					
+					<p color="grey"><i>4th Neurips workshop on Bayesian Deep Learning 2019</i></p>
+
+					<div class="btn-group btn-group-sm d-flex flex-wrap" data-toggle="buttons">
+						<button type="button" class="btn text-white border-right"data-toggle="collapse"  href="#collapse_IMPP" role="button" aria-expanded="false" aria-controls="collapseExample">Abstract</button>
+						<button type="button" class="btn text-white border-left border-right"  onclick="window.location='https://arxiv.org/abs/1912.00874';">PDF (arXiv)</button>
+						<button type="button" class="btn text-white border-left border-right"  onclick="window.location='http://bayesiandeeplearning.org/2019/papers/53.pdf';">PDF (BDL)</button>
+						<button type="button" class="btn text-white border-left"  data-toggle="collapse" href="#collapse_IMPP_bibtex" role="button" aria-expanded="false" aria-controls="collapse_IMPP_bibtex">Bibtex</button>
+					</div>
+
+					<div class="collapse" id="collapse_IMPP">
+					  <div class="p-3 mb-2 bg-light text-dark">
+						Bayesian approaches offer a robust statistical framework to introduce prior knowledge into learning
+						procedures. However, the tasks introduced above can be challenging in practice since "information"
+						gained by one network such as learned features can be difficult to encode into prior distributions over
+						networks that do not share the same architecture or even the same output dimension. We introduce
+						here a Bayesian viewpoint that centres around features and describe a set of prior distributions
+						derived from the theory of Gaussian processes and deep kernel learning that facilitate a variety of
+						deep learning tasks in a unified way. In particular, we will show that our approach is applicable to
+						knowledge distillation, transfer learning and combining experts.		
+					  </div>
+					</div>
+					<div class="collapse" id="collapse_IMPP_bibtex">
+					  <div class="class="card-body">
+						<pre class="prettyprint"><code type="text" id="schmon2018">@Article{impprior,
+author  = {Jack K Fitzsimons and Sebastian M Schmon and Stephen J Roberts},
+title   = {Implicit Priors for Knowledge Sharing in Bayesian Neural Networks},
+journal = {4th Neurips workshop on Bayesian Deep Learning},
+year    = {2019},
+}
+						</code></pre>
+						<input type="button" value="Copy to clipboard" class="btn btn-sm btn-secondary" onclick="copyToClipboard('#schmon2018');this.value='Copy to clipboard ✓'">
+					  </div>
+					</div>
+				  </div>
+				  <!-- <div class="card-footer">
+					<div data-badge-popover="right" data-badge-type="1" data-arxiv-id='1912.00874' data-condensed="true" data-hide-no-mentions="true" class="altmetric-embed"></div>
+				  </div> -->
+			</div>
+		</div>
+	</div>
+
 	</div>
 	</div>
-	
+
+
+
 	<div class="album py-5 bg-light" style="background: #252A34 !important">
     <div class="container">
 		<!-- <h3>Talks & Presentations</h3>
