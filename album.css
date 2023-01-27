@@ -2,6 +2,10 @@
   --jumbotron-padding-y: 3rem;
 }
 
+p { 
+  margin:3pt  
+}
+
 a {
   color: #08D9D6;
 }
@@ -26,7 +30,7 @@ body {
   color: #EAEAEA;
   background-color: #252A34;
   /*background-image: linear-gradient(skyblue, silver);*/
-  background-image: url("background.jpg");
+  background-image: url("bg.jpg");
   background-size: cover;
 }
 
