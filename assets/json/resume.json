@@ -7,13 +7,6 @@
     // "phone": "(912) 123-4567",
     "url": "https://schmons.github.io/",
     "summary": "A German-born statistician and machine learning researcher. Now working on biology in Cambridge.",
-    // "location": {
-    //   "address": "2712 Broadway St",
-    //   "postalCode": "CA 94115",
-    //   "city": "San Francisco",
-    //   "countryCode": "US",
-    //   "region": "California"
-    // },
     "profiles": [
       {
         "network": "Twitter",
@@ -63,7 +56,6 @@
   "volunteer": [
     {
       "organization": "Neurips",
-      "location": "Zurich, Switzerland",
       "position": "Area Chair",
       "url": "https://example.com",
       "startDate": "2024",
@@ -81,8 +73,8 @@
       "studyType": "PhD",
       "startDate": "2015",
       "endDate": "2020",
-      "score": "1a - no corrections (best possible)",
-      "courses": ["Theory of Relativity"]
+      "score": "1a - no corrections (best possible)"
+      // "courses": 
     },
     {
       "institution": "Humboldt University of Berlin",
@@ -92,8 +84,8 @@
       "studyType": "MSc",
       "startDate": "2013",
       "endDate": "2015",
-      "score": "with distinction",
-      "courses": ["Theory of Relativity"]
+      "score": "with distinction"
+      // "courses": 
     },
     {
       "institution": "Free University Berlin",
@@ -102,8 +94,8 @@
       "area": "Mathematics",
       "studyType": "BSc",
       "startDate": "2011",
-      "endDate": "2013",
-      "courses": ["Theory of Relativity"]
+      "endDate": "2013"
+      // "courses": 
     },
     {
       "institution": "Humboldt University of Berlin",
@@ -112,17 +104,46 @@
       "area": "Economics",
       "studyType": "BSc",
       "startDate": "2009",
-      "endDate": "2013",
-      "courses": ["Theory of Relativity"]
+      "endDate": "2013"
+      // "courses":
     }
   ],
   "awards": [
     {
-      "title": "Nobel Prize in Physics",
-      "date": "1921-11-01",
-      "awarder": "Royal Swedish Academy of Sciences",
-      "url": "https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/",
-      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
+      "title": "EPSRC DPhil scholarship",
+      "date": "2015-09",
+      "awarder": "Department of Statistics, University of Oxford, UK",
+      "summary": "Out of 1 per year."
+    },
+    {
+      "title": "Best paper award",
+      "date": "2022-06",
+      "awarder": "AI4ABM workshop, ICML 2022"
+    }, 
+    {
+      "title": "Best reviewer award",
+      "date": "2022",
+      "awarder": "Neurips"
+    }, 
+    {
+      "title": "Best reviewer award",
+      "date": "2022",
+      "awarder": "UAI"
+    }, 
+    {
+      "title": "Best reviewer award",
+      "date": "2021",
+      "awarder": "UAI"
+    }, 
+    {
+      "title": "Erasmus grant",
+      "date": "2014",
+      "awarder": "Humboldt University"
+    }, 
+    {
+      "title": "Travel/research grant",
+      "date": "2018",
+      "awarder": "Magdalen College Oxford"
     }
   ],
   // "certificates": [
