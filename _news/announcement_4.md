@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Our paper on [Approximate Bayesian Computation with Path Signature](https://arxiv.org/abs/2106.12555) got accepted as a Spotlight paper at [UAI 2024](https://www.auai.org/uai2024/)!
+Our paper on [Approximate Bayesian Computation with Path Signatures](https://arxiv.org/abs/2106.12555) got accepted as a Spotlight paper at [UAI 2024](https://www.auai.org/uai2024/)!

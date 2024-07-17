@@ -1,7 +1,8 @@
 ---
 layout: post
+title: Our paper on Approximate Bayesian Computation with Path Signatures won OUTSTANDING PAPER!
 date: 2024-07-17 17:41:00
-inline: true
+inline: false
 related_posts: false
 ---
 
@@ -11,5 +12,5 @@ related_posts: false
     </div>
 </div>
 <div class="caption">
-    Our paper on [Approximate Bayesian Computation with Path Signature](https://arxiv.org/abs/2106.12555) has been recognized with the _outstanding paper award_ at [UAI 2024](https://www.auai.org/uai2024/)!
+    Our paper on [Approximate Bayesian Computation with Path Signatures](https://arxiv.org/abs/2106.12555) has been recognized with the _outstanding paper award_ at [UAI 2024](https://www.auai.org/uai2024/)!
 </div>
