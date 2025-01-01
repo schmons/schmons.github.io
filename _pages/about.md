@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Senior Statt Machine Learning Engineer, <a href='http://altoslabs.com'>Altos Labs</a>. 
+subtitle: Senior Staff Machine Learning. 
 
 profile:
   align: right
