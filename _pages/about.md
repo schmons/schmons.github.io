@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Senior Staff Machine Learning. 
+subtitle: Senior Staff Machine Learning Researcher. 
 
 profile:
   align: right
