@@ -5,7 +5,7 @@ permalink: /
 subtitle: Senior Staff Machine Learning Researcher. 
 
 profile:
-  align: right
+  align: left
   image: seb.jpeg
   image_circular: True # crops the image to make it circular
   more_info:
