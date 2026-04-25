@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://schmons.github.io/sitemap.xml
